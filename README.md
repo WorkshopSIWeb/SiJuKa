@@ -1,2 +1,1 @@
-# SiJuKa
-Sistem Informasi Penjualan Kayu
+# Sijuka
