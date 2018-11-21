@@ -23,7 +23,7 @@ include 'koneksi.php';
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-	
+
     <!-- bootstrap-progressbar -->
     <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- JQVMap -->
@@ -36,6 +36,11 @@ include 'koneksi.php';
   </head>
 
   <body class="nav-md">
+    <?php
+	    if($_SESSION['status']!="login"){
+		      header("location:loregpembeli.php?pesan=belum_login");
+	       }
+        ?>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -161,7 +166,7 @@ include 'koneksi.php';
                                 ?>
                                    <tr>
                                          <td>
-                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50">
+                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" width="50" height="50">
                                           </td>
                                           <td>
                                             <?php echo $_SESSION['username']?>
@@ -173,7 +178,7 @@ include 'koneksi.php';
                   </table>
                   <!-- </a> -->
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="profile.php"> Profile</a></li>
                     <li>
                       <a href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
@@ -294,9 +299,9 @@ include 'koneksi.php';
             </div>
           </div>
         </div>
-        
+
         <!-- /page content -->
-        
+
 
         <!-- footer content -->
         <footer>
@@ -349,6 +354,6 @@ include 'koneksi.php';
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-	
+
   </body>
 </html>
