@@ -63,6 +63,11 @@
                   echo "<script>alert('Anda berhasil log out!'); window.location.href = 'loregpembeli.php';</script>";
                 }else if($_GET['pesan'] == "belum_login"){
                   echo "<script>alert('Anda harus login dulu untuk mengakses halaman tersebut!'); window.location.href = 'loregpembeli.php';</script>";
+                }elseif ($_GET['pesan'] == "approve") {
+                  echo "<script>alert('Pendaftaran Anda Berhasil, Silahkan Login untuk Masuk ke sistem'); window.location.href = 'loregpembeli.php';</script>";
+                }elseif ($_GET['pesan'] == "bukan_admin") {
+                  echo "<script>alert('Anda bukan admin. Anda tidak seharusnya mengakses halaman ini'); window.location.href = 'page_404.html';</script>";
+                  // code...
                 }
               }
               ?>
@@ -136,11 +141,12 @@
             <div>
               <input type="password" id="password" name="repassword" class="form-password" placeholder="  Masukkan Kembali Password" required="required"/>
             </div>
-            <table width="350px" align="left">
-            <tr>
-              <td><input type="checkbox" class="form-checkbox">Tampilkan Password</td>
-            </tr>
-          </table>
+            <div class="row">
+              <div class="col-lg-0"></div>
+              <div class="col-lg-6">
+              <input type="checkbox" class="form-checkbox">Tampilkan Password
+            </div>
+            </div>
           <br>
 
       			     Upload Foto Profil

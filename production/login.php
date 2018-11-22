@@ -12,6 +12,8 @@
 
   if($cek > 0){
     $data = mysqli_fetch_assoc($login);
+    $_SESSION['username'] = $username;
+	  $_SESSION['status'] = "login";
 
     if($data['jabatan']=="admin"){
       $_SESSION['username'] = $username;
@@ -20,13 +22,15 @@
     }else if ($data['jabatan']=="pembeli") {
       $_SESSION['username'] = $username;
       $_SESSION['jabatan'] = "pembeli";
-      header("location:index3.php");
+      header("location:page_403.html");
     }else if ($data['jabatan']=="penjual") {
       $_SESSION['username'] = $username;
       $_SESSION['jabatan'] = "penjual";
-      header("location:index2.php");
+      header("location:page_500.html");
     }else{
       header("location:loregpembeli.php");
     }
-    }
+  }else {
+    header("location:loregpembeli.php?pesan=gagal");
+  }
  ?>

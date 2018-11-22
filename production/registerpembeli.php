@@ -49,7 +49,7 @@ $query = mysqli_query($koneksi,"INSERT INTO tbl_user VALUES ('$nik','$nama_lengk
 // echo '<a href="index.php">kembali</a>';
 // }
 if ($query) {
-	echo "File Berhasil Diupload";
+	header("location:loregpembeli.php?pesan=approve");
 }
 else {
 	echo "Gagal Mengupload Gambar";
