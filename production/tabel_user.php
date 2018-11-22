@@ -23,7 +23,7 @@ include 'koneksi.php';
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-  
+
     <!-- bootstrap-progressbar -->
     <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- JQVMap -->
@@ -161,7 +161,7 @@ include 'koneksi.php';
                                 ?>
                                    <tr>
                                          <td>
-                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50">
+                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" width="50" height="50">
                                           </td>
                                           <td>
                                             <?php echo $_SESSION['username']?>
@@ -340,7 +340,7 @@ include 'koneksi.php';
         <!-- /footer content -->
       </div>
     </div>
-    
+
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
