@@ -66,8 +66,8 @@
                 }elseif ($_GET['pesan'] == "approve") {
                   echo "<script>alert('Pendaftaran Anda Berhasil, Silahkan Login untuk Masuk ke sistem'); window.location.href = 'loregpembeli.php';</script>";
                 }elseif ($_GET['pesan'] == "bukan_admin") {
-                  echo "<script>alert('Anda bukan admin. Anda tidak seharusnya mengakses halaman ini'); window.location.href = 'page_404.html';</script>";
-                  // code...
+                  echo "<script>alert('Anda bukan admin. Anda tidak seharusnya mengakses halaman ini!'); window.location.href = 'page_404.html';</script>";
+
                 }
               }
               ?>
