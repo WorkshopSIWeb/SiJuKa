@@ -2,7 +2,8 @@
 session_start();
 
 include 'koneksi.php';
- ?>
+include 'php/cek_user.php';
+?>
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -339,7 +340,7 @@ include 'koneksi.php';
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="website">Jenis kelamin
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" name="pekerjaan" class="form-control col-md-7 col-xs-12">
+                          <input type="text" name="jenis_kelamin" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="item form-group">

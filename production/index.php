@@ -2,7 +2,8 @@
 session_start();
 
 include 'koneksi.php';
- ?>
+include 'php/cek_user.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,20 +37,6 @@ include 'koneksi.php';
   </head>
 
   <body class="nav-md">
-    <?php
-    $orang = $_SESSION['username'];
-    $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
-    while ($row = $al->fetch_assoc()) {
-    echo $row['jabatan']."<br>";
-    echo $_SESSION['jabatan'];
-    }
-	    if($_SESSION['status']!="login"){
-		      header("location:loregpembeli.php?pesan=belum_login");
-	      }
-    if ($_SESSION['jabatan'] != 'admin') {
-          header("location:loregpembeli.php?pesan=bukan_admin");
-        }
-        ?>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">

@@ -3,6 +3,7 @@ session_start();
 
 include 'koneksi.php';
 include 'php/cek_user.php';
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +65,7 @@ include 'php/cek_user.php';
                                 ?>
                                    <tr>
                                          <td>
-                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50">
+                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" width="50" height="50">
                                           </td>
                                     </tr>
                      <?php } ?>
@@ -113,18 +114,6 @@ include 'php/cek_user.php';
                     </ul>
                   </li>
                 </ul>
-              </div>
-              <div class="menu_section">
-                <h3>Live On</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.php">Profile</a></li>
-                    </ul>
-                  </li>
               </div>
             </div>
             <!-- /sidebar menu -->
@@ -342,37 +331,7 @@ include 'php/cek_user.php';
                       </ul>
 
                       <a class="btn btn-success" href="edit_profil.php"><i class="fa fa-edit m-right-xs"></i>Edit Profil</a>
-                      <br />
-
-                      <!-- start skills -->
-                      <h4>Skills</h4>
-                      <ul class="list-unstyled user_data">
-                        <li>
-                          <p>Web Applications</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                          </div>
-                        </li>
-                        <li>
-                          <p>Website Design</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="70"></div>
-                          </div>
-                        </li>
-                        <li>
-                          <p>Automation & Testing</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="30"></div>
-                          </div>
-                        </li>
-                        <li>
-                          <p>UI / UX</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                          </div>
-                        </li>
-                      </ul>
-                      <!-- end of skills -->
+                      <br >
 
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
@@ -464,6 +423,15 @@ include 'php/cek_user.php';
                                 echo $row['email']."<br>";
                                 } ?></td>
                               </tr>
+                              <tr>
+                                <td>Jenis Kelamin</td>
+                                <td>:</td>
+                                <td><?php
+                                $al = mysqli_query($koneksi, "SELECT jenis_kelamin FROM tbl_user WHERE username='$orang'");
+                                while ($row = $al->fetch_assoc()) {
+                                echo $row['jenis_kelamin']."<br>";
+                                } ?></td>
+                              </tr>
                             </table>
                           </h4>
                           </div>
@@ -473,11 +441,11 @@ include 'php/cek_user.php';
                             <table class="data table table-striped no-margin">
                               <thead>
                                 <tr>
-                                  <th>#</th>
-                                  <th>Project Name</th>
-                                  <th>Client Company</th>
-                                  <th class="hidden-phone">Hours Spent</th>
-                                  <th>Contribution</th>
+                                  <th>No</th>
+                                  <th>Nama Kayu</th>
+                                  <th>Jenis Kayu</th>
+                                  <th>ALamat Kebub</th>
+                                  <th>Deskripsi</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -548,7 +516,7 @@ include 'php/cek_user.php';
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            SIJUKA © 2018
           </div>
           <div class="clearfix"></div>
         </footer>
