@@ -65,7 +65,7 @@ include 'php/cek_user.php';
                                 ?>
                                    <tr>
                                          <td>
-                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" width="50" height="50">
+                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50">
                                           </td>
                                     </tr>
                      <?php } ?>
@@ -330,7 +330,12 @@ include 'php/cek_user.php';
                         </li>
                       </ul>
 
-                      <a class="btn btn-success" href="edit_profil.php"><i class="fa fa-edit m-right-xs"></i>Edit Profil</a>
+                      <a class="btn btn-success" href="edit_profil.php?nik=<?php
+                       $dt = mysqli_query($koneksi, "SELECT *FROM tbl_user WHERE username='$orang'") ;
+                       while ($d = mysqli_fetch_array($dt)) {
+                         echo $d['nik'];
+                       }
+                       ?>" ><i class="fa fa-edit m-right-xs"></i>Edit Profil</a>
                       <br >
 
                     </div>
@@ -367,7 +372,7 @@ include 'php/cek_user.php';
                               <tr>
                                 <th width="150px"> &nbsp; </th>
                                 <th width="70px"> &nbsp; </th>
-                                <th width="300px"> &nbsp; </th>
+                                <th width="500px"> &nbsp; </th>
                               </tr>
                               <tr>
                                 <td>NIK</td>

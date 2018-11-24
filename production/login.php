@@ -14,6 +14,7 @@
     $data = mysqli_fetch_assoc($login);
     $_SESSION['username'] = $username;
 	  $_SESSION['status'] = "login";
+    $_SESSION['nik'];
 
     if($data['jabatan']=="admin"){
       $_SESSION['username'] = $username;
