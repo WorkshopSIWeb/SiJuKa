@@ -13,9 +13,9 @@ include 'php/cek_user.php';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/IMG-20181016-WA0004.jpg" type="image/ico" />
+    <link rel="icon" href="images/IMG-20181016-WA0004.jpg" type="image/ico" />
 
-    <title>Si_Juka | Sistem Informasi Penjualan Kayu Online Terlengkap </title>
+    <title>SIJUKA | Profil </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
