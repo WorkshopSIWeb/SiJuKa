@@ -301,7 +301,7 @@ include 'php/cek_user.php';
 
                     <form class="form-horizontal form-label-left" action="php/update_profil.php" method="post">
                       <div class="item form-group">
-                        <input type="hidden" name="nik" value="<?php echo $dt['nik'];?>">"
+                        <input type="hidden" name="nik" value="<?php echo $dt['nik'];?>">
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nama Lengkap <span class="required">*</span>
