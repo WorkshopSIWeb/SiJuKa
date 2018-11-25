@@ -40,7 +40,7 @@
       <div class="card card-login mx-auto mt-5">
         <div class="card-body">
           <div class="text-center mb-4">
-           <img src=gambar/logo1.png height="100px"align="center"/>
+           <img src=sijuka.png height="100px"align="center"/>
 			<h4>Lupa Password?</h4>
 
             <p>masukan email untuk merubah password</p>
