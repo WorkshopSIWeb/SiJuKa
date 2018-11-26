@@ -2,7 +2,8 @@
 session_start();
 
 include 'koneksi.php';
- ?>
+include 'php/cek_user.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -386,7 +387,7 @@ include 'koneksi.php';
         <!-- /footer content -->
       </div>
     </div>
-    
+
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->

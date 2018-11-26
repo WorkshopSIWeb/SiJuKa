@@ -320,40 +320,41 @@ include 'koneksi.php';
                       <!-- <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
                       </p> -->
                       <span class="section">Masukkan Data yang sesuai :</span>
-
+                      <form action="input_data_user.php" method="post" enctype="multipart/form-data" >
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nik">NIK <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nik" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nik" placeholder="Nomor Induk Keluarga" required="required" type="text">
+                          <input id="nik" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nik" placeholder="Nomor Induk Keluarga" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama Lengkap <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nama_lengkap" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nama_lengkap" placeholder="Nama Lengkap" required="required" type="text">
+                          <input id="nama_lengkap" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nama_lengkap" placeholder="Nama Lengkap" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tgl_lahir">Tanggal Lahir <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="tgl_lahir" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tgl_lahir" placeholder="Tahun-Bulan-Tanggal" required="required" type="text">
+                          <!-- <i class="fa fa-calendar"></i> -->
+                          <input id="tgl_lahir" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tgl_lahir" placeholder="Tahun-Bulan-Tanggal" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="alamat">Alamat Lengkap <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="alamat" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="alamat" placeholder="Alamat" required="required" type="text">
+                          <input id="alamat" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="alamat" placeholder="Alamat" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no_telepon">Nomor Telepon <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="no_telepon" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="no_telepon" placeholder="Nomor Telepon" required="required" type="text">
+                          <input id="no_telepon" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12" data-validate-words="2" name="no_telepon" placeholder="Nomor Telepon" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -367,7 +368,7 @@ include 'koneksi.php';
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="username" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="username" placeholder="Username" required="required" type="text">
+                          <input id="username" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="username" placeholder="Username" required="required" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -384,7 +385,7 @@ include 'koneksi.php';
                        </div>
                       <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Jabatan</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <!-- <div class="col-md-6 col-sm-6 col-xs-12">
                               <div id="jabatan" class="btn-group" data-toggle="buttons">
                                 <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                   <input type="radio" name="jabatan" value="admin"> &nbsp; Admin &nbsp;
@@ -396,18 +397,21 @@ include 'koneksi.php';
                                   <input type="radio" name="jabatan" value="pembeli"> Pembeli
                                 </label>
                               </div>
-                            </div>
+                            </div> -->
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="pekerjaan" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="jabatan" placeholder="jabatan" type="text">
+                        </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pekerjaan">Pekerjaan <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="pekerjaan" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="pekerjaan" placeholder="Pekerjaan" required="required" type="text">
+                          <input id="pekerjaan" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="pekerjaan" placeholder="Pekerjaan" type="text">
                         </div>
                       </div>
                       <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Jenis Kelamin</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <!-- <div class="col-md-6 col-sm-6 col-xs-12">
                               <div id="jenis_kelamin" class="btn-group" data-toggle="buttons">
                                 <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                   <input type="radio" name="jenis_kelamin" value="Laki-laki"> &nbsp; Laki - Laki &nbsp;
@@ -415,17 +419,21 @@ include 'koneksi.php';
                                 <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                   <input type="radio" name="jenis_kelamin" value="Perempuan"> Perempuan
                                 </label>
-                             </div>
+                             </div> -->
+                             <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="pekerjaan" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="jenis_kelamin" placeholder="Jenis Kelamin" type="text">
+                        </div>
                             </div>
                       </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                          <button type="submit" class="btn btn-primary">Cancel</button>
-                          <button id="send" type="submit" class="btn btn-success">Submit</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">Batal</button>
+                          <input type="submit" class="btn btn-primary" value="simpan om">
                         </div>
                       </div>
                     </form>
+                  </form>
                   </div>
                 </div>
               </div>

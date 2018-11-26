@@ -2,7 +2,8 @@
 session_start();
 
 include 'koneksi.php';
- ?>
+include 'php/cek_user.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -325,7 +326,7 @@ include 'koneksi.php';
     <!-- bootstrap-daterangepicker -->
     <script src="../vendors/moment/min/moment.min.js"></script>
     <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-    
+
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
   </body>

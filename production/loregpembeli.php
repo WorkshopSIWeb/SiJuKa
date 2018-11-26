@@ -6,8 +6,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <script type="text/javascript" src="jquery.js"></script>
     <link rel="icon" href="images/IMG-20181016-WA0004.jpg" type="image/ico" />
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+
 
     <title>SIJUKA | LOGIN</title>
 
@@ -64,11 +68,11 @@
                   echo "<script>alert('Anda berhasil log out!'); window.location.href = 'loregpembeli.php';</script>";
                 }else if($_GET['pesan'] == "belum_login"){
                   echo "<script>alert('Anda harus login dulu untuk mengakses halaman tersebut!'); window.location.href = 'loregpembeli.php';</script>";
-                }elseif ($_GET['pesan'] == "approve") {
+                }else if ($_GET['pesan'] == "approve") {
                   echo "<script>alert('Pendaftaran Anda Berhasil, Silahkan Login untuk Masuk ke sistem'); window.location.href = 'loregpembeli.php';</script>";
-                }elseif ($_GET['pesan'] == "bukan_admin") {
-                  echo "<script>alert('Anda bukan admin. Anda tidak seharusnya mengakses halaman ini'); window.location.href = 'page_404.html';</script>";
-                  // code...
+                }else if ($_GET['pesan'] == "bukan_admin") {
+                  echo "<script>alert('Anda bukan admin. Anda tidak seharusnya mengakses halaman ini!'); window.location.href = 'page_404.html';</script>";
+
                 }
               }
               ?>
