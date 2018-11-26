@@ -356,7 +356,7 @@ include 'php/cek_user.php';
                         <td><?php echo $row['jenis_kelamin'];?></td>
                         <td>
                           <a href="aksi_kebun.php?sender=edit&nik=<?php echo $row['nik']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a> 
-                          <a href="aksi_kebun.php?sender=hapus&nik=<?php echo $row['nik']; ?>" class="btn btn-danger"><li class="fa fa-trash-o"></li> Hapus</a> 
+                          <a href="php/delete_data_user.php?nik=<?php echo $row['nik']; ?>" method="post" class="btn btn-danger"><li class="fa fa-trash-o"></li> Hapus</a> 
                         </td>
                       </tr>
                       <?php    

@@ -394,15 +394,15 @@ include 'php/cek_user.php';
                           </div>
                        </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Jabatan <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jabatan">Jabatan <span class="required">*</span>
                         </label>
                         <div class="item form-group">
                           <div class="col-md-6 col-sm-6 col-xs-12">
                           <select class="select1_single form-control" name="jabatan" id="jabatan" class="jabatan" value=" ">
                             <option disabled="disabled">Jabatan :</option>
-                            <option value="admin">Admin</option>
-                            <option value="penjual">Penjual</option>
-                            <option value="pembeli">Pembeli</option>
+                            <option>Admin</option>
+                            <option>Penjual</option>
+                            <option>Pembeli</option>
                           </select>
                         </div>
                         </div>
@@ -421,8 +421,8 @@ include 'php/cek_user.php';
                           <div class="col-md-6 col-sm-6 col-xs-12">
                           <select class="select1_single form-control" name="jenis_kelamin" id="jenis_kelamin" class="jenis_kelamin" value=" ">
                             <option disabled="disabled">Jenis Kelamin :</option>
-                            <option value="Laki-laki">Laki - Laki</option>
-                            <option value="Perempuan">Perempuan</option>
+                            <option>Laki - Laki</option>
+                            <option>Perempuan</option>
                           </select>
                         </div>
                         </div>
