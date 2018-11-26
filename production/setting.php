@@ -1,8 +1,8 @@
 <?php
-session_start();
+  session_start();
 
-include 'koneksi.php';
-include 'php/cek_user.php';
+  include 'koneksi.php';
+  include 'php/cek_user.php';
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -13,7 +13,7 @@ include 'php/cek_user.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>SIJUKA | Edit Profil</title>
+    <title>SIJUKA | Pengaturan</title>
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -272,7 +272,7 @@ include 'php/cek_user.php';
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Edit Profil</h2>
+                    <h2>Profil</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li>
                         <div class="col-lg-6">
@@ -344,10 +344,18 @@ include 'php/cek_user.php';
                         </div>
                       </div>
                       <div class="item form-group">
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kelamin">Jenis kelamin
+                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kelamin">Jenis kelamin
                           </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <!-- <div class="col-md-6 col-sm-6 col-xs-12">
                             <input type="text" name="jenis_kelamin" value="<?php echo $dt['jenis_kelamin'] ?>" class="form-control col-md-7 col-xs-12">
+                          </div> -->
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="jenis_kelamin" class="select2_single form-control" tabindex="-1" >
+                              <option><?php echo $dt['jenis_kelamin']; ?></option>
+                              <option name="jenis_kelamin" value="Laki-laki">Laki-laki</option>
+                              <option name="jenis_kelamin" value="Perempuan">Perempuan</option>
+                              <option name="jenis_kelamin" value="Lain-lain">Lain-lain</option>
+                            </select>
                           </div>
                         </div>
                       <div class="ln_solid"></div>
@@ -364,6 +372,76 @@ include 'php/cek_user.php';
               </div>
             </div>
           </div>
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Informasi Akun</h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li>
+                  <div class="col-lg-6">
+                </li>
+                <li>
+                  <div class="col-lg-7">
+                </li>
+                <li>
+                  <div class="col-lg-7">
+                </li>
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+              <!-- start form for validation -->
+              <form id="demo-form" data-parsley-validate>
+                <label for="fullname">Full Name * :</label>
+                <input type="text" id="fullname" class="form-control" name="fullname" required />
+
+                <label for="email">Email * :</label>
+                <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+
+                <label>Gender *:</label>
+                <p>
+                  M:
+                  <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /> F:
+                  <input type="radio" class="flat" name="gender" id="genderF" value="F" />
+                </p>
+
+                <label>Hobbies (2 minimum):</label>
+                <p style="padding: 5px;">
+                  <input type="checkbox" name="hobbies[]" id="hobby1" value="ski" data-parsley-mincheck="2" required class="flat" /> Skiing
+                  <br />
+
+                  <input type="checkbox" name="hobbies[]" id="hobby2" value="run" class="flat" /> Running
+                  <br />
+
+                  <input type="checkbox" name="hobbies[]" id="hobby3" value="eat" class="flat" /> Eating
+                  <br />
+
+                  <input type="checkbox" name="hobbies[]" id="hobby4" value="sleep" class="flat" /> Sleeping
+                  <br />
+                  <p>
+
+                    <label for="heard">Heard us by *:</label>
+                    <select id="heard" class="form-control" required>
+                      <option value="">Choose..</option>
+                      <option value="press">Press</option>
+                      <option value="net">Internet</option>
+                      <option value="mouth">Word of mouth</option>
+                    </select>
+
+                    <label for="message">Message (20 chars min, 100 max) :</label>
+                    <textarea id="message" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
+                    data-parsley-validation-threshold="10"></textarea>
+
+                    <br/>
+                    <span class="btn btn-primary">Validate form</span>
+
+                  </form>
+                  <!-- end form for validations -->
+
+                </div>
+              </div>
         </div>
         <!-- /page content -->
 

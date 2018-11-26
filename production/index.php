@@ -176,8 +176,8 @@ include 'php/cek_user.php';
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="profile.php"> Profile</a></li>
                     <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
+                      <a href="setting.php">
+                        <!-- <span class="badge bg-red pull-right">50%</span> -->
                         <span>Pengaturan</span>
                       </a>
                     </li>
