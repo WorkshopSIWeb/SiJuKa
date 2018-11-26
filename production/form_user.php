@@ -2,6 +2,7 @@
 session_start();
 
 include 'koneksi.php';
+include 'php/cek_user.php';
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -314,6 +315,15 @@ include 'koneksi.php';
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+                    <?php
+                    $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'") ;
+                    while ($d = mysqli_fetch_array($data)) {
+                        $id = $d['nik'];
+                        $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
+                        while ($dt = mysqli_fetch_array($qm)){
+                     ?>
+
+                    <form class="form-horizontal form-label-left" action="php/insert_data_user.php" method="post">
 
                     <form class="form-horizontal form-label-left" novalidate>
 
@@ -383,23 +393,18 @@ include 'koneksi.php';
                             <input type="file" name="foto_profil" value="<?php echo $row['foto'];?>" class="form-control" placeholder="Enter..." required="">
                           </div>
                        </div>
-                      <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Jabatan</label>
-                            <!-- <div class="col-md-6 col-sm-6 col-xs-12">
-                              <div id="jabatan" class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="jabatan" value="admin"> &nbsp; Admin &nbsp;
-                                </label>
-                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="jabatan" value="penjual"> Penjual
-                                </label>
-                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="jabatan" value="pembeli"> Pembeli
-                                </label>
-                              </div>
-                            </div> -->
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="pekerjaan" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="jabatan" placeholder="jabatan" type="text">
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Jabatan <span class="required">*</span>
+                        </label>
+                        <div class="item form-group">
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="select1_single form-control" name="jabatan" id="jabatan" class="jabatan" value=" ">
+                            <option disabled="disabled">Jabatan :</option>
+                            <option value="admin">Admin</option>
+                            <option value="penjual">Penjual</option>
+                            <option value="pembeli">Pembeli</option>
+                          </select>
+                        </div>
                         </div>
                       </div>
                       <div class="item form-group">
@@ -409,31 +414,29 @@ include 'koneksi.php';
                           <input id="pekerjaan" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="pekerjaan" placeholder="Pekerjaan" type="text">
                         </div>
                       </div>
-                      <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Jenis Kelamin</label>
-                            <!-- <div class="col-md-6 col-sm-6 col-xs-12">
-                              <div id="jenis_kelamin" class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="jenis_kelamin" value="Laki-laki"> &nbsp; Laki - Laki &nbsp;
-                                </label>
-                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="jenis_kelamin" value="Perempuan"> Perempuan
-                                </label>
-                             </div> -->
-                             <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="pekerjaan" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="jenis_kelamin" placeholder="Jenis Kelamin" type="text">
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Jenis Kelamin <span class="required">*</span>
+                        </label>
+                        <div class="item form-group">
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="select1_single form-control" name="jenis_kelamin" id="jenis_kelamin" class="jenis_kelamin" value=" ">
+                            <option disabled="disabled">Jenis Kelamin :</option>
+                            <option value="Laki-laki">Laki - Laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                          </select>
                         </div>
-                            </div>
+                        </div>
                       </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
                           <button type="button" class="btn btn-primary" data-dismiss="modal">Batal</button>
-                          <input type="submit" class="btn btn-primary" value="simpan om">
+                          <input type="submit" class="btn btn-primary" value="Simpan">
                         </div>
                       </div>
                     </form>
                   </form>
+                  <?php } }?>
                   </div>
                 </div>
               </div>
