@@ -263,7 +263,7 @@ include 'php/cek_user.php';
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div class="right_col" role="main">
+        <!-- <div class="right_col" role="main">
           <div class="">
 
             <div class="clearfix"></div>
@@ -350,9 +350,171 @@ include 'php/cek_user.php';
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- /page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Form Wizards</h3>
+              </div>
 
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                              <button class="btn btn-default" type="button">Go!</button>
+                          </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="row">
+
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Form Wizards <small>Sessions</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+
+                    <!-- Smart Wizard -->
+                    <p>This is a basic form wizard example that inherits the colors from the selected scheme.</p>
+                    <div id="wizard" class="form_wizard wizard_horizontal">
+                      <ul class="wizard_steps">
+                        <li>
+                          <a href="#step-1">
+                            <span class="step_no">1</span>
+                            <span class="step_descr">
+                                              Langkah 1<br />
+                                              <small>Upload data kayu</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#step-2">
+                            <span class="step_no">2</span>
+                            <span class="step_descr">
+                                              Langkah 2<br />
+                                              <small>Upload Foto Kayu</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#step-3">
+                            <span class="step_no">3</span>
+                            <span class="step_descr">
+                                              Step 3<br />
+                                              <small>Step 3 description</small>
+                                          </span>
+                          </a>
+                        </li>
+                      </ul>
+                      <div id="step-1">
+                          <?php
+                          $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'") ;
+                          while ($d = mysqli_fetch_array($data)) {
+                              $id = $d['nik'];
+                              $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
+                              while ($dt = mysqli_fetch_array($qm)){
+                           ?>
+
+                          <form class="form-horizontal form-label-left" action="php/upload_kayu.php" method="post">
+                            <div class="item form-group">
+                              <input type="hidden" name="nik" value="<?php echo $dt['nik'];?>">
+                            </div>
+                            <div class="item form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nama Kayu <span class="required">*</span>
+                              </label>
+                              <div class="item form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="select1_single form-control" name="nama_kayu" id="nama_kayu" class="nama_kayu" value=" ">
+                                  <option disabled="disabled">Pilih Kayu</option>
+                                  <option value="Jati">Jati</option>
+                                  <option value="Mahoni">Mahoni</option>
+                                </select>
+                              </div>
+                              </div>
+                            </div>
+                            <div class="item form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kayu">Jenis Kayu <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="jenis_kayu" name="jenis_kayu" required="required" class="form-control col-md-7 col-xs-12">
+                              </div>
+                            </div>
+                            <div class="item form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="alamat">Alamat Kebun <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="address" name="alamat" required="required" class="form-control col-md-7 col-xs-12">
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Deskripsi </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <textarea name="deskripsi" class="resizable_textarea form-control" placeholder="Deskripsikan ukuran batang kayu (diameter x jumlah) "></textarea>
+                              </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                              <div class="col-md-6 col-md-offset-3">
+                                <button type="submit" class="btn btn-primary">Batal</button>
+                                <input type="submit" class="btn btn-primary" value="posting">
+                              </div>
+                            </div>
+                          </form>
+                        <?php } }?>
+
+                      </div>
+                      <div id="step-2">
+                        <div class="form-group">
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="file" name="file" required="required"/>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="step-3">
+                        <h2 class="StepTitle">Step 3 Content</h2>
+                        <p>
+                          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                          eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                          in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                      </div>
+
+                    </div>
+                    <!-- End SmartWizard Content -->
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- footer content -->
         <footer>
           <div class="pull-right">
@@ -374,7 +536,8 @@ include 'php/cek_user.php';
     <script src="../vendors/nprogress/nprogress.js"></script>
     <!-- validator -->
     <script src="../vendors/validator/validator.js"></script>
-
+    <!-- jQuery Smart Wizard -->
+    <script src="../vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
 
