@@ -2,6 +2,7 @@
 session_start();
 
 include 'koneksi.php';
+include 'php/cek_user.php';
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +24,7 @@ include 'koneksi.php';
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-  
+
     <!-- bootstrap-progressbar -->
     <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- JQVMap -->
@@ -36,6 +37,20 @@ include 'koneksi.php';
   </head>
 
   <body class="nav-md">
+    <?php
+    $orang = $_SESSION['username'];
+    $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
+    while ($row = $al->fetch_assoc()) {
+    // echo $row['jabatan']."<br>";
+    echo $_SESSION['jabatan'];
+    }
+      if($_SESSION['status']!="login"){
+          header("location:loregpembeli.php?pesan=belum_login");
+        }
+    if ($_SESSION['jabatan'] != 'admin') {
+          header("location:loregpembeli.php?pesan=bukan_admin");
+        }
+        ?>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -161,7 +176,7 @@ include 'koneksi.php';
                                 ?>
                                    <tr>
                                          <td>
-                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50">
+                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" width="50" height="50">
                                           </td>
                                           <td>
                                             <?php echo $_SESSION['username']?>
@@ -173,7 +188,7 @@ include 'koneksi.php';
                   </table>
                   <!-- </a> -->
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="profile.php"> Profile</a></li>
                     <li>
                       <a href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
@@ -253,6 +268,7 @@ include 'koneksi.php';
             </nav>
           </div>
         </div>
+        </div>
         <!-- /top navigation -->
 
         <!-- page content -->
@@ -299,6 +315,8 @@ include 'koneksi.php';
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+                    <form class="form-horizontal form-label-left" action="php/insert_data_kayu.php" method="post">
+
 
                     <form class="form-horizontal form-label-left" novalidate>
                       <span class="section">Masukkan Data yang Sesuai :</span>
@@ -306,35 +324,43 @@ include 'koneksi.php';
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kode_kayu">Kode Kayu <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="kode_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nik" placeholder="Kode Kayu" required="required" type="text">
+                          <input id="kode_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="kode_kayu" placeholder="Kode Kayu" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_kayu">Nama Kayu <span class="required">:</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_kayu">Nama Kayu <span class="required">*</span>
                         </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nama_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nama_kayu" placeholder="Nama Kayu" required="required" type="text">
+                        <div class="item form-group">
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="select1_single form-control" name="nama_kayu" id="nama_kayu" class="nama_kayu" value=" ">
+                            <option disabled="disabled">Nama Kayu :</option>
+                            <option value="Jati">Jati</option>
+                            <option value="Mahoni">Mahoni</option>
+                            <option value="Sandrila">Sandrila</option>
+                            <option value="Sengon">Sengon</option>
+                          </select>
+                        </div>
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kayu">Jenis Kayu <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="jenis_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="jenis_kayu" placeholder="Jenis Kayu" required="required" type="text">
+                          <input id="jenis_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="jenis_kayu" placeholder="Jenis Kayu" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="alamat_kebun">Alamat kebun <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="alamat_kebun" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="alamat_kebun" placeholder="Alamat Kebun" required="required" type="text">
+                          <input id="alamat_kebun" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="alamat_kebun" placeholder="Alamat Kebun" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama Lengkap <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nama_lengkap" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nama_lengkap" placeholder="Nama Lengkap" required="required" type="text">
+                          <input id="nama_lengkap" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nama_lengkap" placeholder="Nama Lengkap" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -348,7 +374,7 @@ include 'koneksi.php';
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tanggal_upload">Tanggal Upload <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="tanggal_upload" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tanggal_upload" placeholder="Tahun-Bulan-Tanggal" required="required" type="text">
+                          <input id="tanggal_upload" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tanggal_upload" placeholder="Tahun-Bulan-Tanggal"  type="text">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -372,8 +398,8 @@ include 'koneksi.php';
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                          <button type="submit" class="btn btn-primary">Cancel</button>
-                          <button id="send" type="submit" class="btn btn-success">Submit</button>
+                          <button type="submit" class="btn btn-primary">Batal</button>
+                          <input type="submit" class="btn btn-primary" value="Simpan">
                         </div>
                       </div>
                     </form>

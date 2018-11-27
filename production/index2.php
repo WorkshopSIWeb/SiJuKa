@@ -37,6 +37,20 @@ include 'php/cek_user.php';
   </head>
 
   <body class="nav-md">
+    <?php
+    $orang = $_SESSION['username'];
+    $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
+    while ($row = $al->fetch_assoc()) {
+    // echo $row['jabatan']."<br>";
+    echo $_SESSION['jabatan'];
+    }
+      if($_SESSION['status']!="login"){
+          header("location:loregpembeli.php?pesan=belum_login");
+        }
+    if ($_SESSION['jabatan'] != 'admin') {
+          header("location:loregpembeli.php?pesan=bukan_admin");
+        }
+        ?>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -162,7 +176,7 @@ include 'php/cek_user.php';
                                 ?>
                                    <tr>
                                          <td>
-                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50">
+                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" width="50" height="50">
                                           </td>
                                           <td>
                                             <?php echo $_SESSION['username']?>
@@ -174,7 +188,7 @@ include 'php/cek_user.php';
                   </table>
                   <!-- </a> -->
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="profile.php"> Profile</a></li>
                     <li>
                       <a href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
@@ -253,7 +267,9 @@ include 'php/cek_user.php';
               </ul>
             </nav>
           </div>
-        </div>        <!-- /top navigation -->
+        </div>
+        </div>
+        <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">

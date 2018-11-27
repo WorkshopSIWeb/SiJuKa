@@ -37,6 +37,20 @@ include 'php/cek_user.php';
   </head>
 
   <body class="nav-md">
+    <?php
+    $orang = $_SESSION['username'];
+    $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
+    while ($row = $al->fetch_assoc()) {
+    // echo $row['jabatan']."<br>";
+    echo $_SESSION['jabatan'];
+    }
+      if($_SESSION['status']!="login"){
+          header("location:loregpembeli.php?pesan=belum_login");
+        }
+    if ($_SESSION['jabatan'] != 'admin') {
+          header("location:loregpembeli.php?pesan=bukan_admin");
+        }
+        ?>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -174,7 +188,7 @@ include 'php/cek_user.php';
                   </table>
                   <!-- </a> -->
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="profile.php"> Profile</a></li>
                     <li>
                       <a href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
@@ -254,6 +268,7 @@ include 'php/cek_user.php';
             </nav>
           </div>
         </div>
+        </div>
         <!-- /top navigation -->
 
         <!-- page content -->
@@ -304,6 +319,7 @@ include 'php/cek_user.php';
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
+                          <th>No</th>
                           <th>Kode_Kayu</th>
                           <th>Nama_Kayu</th>
                           <th>Jenis_Kayu</th>
@@ -313,10 +329,41 @@ include 'php/cek_user.php';
                           <th>Foto_Kebun_1</th>
                           <th>Foto_Kebun_2</th>
                           <th>Foto_Kebun_3</th>
+                          <th>Pilihan</th>
                         </tr>
                       </thead>
                       <tbody>
-
+                        <?php
+                        $sql="SELECT  * FROM tbl_kayu";
+                        $no=1;
+                        if (!$result=  mysqli_query($koneksi, $sql)){
+                        die('Error:'.mysqli_error($koneksi));
+                        }  else {
+                        if (mysqli_num_rows($result)> 0){
+                        while ($row=  mysqli_fetch_assoc($result)){
+                        ?>
+                        <td><?php echo $no ;?></td>
+                        <td><?php echo $row['kode_kayu'];?></td>
+                        <td><?php echo $row['nama_kayu'];?></td>
+                        <td><?php echo $row['jenis_kayu'];?></td>
+                        <td><?php echo $row['alamat_kebun'];?></td>
+                        <td><?php echo $row['deskripsi'];?></td>
+                        <td><?php echo $row['tanggal_upload'];?></td>
+                        <td><?php echo $row['foto_1'];?></td>
+                        <td><?php echo $row['foto_2'];?></td>
+                        <td><?php echo $row['foto_3'];?></td>
+                        <td>
+                          <a href="aksi_user.php?sender=edit&nik=<?php echo $row['nik']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a> 
+                          <a href="php/delete_data_KAYU.php?kode_kayu=<?php echo $row['kode_kayu']; ?>" method="post" class="btn btn-danger"><li class="fa fa-trash-o"></li> Hapus</a> 
+                        </td>
+                      </tr>
+                      <?php    
+                        $no++;                    
+                        }
+                        }  else {
+                           echo '';    
+                           }
+                        }?>
                       </tbody>
                     </table>
                   </div>

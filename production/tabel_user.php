@@ -37,6 +37,20 @@ include 'php/cek_user.php';
   </head>
 
   <body class="nav-md">
+    <?php
+    $orang = $_SESSION['username'];
+    $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
+    while ($row = $al->fetch_assoc()) {
+    // echo $row['jabatan']."<br>";
+    echo $_SESSION['jabatan'];
+    }
+      if($_SESSION['status']!="login"){
+          header("location:loregpembeli.php?pesan=belum_login");
+        }
+    if ($_SESSION['jabatan'] != 'admin') {
+          header("location:loregpembeli.php?pesan=bukan_admin");
+        }
+        ?>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -174,7 +188,7 @@ include 'php/cek_user.php';
                   </table>
                   <!-- </a> -->
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="profile.php"> Profile</a></li>
                     <li>
                       <a href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
@@ -253,7 +267,9 @@ include 'php/cek_user.php';
               </ul>
             </nav>
           </div>
-        </div>        <!-- /top navigation -->
+        </div>
+        </div>
+        <!-- /top navigation -->
 
         <!-- page content -->
         <div class="right_col" role="main">
@@ -274,7 +290,7 @@ include 'php/cek_user.php';
                 </div>
               </div>
             </div>
-
+                    
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
@@ -303,6 +319,7 @@ include 'php/cek_user.php';
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
+                          <th>No</th>
                           <th>NIK</th>
                           <th>Nama_Lengkap</th>
                           <th>Tanggal_Lahir</th>
@@ -310,8 +327,6 @@ include 'php/cek_user.php';
                           <th>Nomor_Telepon</th>
                           <th>Email</th>
                           <th>Username</th>
-                          <th>Password</th>
-                          <th>Foto_Profil</th>
                           <th>Jabatan</th>
                           <th>Pekerjaan</th>
                           <th>Jenis_Kelamin</th>
@@ -319,7 +334,38 @@ include 'php/cek_user.php';
                         </tr>
                       </thead>
                       <tbody>
-
+                        <?php
+                        $sql="SELECT  * FROM tbl_user";
+                        $no=1;
+                        if (!$result=  mysqli_query($koneksi, $sql)){
+                        die('Error:'.mysqli_error($koneksi));
+                        }  else {
+                        if (mysqli_num_rows($result)> 0){
+                        while ($row=  mysqli_fetch_assoc($result)){
+                        ?>
+                        <td><?php echo $no ;?></td>
+                        <td><?php echo $row['nik'];?></td>
+                        <td><?php echo $row['nama_lengkap'];?></td>
+                        <td><?php echo $row['tgl_lahir'];?></td>
+                        <td><?php echo $row['alamat'];?></td>
+                        <td><?php echo $row['no_telepon'];?></td>
+                        <td><?php echo $row['email'];?></td>
+                        <td><?php echo $row['username'];?></td>
+                        <td><?php echo $row['jabatan'];?></td>
+                        <td><?php echo $row['pekerjaan'];?></td>
+                        <td><?php echo $row['jenis_kelamin'];?></td>
+                        <td>
+                          <a href="aksi_kebun.php?sender=edit&nik=<?php echo $row['nik']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a> 
+                          <a href="php/delete_data_user.php?nik=<?php echo $row['nik']; ?>" method="post" class="btn btn-danger"><li class="fa fa-trash-o"></li> Hapus</a> 
+                        </td>
+                      </tr>
+                      <?php    
+                        $no++;                    
+                        }
+                        }  else {
+                           echo '';    
+                           }
+                        }?>
                       </tbody>
                     </table>
                   </div>
@@ -330,7 +376,7 @@ include 'php/cek_user.php';
           </div>
         </div>
         <!-- /page content -->
-
+        
        <!-- footer content -->
         <footer>
           <div class="pull-right">

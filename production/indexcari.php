@@ -2,7 +2,8 @@
 session_start();
 
 include 'koneksi.php';
- ?>
+include 'php/cek_user.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,7 +12,7 @@ include 'koneksi.php';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/IMG-20181016-WA0004.jpg" type="image/ico" />
+    <link rel="icon" href="images/IMG-20181016-WA0004.jpg" type="image/ico" />
 
     <title>Si_Juka | Sistem Informasi Penjualan Kayu Online Terlengkap </title>
 
@@ -36,19 +37,11 @@ include 'koneksi.php';
   </head>
 
   <body class="nav-md">
+     <body class="nav-md">
     <?php
-    $orang = $_SESSION['username'];
-    $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
-    while ($row = $al->fetch_assoc()) {
-    // echo $row['jabatan']."<br>";
-    echo $_SESSION['jabatan'];
-    }
       if($_SESSION['status']!="login"){
           header("location:loregpembeli.php?pesan=belum_login");
-        }
-    if ($_SESSION['jabatan'] != 'admin') {
-          header("location:loregpembeli.php?pesan=bukan_admin");
-        }
+         }
         ?>
     <div class="container body">
       <div class="main_container">
@@ -122,18 +115,6 @@ include 'koneksi.php';
                   </li>
                 </ul>
               </div>
-              <div class="menu_section">
-                <h3>Live On</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.php">Profile</a></li>
-                    </ul>
-                  </li>
-              </div>
             </div>
             <!-- /sidebar menu -->
 
@@ -187,7 +168,7 @@ include 'koneksi.php';
                   </table>
                   <!-- </a> -->
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profile.php"> Profile</a></li>
+                    <li><a href="javascript:;"> Profile</a></li>
                     <li>
                       <a href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
@@ -263,144 +244,118 @@ include 'koneksi.php';
                     </li>
                   </ul>
                 </li>
+                <li>
+                  <form action="indexcari.php" method="post">
+      <input type="text" id="searchquery" size="60" name="keyword" placeholder="Search..." />
+      <input type="submit" id="searchbutton" value="Search" name="Search" class="formbutton" />
+    </form>
+                </li>
               </ul>
             </nav>
           </div>
         </div>
-        </div>
         <!-- /top navigation -->
 
         <!-- page content -->
+        <?php
+//koneksi
+$koneksi = new mysqli('localhost','root','','sijuka');
+if (isset($_POST['Search'])){
+    //variable
+    $keyword = $_POST['keyword'];
+    $query = $koneksi->query("SELECT * FROM tbl_kayu WHERE nama_kayu LIKE '%$keyword%' OR jenis_kayu LIKE '%$keyword%' OR alamat_kebun LIKE '$keyword' OR deskripsi LIKE '$keyword' ");
+    $row = mysqli_num_rows($query);
+    //cek apakah ada satu   
+    if ($row==0){
+        ?>
+        <center><h3> 404 NOT FOUND</h3></center>
+        <?php  
+    }
+    else{
+        ?>
         <div class="right_col" role="main">
           <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Form Validation</h3>
-              </div>
+            
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                              <button class="btn btn-default" type="button">Cari!</button>
-                          </span>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="clearfix"></div>
+            <div class="container" >
+    <br><br>
+        <center><h3>Menampilkan hasil dari "<?php echo $keyword;?>" .</h3></center> <br>
+  
+        <?php
+        ?>
+                <!-- <td class="main">nama_kayu</td>
+                <td class="main">alamat_kebun</td>
+                <td class="main">deskripsi</td>
+        </tr> -->
+  - 
+<?php
+foreach ($query as $rows){
+        $nama_kayu = $rows['nama_kayu'];
+        $jenis_kayu = $rows['jenis_kayu'];
+        $alamat_kebun = $rows['alamat_kebun'];
+    $deskripsi = $rows['deskripsi'];
+        ?>
+  <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
+  <div class="container">
+  <div class="row">
+  <div class="container">
+        <div class="col-md-6">
+          <a href="#">
+            <img class="img-fluid rounded mb-3 mb-md-0 mb-md" src="images/1.ico" alt="" width="500px">
+      
+      </a>
+        </div>
+        <div class="col-md-4">
+          <h3> <?php echo  $nama_kayu; ?>  </h3>
+          <p> <?php echo  $jenis_kayu; ?> </p>
+      <p class="main"> <?php echo  $deskripsi; ?> </p>
+          <a class="btn btn-primary" href="#">View Project</a>
+        </div>
+      </div>
+    </div>
+    </div>
+      <!-- /.row -->
 
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Form validation <small>sub title</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
+      <hr>
+        <?php
+        
+        
+        }
+        ?>
+        </table>
+<!--        <?php
+    }
+}
+?> 
+ 
+  <!-- Pagination -->
+      <center><ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
 
-                    <form class="form-horizontal form-label-left" novalidate>
-
-                      <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
-                      </p>
-                      <span class="section">Personal Info</span>
-
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="both name(s) e.g Jon Doe" required="required" type="text">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Confirm Email <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="email" id="email2" name="confirm_email" data-validate-linked="email" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Number <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="number" id="number" name="number" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="website">Website URL <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="url" id="website" name="website" required="required" placeholder="www.website.com" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="occupation">Occupation <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="occupation" type="text" name="occupation" data-validate-length-range="5,20" class="optional form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label for="password" class="control-label col-md-3">Password</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="password" type="password" name="password" data-validate-length="6,8" class="form-control col-md-7 col-xs-12" required="required">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label for="password2" class="control-label col-md-3 col-sm-3 col-xs-12">Repeat Password</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="password2" type="password" name="password2" data-validate-linked="password" class="form-control col-md-7 col-xs-12" required="required">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="telephone">Telephone <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="tel" id="telephone" name="phone" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Textarea <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="textarea" required="required" name="textarea" class="form-control col-md-7 col-xs-12"></textarea>
-                        </div>
-                      </div>
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-md-offset-3">
-                          <button type="submit" class="btn btn-primary">Cancel</button>
-                          <button id="send" type="submit" class="btn btn-success">Submit</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
+     </div><br>
+            
           </div>
         </div>
         <!-- /page content -->
@@ -408,7 +363,7 @@ include 'koneksi.php';
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            SIJUKA © 2018
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -424,11 +379,17 @@ include 'koneksi.php';
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- validator -->
-    <script src="../vendors/validator/validator.js"></script>
+    <!-- morris.js -->
+    <script src="../vendors/raphael/raphael.min.js"></script>
+    <script src="../vendors/morris.js/morris.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-	
+
   </body>
 </html>
