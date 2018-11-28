@@ -489,8 +489,10 @@ include 'php/cek_user.php';
                       </div>
                       <div id="step-2">
                         <div class="form-group">
+                          <!-- <label class="control-label col-md-3 col-sm-3 col-xs-12">Deskripsi </label> -->
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <input type="file" name="file" required="required"/>
+
                           </div>
                         </div>
                       </div>
@@ -505,7 +507,6 @@ include 'php/cek_user.php';
                           in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                         </p>
                       </div>
-
                     </div>
                     <!-- End SmartWizard Content -->
 
@@ -534,8 +535,6 @@ include 'php/cek_user.php';
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- validator -->
-    <script src="../vendors/validator/validator.js"></script>
     <!-- jQuery Smart Wizard -->
     <script src="../vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
     <!-- Custom Theme Scripts -->
