@@ -330,6 +330,7 @@ include 'php/cek_user.php';
                           <th>Jabatan</th>
                           <th>Pekerjaan</th>
                           <th>Jenis_Kelamin</th>
+                          <th>Foto Profil</th>
                           <th>Pilihan</th>
                         </tr>
                       </thead>
@@ -354,8 +355,9 @@ include 'php/cek_user.php';
                         <td><?php echo $row['jabatan'];?></td>
                         <td><?php echo $row['pekerjaan'];?></td>
                         <td><?php echo $row['jenis_kelamin'];?></td>
+                        <td><img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50"></td>
                         <td>
-                          <a href="aksi_kebun.php?sender=edit&nik=<?php echo $row['nik']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a> 
+                          <a href="edit_user.php?nik=<?php echo $row['nik']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a> 
                           <a href="php/delete_data_user.php?nik=<?php echo $row['nik']; ?>" method="post" class="btn btn-danger"><li class="fa fa-trash-o"></li> Hapus</a> 
                         </td>
                       </tr>

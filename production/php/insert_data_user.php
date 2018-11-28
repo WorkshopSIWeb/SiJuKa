@@ -8,10 +8,10 @@
     $eml = $_POST['email'];
     $usn = $_POST['username'];
     $pass = $_POST['password'];
-    $foto = $_POST['foto_profil'];
-    $jbn = ['jabatan'];
-    $pkjn = ['pekerjaan'];
-    $jenkel = ['jenis_kelamin'];
+    // $foto = $_POST['foto_profil'];
+    $jbn = $_POST['jabatan'];
+    $pkjn = $_POST['pekerjaan'];
+    $jenkel = $_POST['jenis_kelamin'];
 
 $query = mysqli_query($koneksi,"INSERT INTO tbl_user (nik, nama_lengkap, tgl_lahir, alamat, no_telepon, email, username, password, foto_profil, jabatan, pekerjaan, jenis_kelamin) VALUES ('$nk','$nl','$tgl','$alt','$no','$eml','$usn','$pass','$foto','$jbn','$pkjn','$jenkel')");
 if ($query) {

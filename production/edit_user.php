@@ -39,6 +39,7 @@ include 'php/cek_user.php';
   <body class="nav-md">
     <?php
     $orang = $_SESSION['username'];
+    $coba = $_GET['nik'];
     $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
     while ($row = $al->fetch_assoc()) {
     // echo $row['jabatan']."<br>";
@@ -296,7 +297,7 @@ include 'php/cek_user.php';
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Kelola Data Kayu <small>oleh Admin</small></h2>
+                    <h2>Kelola Data User <small>oleh Admin</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -315,96 +316,128 @@ include 'php/cek_user.php';
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <form class="form-horizontal form-label-left" action="php/insert_data_kayu.php" method="post">
+                    <?php
+                    $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE nik='$coba'") ;
+                    while ($d = mysqli_fetch_array($data)) {
+                        $id = $d['nik'];
+                        $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
+                        while ($dt = mysqli_fetch_array($qm)){
+                     ?>
 
+                    <form class="form-horizontal form-label-left" action="php/update_user.php" method="post">
 
                     <form class="form-horizontal form-label-left" novalidate>
-                      <span class="section">Masukkan Data yang Sesuai :</span>
-                      <form action="input_data_kayu.php" method="post" enctype="multipart/form-data" >
+
+                      <!-- <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
+                      </p> -->
+                      <span class="section">Masukkan Data yang sesuai :</span>
+                      <form action="update_user.php" method="post" enctype="multipart/form-data" >
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kode_kayu">Kode Kayu <span class="required">:</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nik">NIK <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="kode_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="kode_kayu" placeholder="Kode Kayu" type="text">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_kayu">Nama Kayu <span class="required">*</span>
-                        </label>
-                        <div class="item form-group">
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="select1_single form-control" name="nama_kayu" id="nama_kayu" class="nama_kayu">
-                            <option disabled="disabled">Nama Kayu :</option>
-                            <option value="Jati">Jati</option>
-                            <option value="Mahoni">Mahoni</option>
-                            <option value="Sandrila">Sandrila</option>
-                            <option value="Sengon">Sengon</option>
-                          </select>
-                        </div>
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kayu">Jenis Kayu <span class="required">:</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="jenis_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="jenis_kayu" placeholder="Jenis Kayu" type="text">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="alamat_kebun">Alamat kebun <span class="required">:</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="alamat_kebun" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="alamat_kebun" placeholder="Alamat Kebun" type="text">
+                          <input id="nik" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nik" placeholder="Nomor Induk Keluarga" type="text" value="<?php echo $dt['nik'];?>">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama Lengkap <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nama_lengkap" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nama_lengkap" placeholder="Nama Lengkap" type="text">
+                          <input id="nama_lengkap" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nama_lengkap" placeholder="Nama Lengkap" type="text" value="<?php echo $dt['nama_lengkap'];?>">
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="deskripsi">Deskripsi <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tgl_lahir">Tanggal Lahir <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="deskripsi" required="required" name="deskripsi" class="form-control col-md-7 col-xs-12"></textarea>
+                          <!-- <i class="fa fa-calendar"></i> -->
+                          <input id="tgl_lahir" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tgl_lahir" placeholder="Tahun-Bulan-Tanggal" type="text" value="<?php echo $dt['tgl_lahir'];?>">
                         </div>
                       </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tanggal_upload">Tanggal Upload <span class="required">:</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="alamat">Alamat Lengkap <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="tanggal_upload" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tanggal_upload" placeholder="Tahun-Bulan-Tanggal"  type="text">
+                          <input id="alamat" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="alamat" placeholder="Alamat" type="text" value="<?php echo $dt['alamat'];?>">
                         </div>
                       </div>
                       <div class="item form-group">
-                         <label for="foto_1" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Kebun 1 </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no_telepon">Nomor Telepon <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="no_telepon" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12" data-validate-words="2" name="no_telepon" placeholder="Nomor Telepon" type="text" value="<?php echo $dt['no_telepon'];?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">E-Mail <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $dt['email'];?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="username" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="username" placeholder="Username" required="required" type="text" value="<?php echo $dt['username'];?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label for="password" class="control-label col-md-3">Password</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="password" type="password" name="password" data-validate-length="6,8" class="form-control col-md-7 col-xs-12" required="required" value="<?php echo $dt['password'];?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                         <label for="foto_profil" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Profil </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="file" name="foto_1" value="<?php echo $row['foto_1'];?>" class="form-control" placeholder="Enter..." required="">
+                            <input type="file" name="foto_profil" value="<?php echo $dt['foto_profil'];?>" class="form-control" placeholder="Enter..." required="">
                           </div>
                        </div>
-                       <div class="item form-group">
-                         <label for="foto_2" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Kebun 2 </label>
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="file" name="foto_2" value="<?php echo $row['foto_2'];?>" class="form-control" placeholder="Enter..." required="">
-                          </div>
-                       </div>
-                       <div class="item form-group">
-                         <label for="foto_3" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Kebun 3 </label>
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="file" name="foto_3" value="<?php echo $row['foto_3
-                            '];?>" class="form-control" placeholder="Enter..." required="">
-                          </div>
-                       </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jabatan">Jabatan <span class="required">*</span>
+                        </label>
+                        <div class="item form-group">
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="select1_single form-control" name="jabatan" id="jabatan" class="jabatan" value="<?php echo $dt['jabatan'];?>">
+                            <option disabled="disabled">Jabatan :</option>
+                            <option value="admin">Admin</option>
+                            <option value="penjual">Penjual</option>
+                            <option value="pembeli">Pembeli</option>
+                          </select>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pekerjaan">Pekerjaan <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="pekerjaan" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="pekerjaan" placeholder="Pekerjaan" type="text" value="<?php echo $dt['pekerjaan'];?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Jenis Kelamin <span class="required">*</span>
+                        </label>
+                        <div class="item form-group">
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="select1_single form-control" name="jenis_kelamin" id="jenis_kelamin" class="jenis_kelamin" value="<?php echo $dt['jenis_kelamin'];?>">
+                            <option disabled="disabled">Jenis Kelamin :</option>
+                            <option value="Laki-laki">Laki - Laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                          </select>
+                        </div>
+                        </div>
+                      </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                          <button type="submit" class="btn btn-primary">Batal</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">Batal</button>
                           <input type="submit" class="btn btn-primary" value="Simpan">
                         </div>
                       </div>
                     </form>
+                  </form>
+                  <?php } }?>
                   </div>
                 </div>
               </div>
