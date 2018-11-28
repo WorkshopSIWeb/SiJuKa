@@ -23,6 +23,8 @@ include 'php/cek_user.php';
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+
+    <script type="text/javascript" src="js/jquery.js"></script>
   </head>
   <body class="nav-md">
     <?php
@@ -393,4 +395,5 @@ include 'php/cek_user.php';
     <script src="../build/js/custom.min.js"></script>
 
   </body>
+  
 </html>
