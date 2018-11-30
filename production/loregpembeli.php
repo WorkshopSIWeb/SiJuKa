@@ -118,7 +118,6 @@
       <form action="registerpembeli.php" method="post" enctype="multipart/form-data" >
         <!-- <form> -->
           <h1>Buat Akun</h1>
-        <!-- </form> -->
             <div>
                 <input type="text" name="nik" class="form-control" placeholder="NIK" required="required"/>
             </div>
@@ -141,10 +140,10 @@
               <input type="text" name="username" class="form-control" placeholder="Username" required="required"/>
             </div>
             <div>
-              <input type="password" id="password" name="password" class="form-password" placeholder="  Password" required="required"/>
+              <input type="password" id="password" name="password" class="form-password form-control" placeholder="Password" required="required"/>
             </div>
             <div>
-              <input type="password" id="password" name="repassword" class="form-password" placeholder="  Masukkan Kembali Password" required="required"/>
+              <input type="password" id="password" name="repassword" class="form-password form-control" placeholder="Masukkan Kembali Password" required="required"/>
             </div>
             <div class="row">
               <div class="col-lg-0"></div>
@@ -173,6 +172,7 @@
                 </div>
               </div>
             </form>
+            <!-- </form> -->
           </section>
         </div>
       </div>

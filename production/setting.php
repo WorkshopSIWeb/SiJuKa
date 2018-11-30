@@ -349,15 +349,12 @@
                       <div class="item form-group">
                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kelamin">Jenis kelamin
                           </label>
-                          <!-- <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" name="jenis_kelamin" value="<?php echo $dt['jenis_kelamin'] ?>" class="form-control col-md-7 col-xs-12">
-                          </div> -->
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <select name="jenis_kelamin" class="select2_single form-control" tabindex="-1" >
-                              <option><?php echo $dt['jenis_kelamin']; ?></option>
-                              <option name="jenis_kelamin" value="Laki-laki">Laki-laki</option>
-                              <option name="jenis_kelamin" value="Perempuan">Perempuan</option>
-                              <option name="jenis_kelamin" value="Lain-lain">Lain-lain</option>
+                              <option disabled="disabled" hidden="yes"><?php echo $dt['jenis_kelamin']; ?></option>
+                              <option value="Laki-laki">Laki-laki</option>
+                              <option value="Perempuan">Perempuan</option>
+                              <option value="Lain-lain">Lain-lain</option>
                             </select>
                           </div>
                         </div>
@@ -376,7 +373,7 @@
 
                 <!-- informasi akun --><div class="x_panel">
                   <div class="x_title">
-                    <h2>Profil</h2>
+                    <h2>Informasi Akun</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li>
                         <div class="col-lg-6">
@@ -423,7 +420,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Validasi Password <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="password" id="password" class="form-password form-control col-md-7 col-xs-12" name="password" value="<?php echo $dt['password'] ?>" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="password" id="password" class="form-password form-control col-md-7 col-xs-12" name="password" required="required">
                         </div>
                       </div>
                       <div class="row">
