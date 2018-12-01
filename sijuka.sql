@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 26 Nov 2018 pada 09.10
--- Versi server: 10.1.36-MariaDB
--- Versi PHP: 7.2.10
+-- Generation Time: Dec 01, 2018 at 04:01 PM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,11 +25,12 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_kayu`
+-- Table structure for table `tbl_kayu`
 --
 
 CREATE TABLE `tbl_kayu` (
   `kode_kayu` int(11) NOT NULL,
+  `nik` varchar(16) NOT NULL,
   `nama_kayu` enum('Jati','Mahoni','Sandrila','Sengon') NOT NULL,
   `jenis_kayu` varchar(30) NOT NULL,
   `alamat_kebun` varchar(60) NOT NULL,
@@ -41,18 +42,25 @@ CREATE TABLE `tbl_kayu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_kayu`
+-- Dumping data for table `tbl_kayu`
 --
 
-INSERT INTO `tbl_kayu` (`kode_kayu`, `nama_kayu`, `jenis_kayu`, `alamat_kebun`, `deskripsi`, `tanggal_upload`, `foto_1`, `foto_2`, `foto_3`) VALUES
-(1, 'Jati', 'anjay', 'jakarta', 'dwdw', '2018-11-17', '', '', ''),
-(2, 'Jati', 'anjay', 'BONDOWOSO', 'jh\r\n', '2018-11-18', '1', '2', '3'),
-(3, 'Mahoni', 'super', 'BONDOWOSO', 'ukuran 13x3, 14x 3', '2018-11-18', '1', '2', '3');
+INSERT INTO `tbl_kayu` (`kode_kayu`, `nik`, `nama_kayu`, `jenis_kayu`, `alamat_kebun`, `deskripsi`, `tanggal_upload`, `foto_1`, `foto_2`, `foto_3`) VALUES
+(1, '22323123123', 'Jati', 'sdsd', 'asdadas', 'asdasdasdasda', '0000-00-00', 'asd', 'asdas', 'asdasd'),
+(3, '22323123123', 'Mahoni', 'qwewqe', 'qweqwe', 'qweqw', '2018-11-29', 'wqeqwe', 'qwewqe', 'qwewqeqe'),
+(4, '3511101506980003', 'Jati', 'anjau', 'kolis', 'asdw', '2018-11-18', '', '2', '3'),
+(5, '3511101506980003', 'Jati', 'asdw', 'asdasd', 'wasda', '2018-11-18', '', '2', '3'),
+(13, '3511101506980003', 'Mahoni', 'dsad', 'asdas', 'asdas', '2018-11-18', 'Untitled.jpg', '2', '3'),
+(14, '3511101506980003', 'Mahoni', 'asdasasd', 'adasddsa', 'asdasdasd', '2018-11-18', 'Untitled.jpg', '2', '3'),
+(15, '3511101506980003', 'Jati', 'asdasd', 'sadsadsa', 'sadasd', '2018-11-18', 'Untitled.jpg', 'Untitled.jpg', 'Untitled.jpg'),
+(16, '3511101506980003', 'Mahoni', 'firman', 'anying', 'asdwdwdwd', '2018-11-18', 'Untitled1.jpg', 'Untitled.jpg', 'Untitled.jpg'),
+(17, '3511101506980003', 'Mahoni', 'destino', 'asdwdw', 'ansjasu', '2018-11-18', 'Untitled1.jpg', 'Untitled1.jpg', 'Untitled1.jpg'),
+(18, '3511101506980003', 'Mahoni', 'anjay', 'solor', 'anjay kayunya anjay a en je aye anjay', '2018-11-18', 'DSC_1376.jpg', 'DSC_1376.jpg', 'DSC_1376.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_upkayu`
+-- Table structure for table `tbl_upkayu`
 --
 
 CREATE TABLE `tbl_upkayu` (
@@ -65,7 +73,7 @@ CREATE TABLE `tbl_upkayu` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_user`
+-- Table structure for table `tbl_user`
 --
 
 CREATE TABLE `tbl_user` (
@@ -84,25 +92,26 @@ CREATE TABLE `tbl_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_user`
+-- Dumping data for table `tbl_user`
 --
 
 INSERT INTO `tbl_user` (`nik`, `nama_lengkap`, `tgl_lahir`, `alamat`, `no_telepon`, `email`, `username`, `password`, `foto_profil`, `jabatan`, `pekerjaan`, `jenis_kelamin`) VALUES
-('28376910028822', 'diana hasim', '2002-06-17', 'BONDOWOSO', '089347478372', 'hel000941@gmail.com', 'alexr', '123qwerty..', 'Untitled.jpg', 'admin', 'Analis Sistem', 'Laki-laki'),
-('3511101506980003', 'Munir', '1999-02-14', 'Rt/Rw 009/004, Sukosari Lor, Sukosari, Bondowoso', '082316285715', 'hel000941@gmail.com', 'khalila', '123qwerty..', 'Untitled.jpg', 'admin', ' Programmer', 'Laki-laki');
+('22323123123', 'Firman', '1992-09-02', 'jember', '08929839', 'firman@gmail.com', 'firman', 'wahtyu', 'Untitled.jpg', 'pembeli', ' ', ''),
+('3511101506980003', 'Munir', '1999-02-14', 'Rt/Rw 009/004, Sukosari Lor, Sukosari, Bondowoso', '082316285715', 'hel000941@gmail.com', 'munir', '123qwerty..', 'Untitled.jpg', 'admin', ' Programmer', 'Laki-laki');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `tbl_kayu`
+-- Indexes for table `tbl_kayu`
 --
 ALTER TABLE `tbl_kayu`
-  ADD PRIMARY KEY (`kode_kayu`);
+  ADD PRIMARY KEY (`kode_kayu`),
+  ADD KEY `nik` (`nik`);
 
 --
--- Indeks untuk tabel `tbl_upkayu`
+-- Indexes for table `tbl_upkayu`
 --
 ALTER TABLE `tbl_upkayu`
   ADD PRIMARY KEY (`kode_up`),
@@ -110,36 +119,36 @@ ALTER TABLE `tbl_upkayu`
   ADD UNIQUE KEY `kode_kayu` (`kode_kayu`);
 
 --
--- Indeks untuk tabel `tbl_user`
+-- Indexes for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`nik`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_kayu`
+-- AUTO_INCREMENT for table `tbl_kayu`
 --
 ALTER TABLE `tbl_kayu`
-  MODIFY `kode_kayu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `kode_kayu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_upkayu`
+-- AUTO_INCREMENT for table `tbl_upkayu`
 --
 ALTER TABLE `tbl_upkayu`
   MODIFY `kode_up` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `tbl_upkayu`
+-- Constraints for table `tbl_kayu`
 --
-ALTER TABLE `tbl_upkayu`
-  ADD CONSTRAINT `tbl_upkayu_ibfk_2` FOREIGN KEY (`kode_kayu`) REFERENCES `tbl_kayu` (`kode_kayu`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `tbl_kayu`
+  ADD CONSTRAINT `tbl_kayu_ibfk_1` FOREIGN KEY (`nik`) REFERENCES `tbl_user` (`nik`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
