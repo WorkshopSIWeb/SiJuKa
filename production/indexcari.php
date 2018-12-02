@@ -37,6 +37,7 @@ include 'php/cek_user.php';
   </head>
 
   <body class="nav-md">
+
      <body class="nav-md">
     <?php
       if($_SESSION['status']!="login"){
@@ -265,45 +266,52 @@ if (isset($_POST['Search'])){
     $keyword = $_POST['keyword'];
     $query = $koneksi->query("SELECT * FROM tbl_kayu WHERE nama_kayu LIKE '%$keyword%' OR jenis_kayu LIKE '%$keyword%' OR alamat_kebun LIKE '$keyword' OR deskripsi LIKE '$keyword' ");
     $row = mysqli_num_rows($query);
-    //cek apakah ada satu   
+    //cek apakah ada satu
     if ($row==0){
         ?>
         <center><h3> 404 NOT FOUND</h3></center>
-        <?php  
+        <?php
     }
     else{
         ?>
         <div class="right_col" role="main">
           <div class="">
-            
+
 
             <div class="clearfix"></div>
             <div class="container" >
     <br><br>
         <center><h3>Menampilkan hasil dari "<?php echo $keyword;?>" .</h3></center> <br>
-  
-        <?php
-        ?>
-                <!-- <td class="main">nama_kayu</td>
-                <td class="main">alamat_kebun</td>
-                <td class="main">deskripsi</td>
-        </tr> -->
-  - 
+
 <?php
 foreach ($query as $rows){
+        $kode_kayu = $rows['kode_kayu'];
         $nama_kayu = $rows['nama_kayu'];
         $jenis_kayu = $rows['jenis_kayu'];
         $alamat_kebun = $rows['alamat_kebun'];
-    $deskripsi = $rows['deskripsi'];
+        $deskripsi = $rows['deskripsi'];
         ?>
   <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
   <div class="container">
-  <div class="row">
-  <div class="container">
+    <div class="row">
+      <div class="container">
         <div class="col-md-6">
           <a href="#">
-            <img class="img-fluid rounded mb-3 mb-md-0 mb-md" src="images/1.ico" alt="" width="500px">
-      
+            <!-- <img class="img-fluid rounded mb-3 mb-md-0 mb-md" src="images/1.ico" alt="" width="500px"> -->
+            <?php
+            include 'koneksi.php';
+               // $orang = $kode_kayu;
+               $pp = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$kode_kayu'");
+               while($d = mysqli_fetch_array($pp)){
+                       ?>
+                          <tr>
+                                <td>
+
+                                       <img src="<?php echo "foto_kayu/foto1/".$d['foto_1']; ?>" class="img-responsive avatar-vew" alt="avatar" width="450px" height="250px">
+                                 </td>
+                           </tr>
+            <?php } ?>
+
       </a>
         </div>
         <div class="col-md-4">
@@ -319,16 +327,14 @@ foreach ($query as $rows){
 
       <hr>
         <?php
-        
-        
         }
         ?>
         </table>
 <!--        <?php
     }
 }
-?> 
- 
+?>
+
   <!-- Pagination -->
       <center><ul class="pagination justify-content-center">
         <li class="page-item">
@@ -355,7 +361,7 @@ foreach ($query as $rows){
       </ul>
 
      </div><br>
-            
+
           </div>
         </div>
         <!-- /page content -->
