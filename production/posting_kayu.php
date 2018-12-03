@@ -329,13 +329,21 @@ include 'php/cek_user.php';
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="address" name="alamat" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
-                      </div>
+                     </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Deskripsi </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <textarea name="deskripsi" class="resizable_textarea form-control" placeholder="Deskripsikan ukuran batang kayu (diameter x jumlah) "></textarea>
                         </div>
                       </div>
+                     <div class="form-group">
+                  <label  class="col-sm-2 control-label">Foto Profil</label>
+                  <div class="col-sm-8">
+                    <input type="file" class="form-control"  name="foto" placeholder="...">
+                  </div>
+                </div>
+
+                    
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
