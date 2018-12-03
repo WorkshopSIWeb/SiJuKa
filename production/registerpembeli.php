@@ -21,24 +21,6 @@
 			if (in_array($ext, $ext_boleh) === true) {
 				if($size < 1044070){
 					move_uploaded_file($file_tmp, 'foto_profil/'.$foto_profil);
-					//$query = mysqli_query("INSERT INTO upload VALUES(NULL, '$foto_profil')");
-			// 		if ($query) {
-			// 			echo "File Berhasil Diupload";
-			// 		}
-			// 		else {
-			// 			echo "Gagal Mengupload Gambar";
-			// 		}
-			// 	}
-			// 	else {
-			// 		echo 'Ukuran File Terlalu Besar';
-			// 	}
-			// }
-			// else {
-			// 	echo "Extendi File Tidak Didukung";
-			// }
-
-
-
 
 $query = mysqli_query($koneksi,"INSERT INTO tbl_user VALUES ('$nik','$nama_lengkap','$tanggal_lahir','$alamat','$no_telepon','$email','$username','$password','$foto_profil','pembeli',' ',' ')");
 // if($query){

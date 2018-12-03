@@ -23,6 +23,8 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+
+      <script type="text/javascript" src="js/jquery.js"></script>
   </head>
   <body class="nav-md">
     <?php
@@ -263,6 +265,7 @@
         <!-- /top navigation -->
 
         <!-- page content -->
+
         <div class="right_col" role="main">
           <div class="">
 
@@ -346,15 +349,12 @@
                       <div class="item form-group">
                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kelamin">Jenis kelamin
                           </label>
-                          <!-- <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" name="jenis_kelamin" value="<?php echo $dt['jenis_kelamin'] ?>" class="form-control col-md-7 col-xs-12">
-                          </div> -->
                           <div class="col-md-6 col-sm-6 col-xs-12">
                             <select name="jenis_kelamin" class="select2_single form-control" tabindex="-1" >
-                              <option><?php echo $dt['jenis_kelamin']; ?></option>
-                              <option name="jenis_kelamin" value="Laki-laki">Laki-laki</option>
-                              <option name="jenis_kelamin" value="Perempuan">Perempuan</option>
-                              <option name="jenis_kelamin" value="Lain-lain">Lain-lain</option>
+                              <option disabled="disabled" hidden="yes"><?php echo $dt['jenis_kelamin']; ?></option>
+                              <option value="Laki-laki">Laki-laki</option>
+                              <option value="Perempuan">Perempuan</option>
+                              <option value="Lain-lain">Lain-lain</option>
                             </select>
                           </div>
                         </div>
@@ -369,80 +369,82 @@
                   <?php } }?>
                   </div>
                 </div>
+
+
+                <!-- informasi akun --><div class="x_panel">
+                  <div class="x_title">
+                    <h2>Informasi Akun</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li>
+                        <div class="col-lg-6">
+                      </li>
+                      <li>
+                        <div class="col-lg-7">
+                      </li>
+                      <li>
+                        <div class="col-lg-7">
+                      </li>
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <?php
+                    $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'") ;
+                    while ($d = mysqli_fetch_array($data)) {
+                        $id = $d['nik'];
+                        $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
+                        while ($dt = mysqli_fetch_array($qm)){
+                     ?>
+
+                    <form class="form-horizontal form-label-left" action="php/update_akun.php" method="post">
+                      <div class="item form-group">
+                        <input type="hidden" name="nik" value="<?php echo $dt['nik'];?>">
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="username" name="username" value="<?php echo $dt['username'] ?>" class="form-control col-md-7 col-xs-12" placeholder="Username" required="required" type="text">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Password <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="password" id="password" class="form-password form-control col-md-7 col-xs-12" name="password" value="<?php echo $dt['password'] ?>" required="required" >
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Validasi Password <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="password" id="password" class="form-password form-control col-md-7 col-xs-12" name="password" required="required">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-0"></div>
+                        <div class="col-lg-6">
+                        <input type="checkbox" class="form-checkbox">Tampilkan Password
+                      </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                          <button type="submit" class="btn btn-primary">Batal</button>
+                          <input type="submit" class="btn btn-primary" value="Simpan">
+                        </div>
+                      </div>
+                    </form>
+                  <?php } }?>
+                  </div>
+                </div>
+
+                <!-- /informasi akun -->
               </div>
             </div>
           </div>
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Informasi Akun</h2>
-              <ul class="nav navbar-right panel_toolbox">
-                <li>
-                  <div class="col-lg-6">
-                </li>
-                <li>
-                  <div class="col-lg-7">
-                </li>
-                <li>
-                  <div class="col-lg-7">
-                </li>
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
 
-              <!-- start form for validation -->
-              <form id="demo-form" data-parsley-validate>
-                <label for="fullname">Full Name * :</label>
-                <input type="text" id="fullname" class="form-control" name="fullname" required />
-
-                <label for="email">Email * :</label>
-                <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
-
-                <label>Gender *:</label>
-                <p>
-                  M:
-                  <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /> F:
-                  <input type="radio" class="flat" name="gender" id="genderF" value="F" />
-                </p>
-
-                <label>Hobbies (2 minimum):</label>
-                <p style="padding: 5px;">
-                  <input type="checkbox" name="hobbies[]" id="hobby1" value="ski" data-parsley-mincheck="2" required class="flat" /> Skiing
-                  <br />
-
-                  <input type="checkbox" name="hobbies[]" id="hobby2" value="run" class="flat" /> Running
-                  <br />
-
-                  <input type="checkbox" name="hobbies[]" id="hobby3" value="eat" class="flat" /> Eating
-                  <br />
-
-                  <input type="checkbox" name="hobbies[]" id="hobby4" value="sleep" class="flat" /> Sleeping
-                  <br />
-                  <p>
-
-                    <label for="heard">Heard us by *:</label>
-                    <select id="heard" class="form-control" required>
-                      <option value="">Choose..</option>
-                      <option value="press">Press</option>
-                      <option value="net">Internet</option>
-                      <option value="mouth">Word of mouth</option>
-                    </select>
-
-                    <label for="message">Message (20 chars min, 100 max) :</label>
-                    <textarea id="message" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
-                    data-parsley-validation-threshold="10"></textarea>
-
-                    <br/>
-                    <span class="btn btn-primary">Validate form</span>
-
-                  </form>
-                  <!-- end form for validations -->
-
-                </div>
-              </div>
-        </div>
         <!-- /page content -->
 
         <!-- footer content -->
@@ -471,4 +473,17 @@
     <script src="../build/js/custom.min.js"></script>
 
   </body>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.form-checkbox').click(function(){
+        if($(this).is(':checked')){
+          $('.form-password').attr('type','text');
+        }else{
+          $('.form-password').attr('type','password');
+        }
+      });
+    });
+  </script>
+
 </html>
