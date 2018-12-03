@@ -12,7 +12,7 @@ include 'php/cek_user.php';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/IMG-20181016-WA0004.jpg" type="image/ico" />
+    <link rel="icon" href="images/IMG-20181016-WA0004.jpg" type="image/ico" />
 
     <title>Si_Juka | Sistem Informasi Penjualan Kayu Online Terlengkap </title>
 
@@ -37,17 +37,12 @@ include 'php/cek_user.php';
   </head>
 
   <body class="nav-md">
+
+     <body class="nav-md">
     <?php
-    $orang = $_SESSION['username'];
-    $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
-    while ($row = $al->fetch_assoc()) {
-    }
       if($_SESSION['status']!="login"){
           header("location:loregpembeli.php?pesan=belum_login");
-        }
-    if ($_SESSION['jabatan'] != 'admin') {
-          header("location:loregpembeli.php?pesan=bukan_admin");
-        }
+         }
         ?>
     <div class="container body">
       <div class="main_container">
@@ -121,18 +116,6 @@ include 'php/cek_user.php';
                   </li>
                 </ul>
               </div>
-              <div class="menu_section">
-                <h3>Live On</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.php">Profile</a></li>
-                    </ul>
-                  </li>
-              </div>
             </div>
             <!-- /sidebar menu -->
 
@@ -186,7 +169,7 @@ include 'php/cek_user.php';
                   </table>
                   <!-- </a> -->
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profile.php"> Profile</a></li>
+                    <li><a href="javascript:;"> Profile</a></li>
                     <li>
                       <a href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
@@ -262,123 +245,131 @@ include 'php/cek_user.php';
                     </li>
                   </ul>
                 </li>
+                <li>
+                  <form action="indexcari.php" method="post">
+      <input type="text" id="searchquery" size="60" name="keyword" placeholder="Search..." />
+      <input type="submit" id="searchbutton" value="Search" name="Search" class="formbutton" />
+    </form>
+                </li>
               </ul>
             </nav>
           </div>
         </div>
-        </div>
         <!-- /top navigation -->
 
         <!-- page content -->
+        <?php
+//koneksi
+$koneksi = new mysqli('localhost','root','','sijuka');
+if (isset($_POST['Search'])){
+    //variable
+    $keyword = $_POST['keyword'];
+    $query = $koneksi->query("SELECT * FROM tbl_kayu WHERE nama_kayu LIKE '%$keyword%' OR jenis_kayu LIKE '%$keyword%' OR alamat_kebun LIKE '$keyword' OR deskripsi LIKE '$keyword' ");
+    $row = mysqli_num_rows($query);
+    //cek apakah ada satu
+    if ($row==0){
+        ?>
+        <center><h3> 404 NOT FOUND</h3></center>
+        <?php
+    }
+    else{
+        ?>
         <div class="right_col" role="main">
           <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Admin</h3>
-              </div>
-<!-- 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Cari!</button>
-                    </span>
-                  </div>
-                </div>
-              </div> -->
-            </div>
-                    
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Tabel user <small>Admin</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <p class="text-muted font-13 m-b-30">
-                     Berikut Daftar Nama User Dari Si-Juka
-                    </p>
-                    <table id="datatable-buttons" class="table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>NIK</th>
-                          <th>Nama_Lengkap</th>
-                          <th>Tanggal_Lahir</th>
-                          <th>Alamat</th>
-                          <th>Nomor_Telepon</th>
-                          <th>Email</th>
-                          <th>Username</th>
-                          <th>Jabatan</th>
-                          <th>Pekerjaan</th>
-                          <th>Jenis_Kelamin</th>
-                          <th>Pilihan</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        $sql="SELECT  * FROM tbl_user";
-                        $no=1;
-                        if (!$result=  mysqli_query($koneksi, $sql)){
-                        die('Error:'.mysqli_error($koneksi));
-                        }  else {
-                        if (mysqli_num_rows($result)> 0){
-                        while ($row=  mysqli_fetch_assoc($result)){
-                        ?>
-                        <td><?php echo $no ;?></td>
-                        <td><?php echo $row['nik'];?></td>
-                        <td><?php echo $row['nama_lengkap'];?></td>
-                        <td><?php echo $row['tgl_lahir'];?></td>
-                        <td><?php echo $row['alamat'];?></td>
-                        <td><?php echo $row['no_telepon'];?></td>
-                        <td><?php echo $row['email'];?></td>
-                        <td><?php echo $row['username'];?></td>
-                        <td><?php echo $row['jabatan'];?></td>
-                        <td><?php echo $row['pekerjaan'];?></td>
-                        <td><?php echo $row['jenis_kelamin'];?></td>
-                        <td>                        
-                          <a href="edit_user.php?nik=<?php echo $row['nik']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a> 
-                          <a href="php/delete_data_user.php?nik=<?php echo $row['nik']; ?>" method="post" class="btn btn-danger"><li class="fa fa-trash-o"></li> Hapus</a> 
-                        </td>
-                      </tr>
-                      <?php    
-                        $no++;                    
-                        }
-                        }  else {
-                           echo '';    
-                           }
-                        }?>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
 
-            </div>
+
+            <div class="clearfix"></div>
+            <div class="container" >
+    <br><br>
+        <center><h3>Menampilkan hasil dari "<?php echo $keyword;?>" .</h3></center> <br>
+
+<?php
+foreach ($query as $rows){
+        $kode_kayu = $rows['kode_kayu'];
+        $nama_kayu = $rows['nama_kayu'];
+        $jenis_kayu = $rows['jenis_kayu'];
+        $alamat_kebun = $rows['alamat_kebun'];
+        $deskripsi = $rows['deskripsi'];
+        ?>
+  <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
+  <div class="container">
+    <div class="row">
+      <div class="container">
+        <div class="col-md-6">
+          <a href="#">
+            <!-- <img class="img-fluid rounded mb-3 mb-md-0 mb-md" src="images/1.ico" alt="" width="500px"> -->
+            <?php
+            include 'koneksi.php';
+               // $orang = $kode_kayu;
+               $pp = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$kode_kayu'");
+               while($d = mysqli_fetch_array($pp)){
+                       ?>
+                          <tr>
+                                <td>
+
+                                       <img src="<?php echo "foto_kayu/foto1/".$d['foto_1']; ?>" class="img-responsive avatar-vew" alt="avatar" width="450px" height="250px">
+                                 </td>
+                           </tr>
+            <?php } ?>
+
+      </a>
+        </div>
+        <div class="col-md-4">
+          <h3> <?php echo  $nama_kayu; ?>  </h3>
+          <p> <?php echo  $jenis_kayu; ?> </p>
+      <p class="main"> <?php echo  $deskripsi; ?> </p>
+          <a class="btn btn-primary" href="#">View Project</a>
+        </div>
+      </div>
+    </div>
+    </div>
+      <!-- /.row -->
+
+      <hr>
+        <?php
+        }
+        ?>
+        </table>
+<!--        <?php
+    }
+}
+?>
+
+  <!-- Pagination -->
+      <center><ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+
+     </div><br>
+
           </div>
         </div>
         <!-- /page content -->
-        
-       <!-- footer content -->
+
+        <!-- footer content -->
         <footer>
           <div class="pull-right">
-           Si-Juka | Sistem Informasi Penjualan Kayu Online Terlengkap </br><a href="https://colorlib.com"></br>Copyright@2018</a>
+            SIJUKA © 2018
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -394,24 +385,14 @@ include 'php/cek_user.php';
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- iCheck -->
-    <script src="../vendors/iCheck/icheck.min.js"></script>
-    <!-- Datatables -->
-    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="../vendors/jszip/dist/jszip.min.js"></script>
-    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    <!-- morris.js -->
+    <script src="../vendors/raphael/raphael.min.js"></script>
+    <script src="../vendors/morris.js/morris.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>

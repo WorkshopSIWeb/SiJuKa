@@ -2,7 +2,8 @@
 session_start();
 
 include 'koneksi.php';
- ?>
+include 'php/cek_user.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,12 +37,11 @@ include 'koneksi.php';
   </head>
 
   <body class="nav-md">
+
     <?php
     $orang = $_SESSION['username'];
     $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
     while ($row = $al->fetch_assoc()) {
-    // echo $row['jabatan']."<br>";
-    echo $_SESSION['jabatan'];
     }
 	    if($_SESSION['status']!="login"){
 		      header("location:loregpembeli.php?pesan=belum_login");
@@ -50,6 +50,7 @@ include 'koneksi.php';
           header("location:loregpembeli.php?pesan=bukan_admin");
         }
         ?>
+
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -189,8 +190,8 @@ include 'koneksi.php';
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="profile.php"> Profile</a></li>
                     <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
+                      <a href="setting.php">
+                        <!-- <span class="badge bg-red pull-right">50%</span> -->
                         <span>Pengaturan</span>
                       </a>
                     </li>

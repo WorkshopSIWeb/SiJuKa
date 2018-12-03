@@ -2,6 +2,7 @@
 session_start();
 
 include 'koneksi.php';
+include 'php/cek_user.php';
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,8 +41,6 @@ include 'koneksi.php';
     $orang = $_SESSION['username'];
     $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
     while ($row = $al->fetch_assoc()) {
-    // echo $row['jabatan']."<br>";
-    echo $_SESSION['jabatan'];
     }
       if($_SESSION['status']!="login"){
           header("location:loregpembeli.php?pesan=belum_login");
@@ -314,46 +313,56 @@ include 'koneksi.php';
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
+                    <?php
+                    $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'") ;
+                    while ($d = mysqli_fetch_array($data)) {
+                        $id = $d['nik'];
+                        $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
+                        while ($dt = mysqli_fetch_array($qm)){
+                     ?>
+
+                    <form class="form-horizontal form-label-left" action="php/insert_data_user.php" method="post">
 
                     <form class="form-horizontal form-label-left" novalidate>
 
                       <!-- <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
                       </p> -->
                       <span class="section">Masukkan Data yang sesuai :</span>
-
+                      <form action="input_data_user.php" method="post" enctype="multipart/form-data" >
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nik">NIK <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nik" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nik" placeholder="Nomor Induk Keluarga" required="required" type="text">
+                          <input id="nik" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nik" placeholder="Nomor Induk Keluarga" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama Lengkap <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="nama_lengkap" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nama_lengkap" placeholder="Nama Lengkap" required="required" type="text">
+                          <input id="nama_lengkap" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nama_lengkap" placeholder="Nama Lengkap" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tgl_lahir">Tanggal Lahir <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="tgl_lahir" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tgl_lahir" placeholder="Tahun-Bulan-Tanggal" required="required" type="text">
+                          <!-- <i class="fa fa-calendar"></i> -->
+                          <input id="tgl_lahir" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tgl_lahir" placeholder="Tahun-Bulan-Tanggal" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="alamat">Alamat Lengkap <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="alamat" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="alamat" placeholder="Alamat" required="required" type="text">
+                          <input id="alamat" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="alamat" placeholder="Alamat" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no_telepon">Nomor Telepon <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="no_telepon" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="no_telepon" placeholder="Nomor Telepon" required="required" type="text">
+                          <input id="no_telepon" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12" data-validate-words="2" name="no_telepon" placeholder="Nomor Telepon" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -367,7 +376,7 @@ include 'koneksi.php';
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="username" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="username" placeholder="Username" required="required" type="text">
+                          <input id="username" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="username" placeholder="Username" required="required" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -382,50 +391,50 @@ include 'koneksi.php';
                             <input type="file" name="foto_profil" value="<?php echo $row['foto'];?>" class="form-control" placeholder="Enter..." required="">
                           </div>
                        </div>
-                      <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Jabatan</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <div id="jabatan" class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="jabatan" value="admin"> &nbsp; Admin &nbsp;
-                                </label>
-                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="jabatan" value="penjual"> Penjual
-                                </label>
-                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="jabatan" value="pembeli"> Pembeli
-                                </label>
-                              </div>
-                            </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jabatan">Jabatan <span class="required">*</span>
+                        </label>
+                        <div class="item form-group">
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="select1_single form-control" name="jabatan" id="jabatan" class="jabatan">
+                            <option disabled="disabled">Jabatan :</option>
+                            <option value="admin">Admin</option>
+                            <option value="penjual">Penjual</option>
+                            <option value="pembeli">Pembeli</option>
+                          </select>
+                        </div>
+                        </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pekerjaan">Pekerjaan <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="pekerjaan" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="pekerjaan" placeholder="Pekerjaan" required="required" type="text">
+                          <input id="pekerjaan" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="pekerjaan" placeholder="Pekerjaan" type="text">
                         </div>
                       </div>
-                      <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Jenis Kelamin</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <div id="jenis_kelamin" class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="jenis_kelamin" value="Laki-laki"> &nbsp; Laki - Laki &nbsp;
-                                </label>
-                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="jenis_kelamin" value="Perempuan"> Perempuan
-                                </label>
-                             </div>
-                            </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Jenis Kelamin <span class="required">*</span>
+                        </label>
+                        <div class="item form-group">
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="select1_single form-control" name="jenis_kelamin" id="jenis_kelamin" class="jenis_kelamin">
+                            <option disabled="disabled">Jenis Kelamin :</option>
+                            <option value="Laki-laki">Laki - Laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                          </select>
+                        </div>
+                        </div>
                       </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                          <button type="submit" class="btn btn-primary">Cancel</button>
-                          <button id="send" type="submit" class="btn btn-success">Submit</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">Batal</button>
+                          <input type="submit" class="btn btn-primary" value="Simpan">
                         </div>
                       </div>
                     </form>
+                  </form>
+                  <?php } }?>
                   </div>
                 </div>
               </div>

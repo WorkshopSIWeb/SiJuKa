@@ -2,6 +2,8 @@
 session_start();
 
 include 'koneksi.php';
+include 'php/cek_user.php';
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,9 +13,9 @@ include 'koneksi.php';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="images/IMG-20181016-WA0004.jpg" type="image/ico" />
+    <link rel="icon" href="images/IMG-20181016-WA0004.jpg" type="image/ico" />
 
-    <title>Si_Juka | Sistem Informasi Penjualan Kayu Online Terlengkap </title>
+    <title>SIJUKA | Profil </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -112,18 +114,6 @@ include 'koneksi.php';
                     </ul>
                   </li>
                 </ul>
-              </div>
-              <div class="menu_section">
-                <h3>Live On</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.php">Profile</a></li>
-                    </ul>
-                  </li>
               </div>
             </div>
             <!-- /sidebar menu -->
@@ -340,38 +330,13 @@ include 'koneksi.php';
                         </li>
                       </ul>
 
-                      <a class="btn btn-success" href="edit_profil.php"><i class="fa fa-edit m-right-xs"></i>Edit Profil</a>
-                      <br />
-
-                      <!-- start skills -->
-                      <h4>Skills</h4>
-                      <ul class="list-unstyled user_data">
-                        <li>
-                          <p>Web Applications</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                          </div>
-                        </li>
-                        <li>
-                          <p>Website Design</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="70"></div>
-                          </div>
-                        </li>
-                        <li>
-                          <p>Automation & Testing</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="30"></div>
-                          </div>
-                        </li>
-                        <li>
-                          <p>UI / UX</p>
-                          <div class="progress progress_sm">
-                            <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                          </div>
-                        </li>
-                      </ul>
-                      <!-- end of skills -->
+                      <a class="btn btn-success" href="edit_profil.php?nik=<?php
+                       $dt = mysqli_query($koneksi, "SELECT *FROM tbl_user WHERE username='$orang'") ;
+                       while ($d = mysqli_fetch_array($dt)) {
+                         echo $d['nik'];
+                       }
+                       ?>" ><i class="fa fa-edit m-right-xs"></i>Edit Profil</a>
+                      <br >
 
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
@@ -407,7 +372,7 @@ include 'koneksi.php';
                               <tr>
                                 <th width="150px"> &nbsp; </th>
                                 <th width="70px"> &nbsp; </th>
-                                <th width="300px"> &nbsp; </th>
+                                <th width="500px"> &nbsp; </th>
                               </tr>
                               <tr>
                                 <td>NIK</td>
@@ -463,70 +428,21 @@ include 'koneksi.php';
                                 echo $row['email']."<br>";
                                 } ?></td>
                               </tr>
+                              <tr>
+                                <td>Jenis Kelamin</td>
+                                <td>:</td>
+                                <td><?php
+                                $al = mysqli_query($koneksi, "SELECT jenis_kelamin FROM tbl_user WHERE username='$orang'");
+                                while ($row = $al->fetch_assoc()) {
+                                echo $row['jenis_kelamin']."<br>";
+                                } ?></td>
+                              </tr>
                             </table>
                           </h4>
                           </div>
                           <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-
-                            <!-- start user projects -->
-                            <table class="data table table-striped no-margin">
-                              <thead>
-                                <tr>
-                                  <th>#</th>
-                                  <th>Project Name</th>
-                                  <th>Client Company</th>
-                                  <th class="hidden-phone">Hours Spent</th>
-                                  <th>Contribution</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>1</td>
-                                  <td>New Company Takeover Review</td>
-                                  <td>Deveint Inc</td>
-                                  <td class="hidden-phone">18</td>
-                                  <td class="vertical-align-mid">
-                                    <div class="progress">
-                                      <div class="progress-bar progress-bar-success" data-transitiongoal="35"></div>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>2</td>
-                                  <td>New Partner Contracts Consultanci</td>
-                                  <td>Deveint Inc</td>
-                                  <td class="hidden-phone">13</td>
-                                  <td class="vertical-align-mid">
-                                    <div class="progress">
-                                      <div class="progress-bar progress-bar-danger" data-transitiongoal="15"></div>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>3</td>
-                                  <td>Partners and Inverstors report</td>
-                                  <td>Deveint Inc</td>
-                                  <td class="hidden-phone">30</td>
-                                  <td class="vertical-align-mid">
-                                    <div class="progress">
-                                      <div class="progress-bar progress-bar-success" data-transitiongoal="45"></div>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td>4</td>
-                                  <td>New Company Takeover Review</td>
-                                  <td>Deveint Inc</td>
-                                  <td class="hidden-phone">28</td>
-                                  <td class="vertical-align-mid">
-                                    <div class="progress">
-                                      <div class="progress-bar progress-bar-success" data-transitiongoal="75"></div>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                            <!-- end user projects -->
+                            <!-- variable -->
+                            
 
                           </div>
                           <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
@@ -547,7 +463,7 @@ include 'koneksi.php';
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            SIJUKA © 2018
           </div>
           <div class="clearfix"></div>
         </footer>

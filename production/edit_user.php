@@ -3,7 +3,7 @@ session_start();
 
 include 'koneksi.php';
 include 'php/cek_user.php';
-?>
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -39,8 +39,11 @@ include 'php/cek_user.php';
   <body class="nav-md">
     <?php
     $orang = $_SESSION['username'];
+    $coba = $_GET['nik'];
     $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
     while ($row = $al->fetch_assoc()) {
+    // echo $row['jabatan']."<br>";
+    echo $_SESSION['jabatan'];
     }
       if($_SESSION['status']!="login"){
           header("location:loregpembeli.php?pesan=belum_login");
@@ -274,25 +277,27 @@ include 'php/cek_user.php';
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Admin</h3>
+                <h3>Form Validation</h3>
               </div>
-<!-- 
+
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Cari!</button>
-                    </span>
+                              <button class="btn btn-default" type="button">Cari!</button>
+                          </span>
                   </div>
                 </div>
-              </div> -->
+              </div>
             </div>
-                    
+            <div class="clearfix"></div>
+
+            <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Tabel user <small>Admin</small></h2>
+                    <h2>Kelola Data User <small>oleh Admin</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -311,71 +316,137 @@ include 'php/cek_user.php';
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <p class="text-muted font-13 m-b-30">
-                     Berikut Daftar Nama User Dari Si-Juka
-                    </p>
-                    <table id="datatable-buttons" class="table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>NIK</th>
-                          <th>Nama_Lengkap</th>
-                          <th>Tanggal_Lahir</th>
-                          <th>Alamat</th>
-                          <th>Nomor_Telepon</th>
-                          <th>Email</th>
-                          <th>Username</th>
-                          <th>Jabatan</th>
-                          <th>Pekerjaan</th>
-                          <th>Jenis_Kelamin</th>
-                          <th>Pilihan</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        $sql="SELECT  * FROM tbl_user";
-                        $no=1;
-                        if (!$result=  mysqli_query($koneksi, $sql)){
-                        die('Error:'.mysqli_error($koneksi));
-                        }  else {
-                        if (mysqli_num_rows($result)> 0){
-                        while ($row=  mysqli_fetch_assoc($result)){
-                        ?>
-                        <td><?php echo $no ;?></td>
-                        <td><?php echo $row['nik'];?></td>
-                        <td><?php echo $row['nama_lengkap'];?></td>
-                        <td><?php echo $row['tgl_lahir'];?></td>
-                        <td><?php echo $row['alamat'];?></td>
-                        <td><?php echo $row['no_telepon'];?></td>
-                        <td><?php echo $row['email'];?></td>
-                        <td><?php echo $row['username'];?></td>
-                        <td><?php echo $row['jabatan'];?></td>
-                        <td><?php echo $row['pekerjaan'];?></td>
-                        <td><?php echo $row['jenis_kelamin'];?></td>
-                        <td>                        
-                          <a href="edit_user.php?nik=<?php echo $row['nik']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a> 
-                          <a href="php/delete_data_user.php?nik=<?php echo $row['nik']; ?>" method="post" class="btn btn-danger"><li class="fa fa-trash-o"></li> Hapus</a> 
-                        </td>
-                      </tr>
-                      <?php    
-                        $no++;                    
-                        }
-                        }  else {
-                           echo '';    
-                           }
-                        }?>
-                      </tbody>
-                    </table>
+                    <?php
+                    $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE nik='$coba'") ;
+                    while ($d = mysqli_fetch_array($data)) {
+                        $id = $d['nik'];
+                        $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
+                        while ($dt = mysqli_fetch_array($qm)){
+                     ?>
+
+                    <form class="form-horizontal form-label-left" action="php/update_user.php" method="post">
+
+                    <form class="form-horizontal form-label-left" novalidate>
+
+                      <!-- <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
+                      </p> -->
+                      <span class="section">Masukkan Data yang sesuai :</span>
+                      <form action="update_user.php" method="post" enctype="multipart/form-data" >
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nik">NIK <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="nik" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nik" placeholder="Nomor Induk Keluarga" type="text" value="<?php echo $dt['nik'];?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama">Nama Lengkap <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="nama_lengkap" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="nama_lengkap" placeholder="Nama Lengkap" type="text" value="<?php echo $dt['nama_lengkap'];?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tgl_lahir">Tanggal Lahir <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <!-- <i class="fa fa-calendar"></i> -->
+                          <input id="tgl_lahir" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tgl_lahir" placeholder="Tahun-Bulan-Tanggal" type="text" value="<?php echo $dt['tgl_lahir'];?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="alamat">Alamat Lengkap <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="alamat" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="alamat" placeholder="Alamat" type="text" value="<?php echo $dt['alamat'];?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="no_telepon">Nomor Telepon <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="no_telepon" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12" data-validate-words="2" name="no_telepon" placeholder="Nomor Telepon" type="text" value="<?php echo $dt['no_telepon'];?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">E-Mail <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo $dt['email'];?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="username" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="1" name="username" placeholder="Username" required="required" type="text" value="<?php echo $dt['username'];?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label for="password" class="control-label col-md-3">Password</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="password" type="password" name="password" data-validate-length="6,8" class="form-control col-md-7 col-xs-12" required="required" value="<?php echo $dt['password'];?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                         <label for="foto_profil" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Profil </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="file" name="foto_profil" value="<?php echo $dt['foto_profil'];?>" class="form-control" placeholder="Enter..." required="">
+                          </div>
+                       </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jabatan">Jabatan <span class="required">*</span>
+                        </label>
+                        <div class="item form-group">
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="select1_single form-control" name="jabatan" id="jabatan" class="jabatan" value="<?php echo $dt['jabatan'];?>">
+                            <option disabled="disabled">Jabatan :</option>
+                            <option value="admin">Admin</option>
+                            <option value="penjual">Penjual</option>
+                            <option value="pembeli">Pembeli</option>
+                          </select>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pekerjaan">Pekerjaan <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="pekerjaan" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="pekerjaan" placeholder="Pekerjaan" type="text" value="<?php echo $dt['pekerjaan'];?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Jenis Kelamin <span class="required">*</span>
+                        </label>
+                        <div class="item form-group">
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="select1_single form-control" name="jenis_kelamin" id="jenis_kelamin" class="jenis_kelamin" value="<?php echo $dt['jenis_kelamin'];?>">
+                            <option disabled="disabled">Jenis Kelamin :</option>
+                            <option value="Laki-laki">Laki - Laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                          </select>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">Batal</button>
+                          <input type="submit" class="btn btn-primary" value="Simpan">
+                        </div>
+                      </div>
+                    </form>
+                  </form>
+                  <?php } }?>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
         <!-- /page content -->
-        
-       <!-- footer content -->
+
+        <!-- footer content -->
         <footer>
           <div class="pull-right">
            Si-Juka | Sistem Informasi Penjualan Kayu Online Terlengkap </br><a href="https://colorlib.com"></br>Copyright@2018</a>
@@ -394,27 +465,11 @@ include 'php/cek_user.php';
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- iCheck -->
-    <script src="../vendors/iCheck/icheck.min.js"></script>
-    <!-- Datatables -->
-    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="../vendors/jszip/dist/jszip.min.js"></script>
-    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    <!-- validator -->
+    <script src="../vendors/validator/validator.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-
+	
   </body>
 </html>
