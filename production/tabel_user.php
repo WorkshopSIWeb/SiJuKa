@@ -41,8 +41,6 @@ include 'php/cek_user.php';
     $orang = $_SESSION['username'];
     $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
     while ($row = $al->fetch_assoc()) {
-    // echo $row['jabatan']."<br>";
-    echo $_SESSION['jabatan'];
     }
       if($_SESSION['status']!="login"){
           header("location:loregpembeli.php?pesan=belum_login");
@@ -278,7 +276,7 @@ include 'php/cek_user.php';
               <div class="title_left">
                 <h3>Admin</h3>
               </div>
-
+<!-- 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
@@ -288,7 +286,7 @@ include 'php/cek_user.php';
                     </span>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
                     
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -330,7 +328,6 @@ include 'php/cek_user.php';
                           <th>Jabatan</th>
                           <th>Pekerjaan</th>
                           <th>Jenis_Kelamin</th>
-                          <th>Foto Profil</th>
                           <th>Pilihan</th>
                         </tr>
                       </thead>
@@ -355,8 +352,7 @@ include 'php/cek_user.php';
                         <td><?php echo $row['jabatan'];?></td>
                         <td><?php echo $row['pekerjaan'];?></td>
                         <td><?php echo $row['jenis_kelamin'];?></td>
-                        <td><img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50"></td>
-                        <td>
+                        <td>                        
                           <a href="edit_user.php?nik=<?php echo $row['nik']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a> 
                           <a href="php/delete_data_user.php?nik=<?php echo $row['nik']; ?>" method="post" class="btn btn-danger"><li class="fa fa-trash-o"></li> Hapus</a> 
                         </td>
