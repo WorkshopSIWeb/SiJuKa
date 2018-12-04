@@ -412,7 +412,29 @@ include 'php/cek_user.php';
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
-
+    
+    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="js/dialog.jquery.js"></script>
+    <script>
+    $(function(){
+      var can=function(){
+        alert("You just clicked CANCEL")
+      }
+      $(".btn").click(function(){
+    $("body").dialog({
+      width: 400,
+      height: "",
+      title: "Confirm Action",
+      content: "<h3>Are You Sure?</h3><i class='fa  fa-question-circle-o fa-5x'></i>",
+      okBtn: "Okey",
+      cancleBtn: "Cancel",
+      okCallback: "",
+      cancleCallback:can,
+      closeCallback: ""
+    });
+      })
+    })
+    </script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
 
