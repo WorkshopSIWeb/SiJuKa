@@ -354,7 +354,7 @@ include 'php/cek_user.php';
                         <td><?php echo $row['jenis_kelamin'];?></td>
                         <td>                        
                           <a href="edit_user.php?nik=<?php echo $row['nik']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a> 
-                          <a href="php/delete_data_user.php?nik=<?php echo $row['nik']; ?>" method="post" class="btn btn-danger"><li class="fa fa-trash-o"></li> Hapus</a> 
+                          <a href="php/delete_data_user.php?nik=<?php echo $row['nik']; ?>" method="post" class="btn btn-danger" onclick="return konfirmasi()" href="#"><li class="fa fa-trash-o"></li> Hapus</a> 
                         </td>
                       </tr>
                       <?php    
@@ -412,8 +412,16 @@ include 'php/cek_user.php';
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+
+    <script type="text/javascript" language="JavaScript">
+    function konfirmasi()
+    {
+    tanya = confirm("Anda Yakin Akan Menghapus Data Tersebut ???");
+    if (tanya == true) return true;
+    else return false;
+    }</script>
     
-    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="js/dialog.jquery.js"></script>
     <script>
     $(function(){
@@ -437,6 +445,6 @@ include 'php/cek_user.php';
     </script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-
+ -->
   </body>
 </html>
