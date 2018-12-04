@@ -11,11 +11,11 @@
     $f_3 = $_POST['foto_3'];
 $query = mysqli_query($koneksi,"INSERT INTO tbl_kayu (kode_kayu, nama_kayu, jenis_kelamin, alamat_kebun, deskripsi, tanggal_upload, foto_1, foto_2, foto_3,) VALUES ('$kk','$nk','$jk','$ak','$des','$tgl','$f_1','$f_2','$f_3')");
 if ($query) {
-    echo "[removed]alert('Data Berhasil Diambahkan');[removed]";
-    header("location:../tabel_kebun.php");
+    echo "<script>alert('S U K S E S. . . Data Berhasil Ditambahkan ! ! !');
+            window.location='../tabel_kebun.php'</script>";
+    // header("location:../tabel_kebun.php");
 }else {
-    echo "[removed]alert('Data Gagal Ditambahkan');[removed]";
-    echo "Gagal om";
+    echo "<script>alert('G A G A L . . . Data Gagal Ditambahkan ! ! !')";
   }
 
 

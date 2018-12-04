@@ -39,6 +39,7 @@ include 'php/cek_user.php';
   <body class="nav-md">
     <?php
     $orang = $_SESSION['username'];
+    $coba = $_GET['kode_kayu'];
     $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
     while ($row = $al->fetch_assoc()) {
     }
@@ -313,17 +314,24 @@ include 'php/cek_user.php';
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <form class="form-horizontal form-label-left" action="php/insert_data_kayu.php" method="post">
+                    <?php
 
+                    $data = mysqli_query($koneksi, "SELECT kode_kayu FROM tbl_kayu WHERE kode_kayu='$coba'") ;
+                    while ($d = mysqli_fetch_array($data)) {
+                        $id = $d['kode_kayu'];
+                        $qm = mysqli_query($koneksi, "SELECT * FROM tbl_kayu where kode_kayu = '$id'");
+                        while ($dt = mysqli_fetch_array($qm)){
+                     ?>
 
+                    <form class="form-horizontal form-label-left" action="php/update_kayu.php" method="post">
                     <form class="form-horizontal form-label-left" novalidate>
                       <span class="section">Masukkan Data yang Sesuai :</span>
-                      <form action="input_data_kayu.php" method="post" enctype="multipart/form-data" >
+                      <form action="update_kayu.php" method="post" enctype="multipart/form-data" >
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kode_kayu">Kode Kayu <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="kode_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="kode_kayu" placeholder="Kode Kayu" type="text">
+                          <input id="kode_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="kode_kayu" placeholder="Kode Kayu" type="text" value="<?php echo $dt['kode_kayu'];?>">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -331,7 +339,7 @@ include 'php/cek_user.php';
                         </label>
                         <div class="item form-group">
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="select1_single form-control" name="nama_kayu" id="nama_kayu" class="nama_kayu">
+                          <select class="select1_single form-control" name="nama_kayu" id="nama_kayu" class="nama_kayu" value="<?php echo $dt['nama_kayu'];?>">
                             <option disabled="disabled">Nama Kayu :</option>
                             <option value="Jati">Jati</option>
                             <option value="Mahoni">Mahoni</option>
@@ -345,28 +353,28 @@ include 'php/cek_user.php';
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kayu">Jenis Kayu <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="jenis_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="jenis_kayu" placeholder="Jenis Kayu" type="text">
+                          <input id="jenis_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="jenis_kayu" placeholder="Jenis Kayu" type="text" value="<?php echo $dt['jenis_kayu'];?>">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="alamat_kebun">Alamat kebun <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="alamat_kebun" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="alamat_kebun" placeholder="Alamat Kebun" type="text">
+                          <input id="alamat_kebun" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="alamat_kebun" placeholder="Alamat Kebun" type="text" value="<?php echo $dt['alamat_kebun'];?>">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="deskripsi">Deskripsi <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="deskripsi" required="required" name="deskripsi" class="form-control col-md-7 col-xs-12"></textarea>
+                          <textarea id="deskripsi" required="required" name="deskripsi" class="form-control col-md-7 col-xs-12" value="<?php echo $dt['deskripsi'];?>"></textarea>
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tanggal_upload">Tanggal Upload <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="tanggal_upload" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tanggal_upload" placeholder="Tahun-Bulan-Tanggal"  type="text">
+                          <input id="tanggal_upload" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tanggal_upload" placeholder="Tahun-Bulan-Tanggal"  type="text" value="<?php echo $dt['tanggal_upload'];?>">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -396,6 +404,7 @@ include 'php/cek_user.php';
                         </div>
                       </div>
                     </form>
+                    <?php } }?>
                   </div>
                 </div>
               </div>

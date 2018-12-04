@@ -17,10 +17,11 @@
   $update = mysqli_query($koneksi,"UPDATE tbl_user SET nama_lengkap = '$nama_lengkap', tgl_lahir = '$tgl_lahir', alamat = '$alamat', no_telepon = '$no_telepon', email = '$email', username = '$username', password = '$password', foto_profil = '$foto_profil', jabatan = '$jabatan', pekerjaan = '$pekerjaan', jenis_kelamin = '$jenis_kelamin' WHERE nik = '$nik'");
   if ($update) {
     // code...
-    echo "[removed]alert('Data Berhasil Di Update');[removed]";
-    header("location: ../tabel_user.php");
+    echo "<script>alert('S U K S E S. . . Data Berhasil DiUbah ! ! !');
+            window.location='../tabel_user.php'</script>";
+    // header("location: ../tabel_user.php");
   }else {
-    echo "gagal";
+    echo "<script>alert('G A G A L . . . Data Gagal Diubah ! ! !')";
     echo $nik;
     echo $nama_lengkap;
   }
