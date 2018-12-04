@@ -352,7 +352,7 @@ include 'php/cek_user.php';
                         <td><?php echo $row['foto_3'];?></td>
                         <td>
                           <a href="aksi_user.php?sender=edit&nik=<?php echo $row['nik']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a> 
-                          <a href="php/delete_data_KAYU.php?kode_kayu=<?php echo $row['kode_kayu']; ?>" method="post" class="btn btn-danger"><li class="fa fa-trash-o"></li> Hapus</a> 
+                          <a href="php/delete_data_KAYU.php?kode_kayu=<?php echo $row['kode_kayu']; ?>" method="post" class="btn btn-danger" onclick="return konfirmasi()" href="#"><li class="fa fa-trash-o"></li> Hapus</a> 
                         </td>
                       </tr>
                       <?php    
@@ -410,6 +410,13 @@ include 'php/cek_user.php';
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script type="text/javascript" language="JavaScript">
+    function konfirmasi()
+    {
+    tanya = confirm("Anda Yakin Akan Menghapus Data Tersebut ???");
+    if (tanya == true) return true;
+    else return false;
+    }</script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>

@@ -15,9 +15,11 @@
 
 $query = mysqli_query($koneksi,"INSERT INTO tbl_user (nik, nama_lengkap, tgl_lahir, alamat, no_telepon, email, username, password, foto_profil, jabatan, pekerjaan, jenis_kelamin) VALUES ('$nk','$nl','$tgl','$alt','$no','$eml','$usn','$pass','$foto','$jbn','$pkjn','$jenkel')");
 if ($query) {
+    echo "<script>alert('Data Berhasil Ditambahkan!');history.go(-1);</script>";
     header("location:../tabel_user.php");
 }else {
-    echo "Gagal om";
+    echo "<script>alert('Data Gagal Ditambahkan!');history.go(-1);</script>";
+    
   }
 
 
