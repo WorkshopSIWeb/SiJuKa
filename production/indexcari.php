@@ -251,6 +251,12 @@ include 'php/cek_user.php';
       <input type="submit" id="searchbutton" value="Search" name="Search" class="formbutton" />
     </form>
                 </li>
+                <li class="">
+                  <form action="indexcari.php" method="post">
+                  <input type="text" id="searchquery" size="60" name="keyword" placeholder="Search..." />
+                  <input type="submit" id="searchbutton" value="Search" name="Search" class="formbutton" />
+                  </form>
+                </li>
               </ul>
             </nav>
           </div>
@@ -297,6 +303,8 @@ foreach ($query as $rows){
       <div class="container">
         <div class="col-md-6">
           <a href="#">
+
+          <a href="detailkayu.php?kayu=<?php echo $kode_kayu?>">
             <!-- <img class="img-fluid rounded mb-3 mb-md-0 mb-md" src="images/1.ico" alt="" width="500px"> -->
             <?php
             include 'koneksi.php';
@@ -319,6 +327,8 @@ foreach ($query as $rows){
           <p> <?php echo  $jenis_kayu; ?> </p>
       <p class="main"> <?php echo  $deskripsi; ?> </p>
           <a class="btn btn-primary" href="#">View Project</a>
+          <p class="main"> <?php echo  $deskripsi; ?> </p>
+          <a class="btn btn-primary" href="detailkayu.php?kayu=<?php echo $kode_kayu?>">Lihat Detail</a>
         </div>
       </div>
     </div>

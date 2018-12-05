@@ -6,6 +6,7 @@
     $ak = $_POST['alamat_kebun'];
     $des = $_POST['deskripsi'];
     $tgl = $_POST['tanggal_upload'];
+
             $ext_boleh = array('png','jpg','jpeg');
             $foto1 = $_FILES['foto_1']['name'];
             $foto2 = $_FILES['foto_2']['name'];

@@ -8,6 +8,7 @@
     $eml = $_POST['email'];
     $usn = $_POST['username'];
     $pass = $_POST['password'];
+
             $ext_boleh = array('png','jpg','jpeg');
             $foto_profil = $_FILES['foto_profil']['name'];
             $x = explode('.', $foto_profil);
@@ -34,5 +35,4 @@ if ($query) {
   }
 }
 }
-
  ?>
