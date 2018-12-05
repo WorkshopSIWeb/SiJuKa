@@ -324,14 +324,8 @@ include 'php/cek_user.php';
                         while ($dt = mysqli_fetch_array($qm)){
                      ?>
 
-                    <form class="form-horizontal form-label-left" action="php/update_user.php" method="post">
-
-                    <form class="form-horizontal form-label-left" novalidate>
-
-                      <!-- <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
-                      </p> -->
+                    <form class="form-horizontal form-label-left" action="php/update_user.php" method="post" enctype="multipart/form-data" >
                       <span class="section">Masukkan Data yang sesuai :</span>
-                      <form action="update_user.php" method="post" enctype="multipart/form-data" >
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nik">NIK <span class="required">:</span>
                         </label>
@@ -351,7 +345,7 @@ include 'php/cek_user.php';
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <!-- <i class="fa fa-calendar"></i> -->
-                          <input id="tgl_lahir" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tgl_lahir" placeholder="Tahun-Bulan-Tanggal" type="text" value="<?php echo $dt['tgl_lahir'];?>">
+                          <input id="tgl_lahir" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tgl_lahir" placeholder="Tahun-Bulan-Tanggal" type="date" value="<?php echo $dt['tgl_lahir'];?>">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -391,7 +385,7 @@ include 'php/cek_user.php';
                       <div class="item form-group">
                          <label for="foto_profil" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Profil </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="file" name="foto_profil" value="<?php echo $dt['foto_profil'];?>" class="form-control" placeholder="Enter..." required="">
+                            <input type="file" name="foto_profil" class="form-control" >
                           </div>
                        </div>
                       <div class="item form-group">

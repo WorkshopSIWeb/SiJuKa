@@ -313,12 +313,8 @@ include 'php/cek_user.php';
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <form class="form-horizontal form-label-left" action="php/insert_data_kayu.php" method="post">
-
-
-                    <form class="form-horizontal form-label-left" novalidate>
+                    <form class="form-horizontal form-label-left" action="php/insert_data_kayu.php" method="post" enctype="multipart/form-data">
                       <span class="section">Masukkan Data yang Sesuai :</span>
-                      <form action="input_data_kayu.php" method="post" enctype="multipart/form-data" >
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kode_kayu">Kode Kayu <span class="required">:</span>
                         </label>
@@ -366,26 +362,25 @@ include 'php/cek_user.php';
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tanggal_upload">Tanggal Upload <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="tanggal_upload" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tanggal_upload" placeholder="Tahun-Bulan-Tanggal"  type="text">
+                          <input id="tanggal_upload" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tanggal_upload" placeholder="Tahun-Bulan-Tanggal"  type="date">
                         </div>
                       </div>
                       <div class="item form-group">
                          <label for="foto_1" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Kebun 1 </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="file" name="foto_1" value="<?php echo $row['foto_1'];?>" class="form-control" placeholder="Enter..." required="">
+                            <input type="file" name="foto_1" class="form-control" >
                           </div>
                        </div>
                        <div class="item form-group">
                          <label for="foto_2" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Kebun 2 </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="file" name="foto_2" value="<?php echo $row['foto_2'];?>" class="form-control" placeholder="Enter..." required="">
+                            <input type="file" name="foto_2" class="form-control" >
                           </div>
                        </div>
                        <div class="item form-group">
                          <label for="foto_3" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Kebun 3 </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="file" name="foto_3" value="<?php echo $row['foto_3
-                            '];?>" class="form-control" placeholder="Enter..." required="">
+                            <input type="file" name="foto_3" class="form-control" >
                           </div>
                        </div>
                       <div class="ln_solid"></div>

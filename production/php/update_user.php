@@ -9,7 +9,15 @@
 	$email = $_POST['email'];
   $username = $_POST['username'];
   $password = $_POST['password'];
-  $foto_profil = $_POST['foto_profil'];
+            $ext_boleh = array('png','jpg','jpeg');
+            $foto_profil = $_FILES['foto_profil']['name'];
+            $x = explode('.', $foto_profil);
+            $ext = strtolower(end($x));
+            $size = $_FILES['foto_profil']['size'];
+            $file_tmp = $_FILES['foto_profil']['tmp_name'];
+            if (in_array($ext, $ext_boleh) === true) {
+                if($size < 1044070){
+                    move_uploaded_file($file_tmp, '../foto_profil/'.$foto_profil);
   $jabatan = $_POST['jabatan'];
 	$pekerjaan = $_POST['pekerjaan'];
   $jenis_kelamin = $_POST['jenis_kelamin'];
@@ -25,4 +33,6 @@
     echo $nik;
     echo $nama_lengkap;
   }
+}
+}
 ?>
