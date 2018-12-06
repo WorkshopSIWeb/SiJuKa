@@ -358,12 +358,19 @@ include 'php/cek_pembeli.php';
                       <?php
                       $al = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
                       while ($row = $al->fetch_assoc()) {
-                      echo $row['nama_kayu'];
-                      echo " - ";
-                      echo $row['jenis_kayu'];
-                      } ?>
-                      </h3>
+                      $nama_kayu = $row['nama_kayu'];}
 
+                        $kayu =mysqli_query($koneksi, "SELECT nama_kayu FROM tbl_jenis WHERE id_jenis = '$nama_kayu'");
+                        while($c = mysqli_fetch_array($kayu)){
+                          echo $c['nama_kayu'];
+                        }
+                        echo " - ";
+                        $al = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
+                        while ($row = $al->fetch_assoc()) {
+                        echo $row['jenis_kayu'];}
+                       ?>
+                      </h3>
+                      <h5>Keterangan : </h5>
                       <p><?php   $al = mysqli_query($koneksi, "SELECT deskripsi FROM tbl_kayu WHERE kode_kayu = '$id'");
                         while ($row = $al->fetch_assoc()) {
                         echo $row['deskripsi'];
@@ -371,44 +378,27 @@ include 'php/cek_pembeli.php';
                       <br />
 
                       <div class="">
-                        <h2>Lokasi : </h2>
-                        </br>
-                        <h2><?php   $al = mysqli_query($koneksi, "SELECT alamat_kebun FROM tbl_kayu WHERE kode_kayu = '$id'");
+                        <h2>Lokasi : <?php   $al = mysqli_query($koneksi, "SELECT alamat_kebun FROM tbl_kayu WHERE kode_kayu = '$id'");
                             while ($row = $al->fetch_assoc()) {
                             echo $row['alamat_kebun'];
                             } ?></h2>
                       </div>
+
                       <br />
 
-                      <div class="">
-                        <h2>Size <small>Please select one</small></h2>
-                        <ul class="list-inline prod_size">
-                          <li>
-                            <button type="button" class="btn btn-default btn-xs">Small</button>
-                          </li>
-                          <li>
-                            <button type="button" class="btn btn-default btn-xs">Medium</button>
-                          </li>
-                          <li>
-                            <button type="button" class="btn btn-default btn-xs">Large</button>
-                          </li>
-                          <li>
-                            <button type="button" class="btn btn-default btn-xs">Xtra-Large</button>
-                          </li>
-                        </ul>
-                      </div>
-                      <br />
 
                       <div class="">
                         <div class="product_price">
-                          <h1 class="price">Ksh80.00</h1>
-                          <span class="price-tax">Ex Tax: Ksh80.00</span>
-                          <br>
+                          <h3>Harga</h3>
+                          <h1 class="price">IDR <?php $al = mysqli_query($koneksi, "SELECT harga FROM tbl_kayu WHERE kode_kayu = '$id'");
+                            while ($row = $al->fetch_assoc()) {
+                            echo $row['harga'];
+                          }?></h1>
                         </div>
                       </div>
 
                       <div class="">
-                        <button type="button" class="btn btn-default btn-lg">Add to Cart</button>
+                        <input type="button" class="btn btn-default btn-lg" value="Add to Cart">
                         <button type="button" class="btn btn-default btn-lg">Add to Wishlist</button>
                       </div>
 

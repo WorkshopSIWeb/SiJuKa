@@ -14,6 +14,9 @@ include 'php/cek_user2.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Gentelella Alela! | </title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  	<link rel="stylesheet" href="css/styleinbox.css">
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -251,253 +254,151 @@ include 'php/cek_user2.php';
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
-
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Inbox Design <small>Some examples to get you started</small></h3>
-              </div>
-
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <div class="clearfix"></div>
 
-            <div class="row">
-              <div class="col-md-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Inbox Design<small>User Mail</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <div class="row">
-                      <div class="col-sm-3 mail_list_column">
-                        <button id="compose" class="btn btn-sm btn-success btn-block" type="button">COMPOSE</button>
-                        <a href="#">
-                          <div class="mail_list">
-                            <div class="left">
-                              <i class="fa fa-circle"></i> <i class="fa fa-edit"></i>
-                            </div>
-                            <div class="right">
-                              <h3>Dennis Mugo <small>3.00 PM</small></h3>
-                              <p>Ut enim ad minim veniam, quis nostrud exercitation enim ad minim veniam, quis nostrud exercitation...</p>
-                            </div>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <div class="mail_list">
-                            <div class="left">
-                              <i class="fa fa-star"></i>
-                            </div>
-                            <div class="right">
-                              <h3>Jane Nobert <small>4.09 PM</small></h3>
-                              <p><span class="badge">To</span> Ut enim ad minim veniam, quis nostrud exercitation enim ad minim veniam, quis nostrud exercitation...</p>
-                            </div>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <div class="mail_list">
-                            <div class="left">
-                              <i class="fa fa-circle-o"></i><i class="fa fa-paperclip"></i>
-                            </div>
-                            <div class="right">
-                              <h3>Musimbi Anne <small>4.09 PM</small></h3>
-                              <p><span class="badge">CC</span> Ut enim ad minim veniam, quis nostrud exercitation enim ad minim veniam, quis nostrud exercitation...</p>
-                            </div>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <div class="mail_list">
-                            <div class="left">
-                              <i class="fa fa-paperclip"></i>
-                            </div>
-                            <div class="right">
-                              <h3>Jon Dibbs <small>4.09 PM</small></h3>
-                              <p>Ut enim ad minim veniam, quis nostrud exercitation enim ad minim veniam, quis nostrud exercitation...</p>
-                            </div>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <div class="mail_list">
-                            <div class="left">
-                              .
-                            </div>
-                            <div class="right">
-                              <h3>Debbis & Raymond <small>4.09 PM</small></h3>
-                              <p>Ut enim ad minim veniam, quis nostrud exercitation enim ad minim veniam, quis nostrud exercitation...</p>
-                            </div>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <div class="mail_list">
-                            <div class="left">
-                              .
-                            </div>
-                            <div class="right">
-                              <h3>Debbis & Raymond <small>4.09 PM</small></h3>
-                              <p>Ut enim ad minim veniam, quis nostrud exercitation enim ad minim veniam, quis nostrud exercitation...</p>
-                            </div>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <div class="mail_list">
-                            <div class="left">
-                              <i class="fa fa-circle"></i> <i class="fa fa-edit"></i>
-                            </div>
-                            <div class="right">
-                              <h3>Dennis Mugo <small>3.00 PM</small></h3>
-                              <p>Ut enim ad minim veniam, quis nostrud exercitation enim ad minim veniam, quis nostrud exercitation...</p>
-                            </div>
-                          </div>
-                        </a>
-                        <a href="#">
-                          <div class="mail_list">
-                            <div class="left">
-                              <i class="fa fa-star"></i>
-                            </div>
-                            <div class="right">
-                              <h3>Jane Nobert <small>4.09 PM</small></h3>
-                              <p>Ut enim ad minim veniam, quis nostrud exercitation enim ad minim veniam, quis nostrud exercitation...</p>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-                      <!-- /MAIL LIST -->
+	<div class="main-section">
+		<div class="head-section">
+			<div class="headLeft-section">
+				<div class="headLeft-sub">
+					<input type="text" name="search" placeholder="Search...">
+					<button> <i class="fa fa-search"></i> </button>
+				</div>
+			</div>
+			<div class="headRight-section">
+				<div class="headRight-sub">
+					<h3>dwdw</h3>
+					<small>Lorem ipsum dolor sit amet...</small>
+				</div>
+			</div>
+		</div>
+    <?php
+    $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'") ;
+    while ($d = mysqli_fetch_array($data)) {
+        $id = $d['nik'];
+        $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
+        while ($dt = mysqli_fetch_array($qm)){
+          $nik = $dt['nik'];}}
+    $chat = mysqli_query($koneksi, "SELECT DISTINCT id_penerima FROM pesan WHERE id_pengirim = '$nik'");
+    $row = mysqli_num_rows($chat);
 
-                      <!-- CONTENT MAIL -->
-                      <div class="col-sm-9 mail_view">
-                        <div class="inbox-body">
-                          <div class="mail_heading row">
-                            <div class="col-md-8">
-                              <div class="btn-group">
-                                <button class="btn btn-sm btn-primary" type="button"><i class="fa fa-reply"></i> Reply</button>
-                                <button class="btn btn-sm btn-default" type="button"  data-placement="top" data-toggle="tooltip" data-original-title="Forward"><i class="fa fa-share"></i></button>
-                                <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Print"><i class="fa fa-print"></i></button>
-                                <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash"><i class="fa fa-trash-o"></i></button>
-                              </div>
-                            </div>
-                            <div class="col-md-4 text-right">
-                              <p class="date"> 8:02 PM 12 FEB 2014</p>
-                            </div>
-                            <div class="col-md-12">
-                              <h4> Donec vitae leo at sem lobortis porttitor eu consequat risus. Mauris sed congue orci. Donec ultrices faucibus rutrum.</h4>
-                            </div>
-                          </div>
-                          <div class="sender-info">
-                            <div class="row">
-                              <div class="col-md-12">
-                                <strong>Jon Doe</strong>
-                                <span>(jon.doe@gmail.com)</span> to
-                                <strong>me</strong>
-                                <a class="sender-dropdown"><i class="fa fa-chevron-down"></i></a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="view-mail">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-                            <p>Riusmod tempor incididunt ut labor erem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                              mollit anim id est laborum.</p>
-                            <p>Modesed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                          </div>
-                          <div class="attachment">
-                            <p>
-                              <span><i class="fa fa-paperclip"></i> 3 attachments — </span>
-                              <a href="#">Download all attachments</a> |
-                              <a href="#">View all images</a>
-                            </p>
-                            <ul>
-                              <li>
-                                <a href="#" class="atch-thumb">
-                                  <img src="images/inbox.png" alt="img" />
-                                </a>
+    //cek apakah ada satu
+    if ($row==0){
+        ?>
+        <center><h3> 404 NOT FOUND</h3></center>
+        <?php
+    }
+    else{
+        ?>
 
-                                <div class="file-name">
-                                  image-name.jpg
-                                </div>
-                                <span>12KB</span>
+		<div class="body-section">
+			<div class="left-section mCustomScrollbar" data-mcs-theme="minimal-dark">
+        <?php
+        foreach ($chat as $rowz){
+              $nikp = $rowz['id_penerima'];
+                ?>
+				<ul>
+					<li class="active">
+						<div class="chatList">
+							<div class="img">
+                <?php
+                   $orang = $_SESSION['username'];
+                   $data = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE nik = '$nikp'");
+                   while($d = mysqli_fetch_array($data)){
+                           ?>
+                              <tr>
+                                    <td>
+                                           <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>"width="50" height="30">
+                                     </td>
+                               </tr>
+                <?php } ?>
+							</div>
+							<div class="desc">
+								<small class="time">4 day</small>
+								<h5>
+                  <!-- memanggil nama penerima chat -->
+                  <?php
+                  $nama = mysqli_query($koneksi, "SELECT nama_lengkap FROM tbl_user WHERE nik = '$nikp'");
+                  while ($row = $nama->fetch_assoc()) {
+                  echo $row['nama_lengkap'];
+                  }
+                   ?>
+                </h5>
+              <!-- memanggil pesan terahir -->
+								<small><?php
+                $psn = mysqli_query($koneksi, "SELECT * FROM pesan WHERE id_pengirim = '$nik' AND id_penerima = '$nikp' ORDER BY id_pesan desc LIMIT 1");
+                while ($row = $psn->fetch_assoc()) {
+                echo $row['isi_pesan'];
+                }
+                 ?></small>
+							</div>
+						</div>
+					</li>
+          <?php
+        }}
+          ?>
+				</ul>
+			</div>
+      <?php
+//koneksi
+$koneksi = new mysqli('localhost','root','','sijuka');
 
+  $query = $koneksi->query("SELECT * FROM pesan WHERE id_pengirim = '$nik' and id_penerima = '$nikp' OR id_pengirim = '$nikp' and id_penerima = '$nik'");
 
-                                <div class="links">
-                                  <a href="#">View</a> -
-                                  <a href="#">Download</a>
-                                </div>
-                              </li>
+  $row = mysqli_num_rows($query);
 
-                              <li>
-                                <a href="#" class="atch-thumb">
-                                  <img src="images/inbox.png" alt="img" />
-                                </a>
-
-                                <div class="file-name">
-                                  img_name.jpg
-                                </div>
-                                <span>40KB</span>
-
-                                <div class="links">
-                                  <a href="#">View</a> -
-                                  <a href="#">Download</a>
-                                </div>
-                              </li>
-                              <li>
-                                <a href="#" class="atch-thumb">
-                                  <img src="images/inbox.png" alt="img" />
-                                </a>
-
-                                <div class="file-name">
-                                  img_name.jpg
-                                </div>
-                                <span>30KB</span>
-
-                                <div class="links">
-                                  <a href="#">View</a> -
-                                  <a href="#">Download</a>
-                                </div>
-                              </li>
-
-                            </ul>
-                          </div>
-                          <div class="btn-group">
-                            <button class="btn btn-sm btn-primary" type="button"><i class="fa fa-reply"></i> Reply</button>
-                            <button class="btn btn-sm btn-default" type="button"  data-placement="top" data-toggle="tooltip" data-original-title="Forward"><i class="fa fa-share"></i></button>
-                            <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Print"><i class="fa fa-print"></i></button>
-                            <button class="btn btn-sm btn-default" type="button" data-placement="top" data-toggle="tooltip" data-original-title="Trash"><i class="fa fa-trash-o"></i></button>
-                          </div>
-                        </div>
-
-                      </div>
-                      <!-- /CONTENT MAIL -->
-                    </div>
-                  </div>
+  //cek apakah ada satu
+  if ($row==0){
+      ?>
+      <center><h3> 404 NOT FOUND</h3></center>
+      <?php
+  }
+  else{
+      ?>
+			<div class="right-section">
+				<div class="message mCustomScrollbar" data-mcs-theme="minimal-dark">
+					<ul>
+            <?php
+            foreach ($query as $rows){
+                    $pesan = $rows['isi_pesan'];
+                    $waktu  = $rows['tanggal'];
+                    ?>
+						<li class="msg-left">
+							<div class="msg-left-sub">
+								<img src="/demo/man03.png">
+								<div class="msg-desc">
+									<?php echo $pesan;?>
+								</div>
+								<small><?php echo $waktu;?></small>
+							</div>
+						</li>
+            <!-- <li class="msg-right">
+              <div class="msg-right-sub">
+                <img src="/demo/man03.png">
+                <div class="msg-desc">
+                  <?php echo $psn;?>
                 </div>
+                <small><?php echo $wkt;?></small>
               </div>
-            </div>
+            </li> -->
+            <?php
+          }}
+            ?>
+					</ul>
+				</div>
+				<div class="right-section-bottom">
+					<form>
+						<div class="upload-btn">
+						  	<button class="btn"><i class="fa fa-photo"></i></button>
+						  	<input type="file" name="myfile" />
+						</div>
+						<input type="text" name="" placeholder="type here...">
+						<button class="btn-send"><i class="fa fa-send"></i></button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
           </div>
         </div>
         <!-- /page content -->
@@ -602,6 +503,10 @@ include 'php/cek_user2.php';
       </div>
     </div>
     <!-- /compose -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- custom scrollbar plugin -->
+    <script src="../vendors/customscroll/jquery.mCustomScrollbar.concat.min.js"></script>
+
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>

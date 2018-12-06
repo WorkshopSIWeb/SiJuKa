@@ -316,12 +316,19 @@ foreach ($query as $rows){
 
       </a>
         </div>
-        <div class="col-md-4">
-          <h3> <?php echo  $nama_kayu; ?>  </h3>
-          <p> <?php echo  $jenis_kayu; ?> </p>
+        <!-- <div class="col-md-4"> -->
+          <h3> <?php
+            $kayu =mysqli_query($koneksi, "SELECT nama_kayu FROM tbl_jenis WHERE id_jenis = '$nama_kayu'");
+            while($c = mysqli_fetch_array($kayu)){
+              echo $c['nama_kayu'];
+            }
+            echo " - ";
+            echo  $jenis_kayu;
+           ?> </h3>
+
           <p class="main"> <?php echo  $deskripsi; ?> </p>
           <a class="btn btn-primary" href="detailkayu.php?kayu=<?php echo $kode_kayu?>">Lihat Detail</a>
-        </div>
+        <!-- </div> -->
       </div>
     </div>
     </div>

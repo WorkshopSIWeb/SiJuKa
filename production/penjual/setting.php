@@ -1,8 +1,8 @@
 <?php
   session_start();
 
-  include 'koneksi.php';
-  include 'php/cek_user.php';
+  include '../koneksi.php';
+  include '../php/cek_user.php';
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -15,21 +15,21 @@
 
     <title>SIJUKA | Pengaturan</title>
     <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="../../build/css/custom.min.css" rel="stylesheet">
 
       <script type="text/javascript" src="js/jquery.js"></script>
   </head>
   <body class="nav-md">
     <?php
       if($_SESSION['status']!="login"){
-          header("location:loregpembeli.php?pesan=belum_login");
+          header("location:../loregpembeli.php?pesan=belum_login");
          }
         ?>
     <div class="container body">
@@ -54,7 +54,7 @@
                                 ?>
                                    <tr>
                                          <td>
-                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50">
+                                                <img src="<?php echo "../foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50">
                                           </td>
                                     </tr>
                      <?php } ?>
@@ -76,62 +76,17 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
+                <h3>Menu</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.html">Dashboard</a></li>
-                      <li><a href="index2.html">Dashboard2</a></li>
-                      <li><a href="index3.html">Dashboard3</a></li>
-                    </ul>
+                  <li><a href="indexpenjual.php"><i class="fa fa-home"></i> Home</a>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="form.html">General Form</a></li>
-                      <li><a href="form_advanced.html">Advanced Components</a></li>
-                      <li><a href="form_validation.html">Form Validation</a></li>
-                      <li><a href="form_wizards.html">Form Wizard</a></li>
-                      <li><a href="form_upload.html">Form Upload</a></li>
-                      <li><a href="form_buttons.html">Form Buttons</a></li>
-                    </ul>
+                  <li><a href="posting_kayu.php"><i class="fa fa-edit"></i> Posting Kayu</a>
                   </li>
-                  <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="general_elements.html">General Elements</a></li>
-                      <li><a href="media_gallery.html">Media Gallery</a></li>
-                      <li><a href="typography.html">Typography</a></li>
-                      <li><a href="icons.html">Icons</a></li>
-                      <li><a href="glyphicons.html">Glyphicons</a></li>
-                      <li><a href="widgets.html">Widgets</a></li>
-                      <li><a href="invoice.html">Invoice</a></li>
-                      <li><a href="inbox.html">Inbox</a></li>
-                      <li><a href="calendar.html">Calendar</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="tables.html">Tables</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="chartjs.html">Chart JS</a></li>
-                      <li><a href="chartjs2.html">Chart JS2</a></li>
-                      <li><a href="morisjs.html">Moris JS</a></li>
-                      <li><a href="echarts.html">ECharts</a></li>
-                      <li><a href="other_charts.html">Other Charts</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                      <li><a href="fixed_footer.html">Fixed Footer</a></li>
-                    </ul>
+                  <li><a href="setting.php"><i class="fa fa-cogs"></i> Pengaturan </a>
+
                   </li>
                 </ul>
               </div>
-
             </div>
             <!-- /sidebar menu -->
 
@@ -172,7 +127,7 @@
                                ?>
                                   <tr>
                                         <td>
-                                               <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" width="50" height="50">
+                                               <img src="<?php echo "../foto_profil/".$d['foto_profil']; ?>" width="50" height="50">
                                          </td>
                                    </tr>
                     <?php } ?>
@@ -190,7 +145,7 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Help</a></li>
-                    <li><a href="loregpembeli.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="../logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -300,7 +255,7 @@
                         while ($dt = mysqli_fetch_array($qm)){
                      ?>
 
-                    <form class="form-horizontal form-label-left" action="php/update_profil.php" method="post">
+                    <form class="form-horizontal form-label-left" action="../php/update_profil.php" method="post">
                       <div class="item form-group">
                         <input type="hidden" name="nik" value="<?php echo $dt['nik'];?>">
                       </div>
@@ -458,18 +413,18 @@
     </div>
 
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <script src="../../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <script src="../../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
+    <script src="../../vendors/nprogress/nprogress.js"></script>
     <!-- validator -->
-    <script src="../vendors/validator/validator.js"></script>
 
+    <script src="../../vendors/validator/validator.js"></script>
     <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+    <script src="../../build/js/custom.min.js"></script>
 
   </body>
 
