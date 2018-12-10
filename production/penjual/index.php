@@ -42,19 +42,13 @@ include '../koneksi.php';
     while ($row = $al->fetch_assoc()) {
     // echo $row['jabatan']."<br
     }
-	    if($_SESSION['status']!="login"){
-		      header("location:loregpembeli.php?pesan=belum_login");
-	      }
-    if ($_SESSION['jabatan'] != 'admin') {
-          header("location:loregpembeli.php?pesan=bukan_admin");
-        }
         ?>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.php" class="site_title"></i> <span>Si-Juka</span></a>
+              <a href="index.php" class="site_title"></i> <span>SIJUKA</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -95,7 +89,7 @@ include '../koneksi.php';
               <div class="menu_section">
                 <h3>Menu</h3>
                 <ul class="nav side-menu">
-                  <li><a href="indexpenjual.php"><i class="fa fa-home"></i> Home</a>
+                  <li><a href="index.php"><i class="fa fa-home"></i> Home</a>
                   </li>
                   <li><a href="posting_kayu.php"><i class="fa fa-edit"></i> Posting Kayu</a>
                   </li>
@@ -157,7 +151,7 @@ include '../koneksi.php';
                   </table>
                   <!-- </a> -->
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="profile.php"> Profile</a></li>
+                    <li><a href="profile.php"> Profil</a></li>
                     <li>
                       <a href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
@@ -243,9 +237,10 @@ include '../koneksi.php';
         <div class="right_col" role="main">
           <div class="">
             <div class="row top_tiles">
+              <a href="tabel_kayu.php">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
+                  <div class="icon" ><i class="fa fa-caret-square-o-right"></i></div>
                   <div class="count"><?php
                   $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'") ;
                   while ($d = mysqli_fetch_array($data)) {
@@ -262,6 +257,8 @@ include '../koneksi.php';
                   <p>Kelola kayu mu di sini</p>
                 </div>
               </div>
+            </a>
+            <a href="daftar_deal.php?<?php echo $id;?>">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
@@ -270,14 +267,17 @@ include '../koneksi.php';
                   <p>Kayumu terjual? Lihat disini</p>
                 </div>
               </div>
+            </a>
+            <a href="setting.php">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
                   <div class="count">3</div><br>
                   <h3>Pengaturan</h3><br>
-                  <p>Menu Untuk Mengelola Data Transaksi</p>
+                  <p>Settings</p>
                 </div>
               </div>
+            </a>
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
@@ -296,7 +296,7 @@ include '../koneksi.php';
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-           Si-Juka | Sistem Informasi Penjualan Kayu Online Terlengkap </br><a href="https://colorlib.com"></br>Copyright@2018</a>
+           SIJUKA</br><a href="https://colorlib.com"></br>Copyright@2018</a>
           </div>
           <div class="clearfix"></div>
         </footer>

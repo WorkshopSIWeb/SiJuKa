@@ -2,6 +2,7 @@
 session_start();
 
 include 'koneksi.php';
+include 'php/rupiah.php';
 include 'php/cek_pembeli.php';
  ?>
 <!DOCTYPE html>
@@ -390,16 +391,19 @@ include 'php/cek_pembeli.php';
                       <div class="">
                         <div class="product_price">
                           <h3>Harga</h3>
-                          <h1 class="price">IDR <?php $al = mysqli_query($koneksi, "SELECT harga FROM tbl_kayu WHERE kode_kayu = '$id'");
+                          <h1 class="price"><?php $al = mysqli_query($koneksi, "SELECT harga FROM tbl_kayu WHERE kode_kayu = '$id'");
                             while ($row = $al->fetch_assoc()) {
-                            echo $row['harga'];
-                          }?></h1>
+                            $hrg =  $row['harga'];
+                          }
+                          echo rupiah($hrg);
+                          ?></h1>
                         </div>
                       </div>
 
                       <div class="">
-                        <input type="button" class="btn btn-default btn-lg" value="Add to Cart">
-                        <button type="button" class="btn btn-default btn-lg">Add to Wishlist</button>
+                        <!-- <input type="button" class="btn btn-default btn-lg" value="Booking kayu"> -->
+                        <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#modalbooking">Booking Kayu</button>
+                        <!-- <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#modalkontak">Kontak Penjual</button> -->
                       </div>
 
                       <div class="product_social">
@@ -417,35 +421,6 @@ include 'php/cek_pembeli.php';
 
                     </div>
 
-
-                    <div class="col-md-12">
-
-                      <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                          <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Home</a>
-                          </li>
-                          <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Profile</a>
-                          </li>
-                          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Profile</a>
-                          </li>
-                        </ul>
-                        <div id="myTabContent" class="tab-content">
-                          <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-                            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher
-                              synth. Cosby sweater eu banh mi, qui irure terr.</p>
-                          </div>
-                          <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-                            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
-                              booth letterpress, commodo enim craft beer mlkshk aliquip</p>
-                          </div>
-                          <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-                            <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui
-                              photo booth letterpress, commodo enim craft beer mlkshk </p>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
                   </div>
                 </div>
               </div>
@@ -466,14 +441,49 @@ include 'php/cek_pembeli.php';
     </div>
 
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- <script src="../vendors/jquery/dist/jquery.min.js"></script> -->
+    <script src="../vendors/jquery/dist/jquery.js"></script>
     <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script> -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.js"></script>
     <!-- FastClick -->
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
 
+    <div id="modalbooking" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- isi modal -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"> Booking kayu </h4>
+          </div>
+          <form action="php/booking.php" method="post" enctype="multipart/form-data">
+          <div class="modal-body">
+            <?php
+              $al = mysqli_query($koneksi, "SELECT nik FROM tbl_kayu WHERE kode_kayu = '$id'");
+              while ($row = $al->fetch_assoc()) {
+              $nikpemilik = $row['nik'];}
+             ?>
+            <input type="hidden" name="pemilik" value='<?php echo $nikpemilik;?>'>
+            <?php
+              $orang = $_SESSION['username'];
+              $as = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username = '$orang'");
+              while ($row = $as->fetch_assoc()) {
+                $nikpemesan = $row['nik'];}
+             ?>
+            <input type="hidden" name="pemesan" value='<?php echo $nikpemesan;?>'>
+            <input type="hidden" name="kode_kayu" value='<?php echo $id;?>'>
+            <p> Segera proses kelanjutannya dengan cara menghubungi pemilik kayu.</p>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-default"  value="booking">
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
   </body>

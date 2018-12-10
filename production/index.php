@@ -44,7 +44,7 @@ include 'koneksi.php';
     echo $_SESSION['jabatan'];
     }
 	    if($_SESSION['status']!="login"){
-		      header("location:loregpembeli.php?pesan=belum_login");
+		      header("location:loregpembeli.php");
 	      }
     if ($_SESSION['jabatan'] != 'admin') {
           header("location:loregpembeli.php?pesan=bukan_admin");

@@ -34,7 +34,7 @@
           $query = mysqli_query($koneksi, "INSERT INTO tbl_kayu (nik, nama_kayu, jenis_kayu, alamat_kebun, deskripsi, foto_1, foto_2, foto_3, harga, status) VALUES ('$nik','$nama_kayu', '$jenis_kayu', '$alamat_kebun', '$deskripsi', '$foto1', '$foto2', '$foto3','$harga','belum laku')");
 
           if($query){
-            header("location:../index.php");
+            header("location:../penjual/index.php");
           }else {
             echo "Gagal om";
       }

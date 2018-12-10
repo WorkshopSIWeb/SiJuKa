@@ -12,7 +12,6 @@
 
   $update = mysqli_query($koneksi,"UPDATE tbl_user SET nama_lengkap = '$nama_lengkap', tgl_lahir = '$tanggal_lahir', alamat = '$alamat', no_telepon = '$no_telepon', email = '$email', pekerjaan = '$pekerjaan', jenis_kelamin = '$jenis_kelamin' WHERE nik = '$nik'");
   if ($update) {
-    // code...
     header("location: ../profile.php");
   }else {
     echo "gagal";

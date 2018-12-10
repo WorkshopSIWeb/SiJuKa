@@ -2,7 +2,7 @@
   session_start();
 
   include '../koneksi.php';
-  include '../php/cek_user.php';
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -78,7 +78,7 @@
               <div class="menu_section">
                 <h3>Menu</h3>
                 <ul class="nav side-menu">
-                  <li><a href="indexpenjual.php"><i class="fa fa-home"></i> Home</a>
+                  <li><a href="index.php"><i class="fa fa-home"></i> Home</a>
                   </li>
                   <li><a href="posting_kayu.php"><i class="fa fa-edit"></i> Posting Kayu</a>
                   </li>

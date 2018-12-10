@@ -1,9 +1,8 @@
 <?php
 session_start();
 
-include 'koneksi.php';
-
-?>
+include '../koneksi.php';
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,37 +11,37 @@ include 'koneksi.php';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="images/IMG-20181016-WA0004.jpg" type="image/ico" />
+	  <link rel="icon" href="../images/IMG-20181016-WA0004.jpg" type="image/ico" />
 
-    <title>Si_Juka | Sistem Informasi Penjualan Kayu Online Terlengkap </title>
+    <title>SIJUKA</title>
 
     <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="../../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link href="../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
 
     <!-- bootstrap-progressbar -->
-    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <link href="../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- JQVMap -->
-    <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <link href="../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
-    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="../../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="../../build/css/custom.min.css" rel="stylesheet">
   </head>
 
   <body class="nav-md">
-
-     <body class="nav-md">
     <?php
-      if($_SESSION['status']!="login"){
-          header("location:loregpembeli.php?pesan=belum_login");
-         }
+    $orang = $_SESSION['username'];
+    $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
+    while ($row = $al->fetch_assoc()) {
+    // echo $row['jabatan']."<br
+    }
         ?>
     <div class="container body">
       <div class="main_container">
@@ -66,7 +65,7 @@ include 'koneksi.php';
                                 ?>
                                    <tr>
                                          <td>
-                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50">
+                                                <img src="<?php echo "../foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50">
                                           </td>
                                     </tr>
                      <?php } ?>
@@ -88,31 +87,14 @@ include 'koneksi.php';
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
+                <h3>Menu</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.php">Admin</a></li>
-                      <li><a href="index2.php">Penjual</a></li>
-                      <li><a href="index3.php">Pembeli</a></li>
-                    </ul>
+                  <li><a href="indexpenjual.php"><i class="fa fa-home"></i> Home</a>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Form Untuk Admin <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="form_user.php">Kelola Data User</a></li>
-                      <li><a href="form_kebun.php">Kelola Data Kebun</a></li>
-                      <li><a href="form_transaksi.php">Kelola Data Transaksi</a></li>
-                      <li><a href="form_laporan.php">Kelola Laporan</a></li>
-                    </ul>
+                  <li><a href="posting_kayu.php"><i class="fa fa-edit"></i> Posting Kayu</a>
                   </li>
-                  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="tabel_user.php">Kelola Tabel User</a></li>
-                      <li><a href="tabel_kebun.php">Kelola Tabel Kebun</a></li>
-                      <li><a href="tabel_transaksi.php">Kelola Tabel Transaksi</a></li>
-                      <li><a href="tabel_laporan.php">Kelola Laporan</a></li>
+                  <li><a href="setting.php"><i class="fa fa-cogs"></i> Pengaturan </a>
 
-                    </ul>
                   </li>
                 </ul>
               </div>
@@ -157,7 +139,7 @@ include 'koneksi.php';
                                 ?>
                                    <tr>
                                          <td>
-                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" width="50" height="50">
+                                                <img src="<?php echo "../foto_profil/".$d['foto_profil']; ?>" width="50" height="50">
                                           </td>
                                           <td>
                                             <?php echo $_SESSION['username']?>
@@ -169,7 +151,7 @@ include 'koneksi.php';
                   </table>
                   <!-- </a> -->
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="profile.php"> Profile</a></li>
                     <li>
                       <a href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
@@ -245,13 +227,6 @@ include 'koneksi.php';
                     </li>
                   </ul>
                 </li>
-                <li class="">
-                  <form action="indexcari.php" method="post">
-                  <input type="text" id="searchquery" size="60" name="keyword" placeholder="Search..." />
-                  <input type="submit" id="searchbutton" value="Search" name="Search" class="formbutton" />
-                  </form>
-                </li>
-
               </ul>
             </nav>
           </div>
@@ -259,130 +234,99 @@ include 'koneksi.php';
         <!-- /top navigation -->
 
         <!-- page content -->
-<?php
-//koneksi
-$koneksi = new mysqli('localhost','root','','sijuka');
-if (isset($_POST['Search'])){
-    //variable
-    $keyword = $_POST['keyword'];
-    $query = $koneksi->query("SELECT j.*, k.* FROM tbl_kayu k, tbl_jenis j
-      WHERE (k.status = 'belum laku' AND j.id_jenis=k.nama_kayu AND j.nama_kayu LIKE '%$keyword%') OR
-            (k.status = 'belum laku' AND j.id_jenis=k.nama_kayu AND k.jenis_kayu LIKE '%$keyword%') OR
-            (k.status = 'belum laku' AND j.id_jenis=k.nama_kayu AND k.alamat_kebun LIKE '$keyword') OR
-            (k.status = 'belum laku' AND j.id_jenis=k.nama_kayu AND k.deskripsi LIKE '$keyword')");
-    $row = mysqli_num_rows($query);
-    //cek apakah ada satu
-    if ($row==0){
-        ?>
-        <center><h3> 404 NOT FOUND</h3></center>
-        <?php
-    }
-    else{
-        ?>
         <div class="right_col" role="main">
           <div class="">
 
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Daftar Kayu mu </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <p class="text-muted font-13 m-b-30">
+                      Berikut Daftar Kayu mu :
+                    </p>
+                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Nama Kayu</th>
+                          <th>Jenis Kayu</th>
+                          <th>Alamat Kebun</th>
+                          <th>Deskripsi</th>
+                          <th>Tanggal</th>
+                          <th>Nama Calon Pembeli</th>
+                          <th>Alamat Pembeli</th>
+                          <th>Kontak Pembeli</th>
+                          <th>Pilihan</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        $sql="SELECT  tbl_kayu.*, tbl_jenis.* FROM tbl_kayu, tbl_jenis WHERE tbl_kayu.nama_kayu = tbl_jenis.id_jenis";
+                        $no=1;
+                        if (!$result=  mysqli_query($koneksi, $sql)){
+                        die('Error:'.mysqli_error($koneksi));
+                        }  else {
+                        if (mysqli_num_rows($result)> 0){
+                        while ($row=  mysqli_fetch_assoc($result)){
+                        ?>
+                        <td><?php echo $no ;?></td>
+                        <td>
+                          <?php echo $row['nama_kayu'];?>
+                        </td>
+                        <td><?php echo $row['jenis_kayu'];?></td>
+                        <td><?php echo $row['alamat_kebun'];?></td>
+                        <td><?php echo $row['deskripsi'];?></td>
+                        <td><?php echo $row['tanggal_upload'];?></td>
+                        <td><?php echo $row['foto_1'];?></td>
+                        <td><?php echo $row['foto_2'];?></td>
+                        <td><?php echo $row['foto_3'];?></td>
+                        <td>
+                          <a href="aksi_user.php?sender=edit&nik=<?php echo $row['nik']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a>
+                          <a href="aksi_user.php?sender=hapus&nik=<?php echo $row['nik']; ?>" class="btn btn-danger"><li class="fa fa-trash-o"></li> Hapus</a>
+                        </td>
+                      </tr>
+                      <?php
+                        $no++;
+                        }
+                        }  else {
+                           echo '';
+                           }
+                        }?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
 
-            <div class="clearfix"></div>
-            <div class="container" >
-    <br><br>
-        <center><h3>Menampilkan hasil dari "<?php echo $keyword;?>" .</h3></center> <br>
-
-<?php
-foreach ($query as $rows){
-        $kode_kayu = $rows['kode_kayu'];
-        $nama_kayu = $rows['nama_kayu'];
-        $jenis_kayu = $rows['jenis_kayu'];
-        $alamat_kebun = $rows['alamat_kebun'];
-        $deskripsi = $rows['deskripsi'];
-        ?>
-  <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
-  <div class="container">
-    <div class="row">
-      <div class="container">
-        <div class="col-md-6">
-
-          <a href="detailkayu.php?kayu=<?php echo $kode_kayu?>">
-            <!-- <img class="img-fluid rounded mb-3 mb-md-0 mb-md" src="images/1.ico" alt="" width="500px"> -->
-            <?php
-            include 'koneksi.php';
-               // $orang = $kode_kayu;
-               $pp = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$kode_kayu'");
-               while($d = mysqli_fetch_array($pp)){
-                       ?>
-                          <tr>
-                                <td>
-
-                                       <img src="<?php echo "foto_kayu/foto1/".$d['foto_1']; ?>" class="img-responsive avatar-vew" alt="avatar" width="450px" height="250px">
-                                 </td>
-                           </tr>
-            <?php } ?>
-
-      </a>
-        </div>
-        <!-- <div class="col-md-4"> -->
-          <h3> <?php
-            $kayu =mysqli_query($koneksi, "SELECT nama_kayu FROM tbl_jenis WHERE id_jenis = '$nama_kayu'");
-            while($c = mysqli_fetch_array($kayu)){
-              echo $c['nama_kayu'];
-            }
-            echo " - ";
-            echo  $jenis_kayu;
-           ?> </h3>
-
-          <p class="main"> <?php echo  $deskripsi; ?> </p>
-          <a class="btn btn-primary" href="detailkayu.php?kayu=<?php echo $kode_kayu?>">Lihat Detail</a>
-        <!-- </div> -->
-      </div>
-    </div>
-    </div>
-      <!-- /.row -->
-
-      <hr>
-        <?php
-        }
-        ?>
-        </table>
-<!--        <?php
-    }
-}
-?>
-
-  <!-- Pagination -->
-      <center><ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
-          </a>
-        </li>
-      </ul>
-
-     </div><br>
-
+            </div>
           </div>
         </div>
+
         <!-- /page content -->
+
 
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            SIJUKA © 2018
+           Si-Juka | Sistem Informasi Penjualan Kayu Online Terlengkap </br><a href="https://colorlib.com"></br>Copyright@2018</a>
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -391,24 +335,45 @@ foreach ($query as $rows){
     </div>
 
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <script src="../../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <script src="../../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- morris.js -->
-    <script src="../vendors/raphael/raphael.min.js"></script>
-    <script src="../vendors/morris.js/morris.min.js"></script>
+    <script src="../../vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="../../vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="../../vendors/gauge.js/dist/gauge.min.js"></script>
     <!-- bootstrap-progressbar -->
     <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="../../vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="../../vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="../../vendors/Flot/jquery.flot.js"></script>
+    <script src="../../vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="../../vendors/Flot/jquery.flot.time.js"></script>
+    <script src="../../vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="../../vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../../vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="../../vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="../../vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="../../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="../../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <!-- bootstrap-daterangepicker -->
-    <script src="../vendors/moment/min/moment.min.js"></script>
-    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="../../vendors/moment/min/moment.min.js"></script>
+    <script src="../../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+    <script src="../../build/js/custom.min.js"></script>
 
   </body>
 </html>

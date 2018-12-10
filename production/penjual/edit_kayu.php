@@ -2,7 +2,6 @@
 session_start();
 
 include '../koneksi.php';
-
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,9 +11,9 @@ include '../koneksi.php';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="../images/IMG-20181016-WA0004.jpg" type="image/ico" />
+	  <link rel="icon" href="../images/IMG-20181016-WA0004.jpg" type="image/ico" />
 
-    <title>SIJUKA | Posting Kayu</title>
+    <title>SIJUKA</title>
 
     <!-- Bootstrap -->
     <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -38,9 +37,11 @@ include '../koneksi.php';
 
   <body class="nav-md">
     <?php
-	    if($_SESSION['status']!="login"){
-		      header("location:loregpembeli.php?pesan=belum_login");
-	       }
+    $orang = $_SESSION['username'];
+    $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
+    while ($row = $al->fetch_assoc()) {
+    // echo $row['jabatan']."<br
+    }
         ?>
     <div class="container body">
       <div class="main_container">
@@ -64,7 +65,7 @@ include '../koneksi.php';
                                 ?>
                                    <tr>
                                          <td>
-                                                <img src="../<?php echo "foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50">
+                                                <img src="<?php echo "../foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50">
                                           </td>
                                     </tr>
                      <?php } ?>
@@ -99,23 +100,6 @@ include '../koneksi.php';
               </div>
             </div>
             <!-- /sidebar menu -->
-
-            <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="production/login.php">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
-            <!-- /menu footer buttons -->
           </div>
         </div>
 
@@ -150,9 +134,10 @@ include '../koneksi.php';
                   </table>
                   <!-- </a> -->
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="profile.php"> Profile</a></li>
                     <li>
-                      <a href="setting.php">
+                      <a href="javascript:;">
+                        <span class="badge bg-red pull-right">50%</span>
                         <span>Pengaturan</span>
                       </a>
                     </li>
@@ -231,25 +216,9 @@ include '../koneksi.php';
         </div>
         <!-- /top navigation -->
 
-        <!-- page content -->
+        <!--page content -->
         <div class="right_col" role="main">
           <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>User Profile</h3>
-              </div>
-
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <div class="clearfix"></div>
 
@@ -257,84 +226,123 @@ include '../koneksi.php';
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Profil</h2>
-
+                    <h2>Edit Profil</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li>
+                        <div class="col-lg-6">
+                      </li>
+                      <li>
+                        <div class="col-lg-7">
+                      </li>
+                      <li>
+                        <div class="col-lg-7">
+                      </li>
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-
                     <?php
-                    $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'") ;
-                    while ($d = mysqli_fetch_array($data)) {
-                        $id = $d['nik'];
-                        $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
+                    $kayu = $_GET['kayu'];
+                        $qm = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu='$kayu'") ;
                         while ($dt = mysqli_fetch_array($qm)){
                      ?>
 
-                      <form action="../php/upload_kayu.php" method="post" enctype="multipart/form-data" >
+                    <form class="form-horizontal form-label-left" action="php/update_profil.php" method="post">
                       <div class="item form-group">
-                        <input type="hidden" name="nik" value="<?php echo $dt['nik'];?>">
-                        <?php } }?>
+                        <input type="hidden" name="kode_kayu" value="<?php echo $dt['kode_kayu'];?>">
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nama Kayu <span class="required">*</span>
                         </label>
-                        <div class="item form-group">
-                          <div class="col-md-8 col-sm-8 col-xs-12">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
                           <select class="select1_single form-control" name="nama_kayu" id="nama_kayu" class="nama_kayu" value=" ">
                             <option disabled="disabled" selected>Pilih Kayu</option>
                             <?php
-                            $kayu = mysqli_query($koneksi, "SELECT * FROM tbl_jenis");
-                            while($row = mysqli_fetch_array($kayu)){
+                            $kyu = mysqli_query($koneksi, "SELECT * FROM tbl_jenis");
+                            while($row = mysqli_fetch_array($kyu)){
                               echo "<option value='$row[id_jenis]'> $row[nama_kayu]</option>";
                             }
                              ?>
                           </select>
                         </div>
-                        </div>
                       </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kayu">Jenis Kayu <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Jenis Kayu <span class="required">*</span>
                         </label>
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                          <input type="text" id="jenis_kayu" name="jenis_kayu" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="alamat">Alamat Kebun <span class="required">*</span>
-                        </label>
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                          <input type="text" id="address" name="alamat" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="alamat">Harga <span class="required">*</span>
-                        </label>
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                          <input type="number" id="price" name="harga" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Deskripsi </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea name="deskripsi" class="resizable_textarea form-control" placeholder="Deskripsikan ukuran batang kayu (diameter x jumlah) "></textarea>
+                          <input id="name" name="jenis_kayu" value="<?php echo $dt['jenis_kayu'] ?>" class="form-control col-md-7 col-xs-12" placeholder="Jenis Kayu" required="required" type="text">
                         </div>
                       </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Alamat Kebun <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="name" name="alamat_kebun" value="<?php echo $dt['alamat_kebun'] ?>" class="form-control col-md-7 col-xs-12" placeholder="Alamat Kebun" required="required" type="text">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> Keterangan<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea name="deskripsi" class="resizable_textarea form-control col-md-7 col-xs-12" placeholder="Isi keterangan kayu disini" required="required" ><?php echo $dt['deskripsi'] ?></textarea>
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Foto Kayu <span class="required">*</span>
+                        </label>
+                      <div class="product_gallery">
+                        <a>
+                          <?php
+                            $pp = mysqli_query($koneksi, "SELECT foto_1 FROM tbl_kayu WHERE kode_kayu = '$kayu'");
+                            while($d = mysqli_fetch_array($pp)){
+                                    ?>
+                                       <tr>
+                                             <td>
 
-                        <input type="file" name="foto1" required="required"/>
-                        <input type="file" name="foto2" />
-                        <input type="file" name="foto3" />
+                                                    <img src="<?php echo "../foto_kayu/foto1/".$d['foto_1']; ?>"  width="50" height="50" alt="avatar">
+                                              </td>
+                                        </tr>
+                         <?php } ?>
+                        </a>
+                        <a>
+                          <?php
+                            $pp = mysqli_query($koneksi, "SELECT foto_2 FROM tbl_kayu WHERE kode_kayu = '$kayu'");
+                            while($d = mysqli_fetch_array($pp)){
+                                    ?>
+                                       <tr>
+                                             <td>
 
+                                                    <img src="<?php echo "../foto_kayu/foto2/".$d['foto_2']; ?>"  width="50" height="50" alt="avatar">
+                                              </td>
+                                        </tr>
+                         <?php } ?>
+                        </a>
+                          <a>
+                            <?php
+                              $pp = mysqli_query($koneksi, "SELECT foto_3 FROM tbl_kayu WHERE kode_kayu = '$kayu'");
+                              while($d = mysqli_fetch_array($pp)){
+                                      ?>
+                                         <tr>
+                                               <td>
 
-                      <div class="ln_solid"></div>
+                                                      <img src="<?php echo "../foto_kayu/foto3/".$d['foto_3']; ?>"  width="50" height="50" alt="avatar">
+                                                </td>
+                                          </tr>
+                           <?php } ?>
+                        </a>
+                      </div>
+                    </div>
+
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
                           <button type="submit" class="btn btn-primary">Batal</button>
-                          <input type="submit" name="upload" class="btn btn-primary" value="posting">
+                          <input type="submit" class="btn btn-primary" value="Simpan">
                         </div>
                       </div>
                     </form>
-
+                  <?php }?>
                   </div>
                 </div>
               </div>
@@ -343,10 +351,11 @@ include '../koneksi.php';
         </div>
         <!-- /page content -->
 
+
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            SIJUKA © 2018
+           Si-Juka | Sistem Informasi Penjualan Kayu Online Terlengkap </br><a href="https://colorlib.com"></br>Copyright@2018</a>
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -362,11 +371,32 @@ include '../koneksi.php';
     <script src="../../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../../vendors/nprogress/nprogress.js"></script>
-    <!-- morris.js -->
-    <script src="../../vendors/raphael/raphael.min.js"></script>
-    <script src="../vendors/morris.js/morris.min.js"></script>
+    <!-- Chart.js -->
+    <script src="../../vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="../../vendors/gauge.js/dist/gauge.min.js"></script>
     <!-- bootstrap-progressbar -->
-    <script src="../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="../../vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="../../vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="../../vendors/Flot/jquery.flot.js"></script>
+    <script src="../../vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="../../vendors/Flot/jquery.flot.time.js"></script>
+    <script src="../../vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="../../vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../../vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="../../vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="../../vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="../../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="../../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <!-- bootstrap-daterangepicker -->
     <script src="../../vendors/moment/min/moment.min.js"></script>
     <script src="../../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
