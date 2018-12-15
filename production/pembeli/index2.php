@@ -2,7 +2,7 @@
 session_start();
 
 include '../koneksi.php';
-include '../php/cek_user2.php';
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,7 +93,7 @@ include '../php/cek_user2.php';
                 <ul class="nav side-menu">
                   <li><a href="index.php"><i class="fa fa-home"></i> Home</a>
                   </li>
-                  <li><a href="posting_kayu.php"><i class="fa fa-edit"></i> Posting Kayu</a>
+                  <li><a href="posting_kayu.php"><i class="fa fa-edit"></i> Daftar Permintaan</a>
                   </li>
                   <li><a href="setting.php"><i class="fa fa-cogs"></i> Pengaturan </a>
 
@@ -239,7 +239,7 @@ include '../php/cek_user2.php';
         <div class="right_col" role="main">
           <div class="">
             <div class="row top_tiles">
-              <a href="tabel_kayu.php">
+              <a href="penawaran.php">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon" ><i class="fa fa-caret-square-o-right"></i></div>
@@ -250,13 +250,13 @@ include '../php/cek_user2.php';
                       $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
                       while ($dt = mysqli_fetch_array($qm)){
                         $nik = $dt['nik'];}}
-                    $count = mysqli_query($koneksi, "SELECT COUNT(kode_kayu) FROM tbl_kayu WHERE nik = '$nik'");
+                    $count = mysqli_query($koneksi, "SELECT COUNT(id_pesan) FROM pesan WHERE id_pengirim = '$nik' AND subyek_pesan = 'BOOKING KAYU'");
                       while ($row = $count->fetch_assoc()) {
-                        echo $row['COUNT(kode_kayu)'];
+                        echo $row['COUNT(id_pesan)'];
                       }
                   ?></div><br>
-                  <h3>Kayu-mu</h3><br>
-                  <p>Kelola kayu mu di sini</p>
+                  <h3>Penawaranmu</h3><br>
+                  <p>Kelola penawaranmu di sini</p>
                 </div>
               </div>
             </a>
@@ -273,7 +273,7 @@ include '../php/cek_user2.php';
             <a href="setting.php">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-gears"></i></div>
+                  <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
                   <div class="count">3</div><br>
                   <h3>Pengaturan</h3><br>
                   <p>Settings</p>
@@ -282,7 +282,7 @@ include '../php/cek_user2.php';
             </a>
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="glyphicon glyphicon-user"></i></div>
+                  <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
                   <div class="count">4</div><br>
                   <h3>Hubungi admin</h3><br>
                   <p>Butuh bantuan ? Hubungi admin !</p>

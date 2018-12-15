@@ -3,7 +3,7 @@ session_start();
 
 include 'koneksi.php';
 include 'php/cek_user.php';
-?>
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -39,15 +39,16 @@ include 'php/cek_user.php';
   <body class="nav-md">
     <?php
     $orang = $_SESSION['username'];
+    $coba = $_GET['kode_kayu'];
     $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
     while ($row = $al->fetch_assoc()) {
     }
-      if($_SESSION['status']!="login"){
+      if ($_SESSION['status']!="login") {
           header("location:loregpembeli.php?pesan=belum_login");
-        }
+      }
     if ($_SESSION['jabatan'] != 'admin') {
-          header("location:loregpembeli.php?pesan=bukan_admin");
-        }
+        header("location:loregpembeli.php?pesan=bukan_admin");
+    }
         ?>
     <div class="container body">
       <div class="main_container">
@@ -67,14 +68,15 @@ include 'php/cek_user.php';
                      <?php
                         $orang = $_SESSION['username'];
                         $data = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE username = '$orang'");
-                        while($d = mysqli_fetch_array($data)){
-                                ?>
+                        while ($d = mysqli_fetch_array($data)) {
+                            ?>
                                    <tr>
                                          <td>
                                                 <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50">
                                           </td>
                                     </tr>
-                     <?php } ?>
+                     <?php
+                        } ?>
                   </table>
               </div>
               <div class="profile_info">
@@ -170,8 +172,8 @@ include 'php/cek_user.php';
                      <?php
                         $orang = $_SESSION['username'];
                         $data = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE username = '$orang'");
-                        while($d = mysqli_fetch_array($data)){
-                                ?>
+                        while ($d = mysqli_fetch_array($data)) {
+                            ?>
                                    <tr>
                                          <td>
                                                 <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" width="50" height="50">
@@ -182,7 +184,8 @@ include 'php/cek_user.php';
                   </a>
                                           </td>
                                     </tr>
-                     <?php } ?>
+                     <?php
+                        } ?>
                   </table>
                   <!-- </a> -->
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -274,7 +277,7 @@ include 'php/cek_user.php';
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Pembeli</h3>
+                <h3>Form Validation</h3>
               </div>
 
               <div class="title_right">
@@ -282,17 +285,19 @@ include 'php/cek_user.php';
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Cari!</button>
-                    </span>
+                              <button class="btn btn-default" type="button">Cari!</button>
+                          </span>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="clearfix"></div>
 
+            <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Tabel Kebun <small>Pembeli</small></h2>
+                    <h2>Kelola Data Kayu <small>oleh Admin</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -311,93 +316,108 @@ include 'php/cek_user.php';
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <p class="text-muted font-13 m-b-30">
-                      Berikut Tabel Daftar Kebun Dari Si-Juka
-                    </p>
-                    <table id="datatable-buttons" class="table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>Kode_Kayu</th>
-                          <th>Nama_Kayu</th>
-                          <th>Jenis_Kayu</th>
-                          <th>Alamat_Kebun</th>
-                          <th>Deskripsi</th>
-                          <th>Tanggal_Upload</th>
-                          <th>Foto_Kebun_1</th>
-                          <th>Foto_Kebun_2</th>
-                          <th>Foto_Kebun_3</th>
-                          <th>Pilihan</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        $sql="SELECT  * FROM tbl_kayu";
-                        $no=1;
-                        if (!$result=  mysqli_query($koneksi, $sql)){
-                        die('Error:'.mysqli_error($koneksi));
-                        }  else {
-                        if (mysqli_num_rows($result)> 0){
-                        while ($row=  mysqli_fetch_assoc($result)){
-                        ?>
-                        <td><?php echo $no ;?></td>
-                        <td><?php echo $row['kode_kayu'];?></td>
-                        <td><?php echo $row['nama_kayu'];?></td>
-                        <td><?php echo $row['jenis_kayu'];?></td>
-                        <td><?php echo $row['alamat_kebun'];?></td>
-                        <td><?php echo $row['deskripsi'];?></td>
-                        <td><?php echo $row['tanggal_upload'];?></td>
-                        <td>
-                          <?php
-                            $id = $row['kode_kayu'];
-                            $pp = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
-                            while($d = mysqli_fetch_array($pp)){
-                                    ?>
-                                    <img src="<?php echo "foto_kayu/foto1/".$d['foto_1']; ?>" class="img-responsive avatar-vew" alt="avatar" width="50px" height="50px">
-                          <?php } ?>
-                        </td>
-                        <td>
-                           <?php
-                              $id = $row['kode_kayu'];
-                              $pp = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
-                              while($d = mysqli_fetch_array($pp)){
-                                      ?>
-                                      <img src="<?php echo "foto_kayu/foto2/".$d['foto_2']; ?>" class="img-responsive avatar-vew" alt="avatar" width="50px" height="50px">
-                           <?php } ?>
-                        </td>
-                        <td>
-                           <?php
-                              $id = $row['kode_kayu'];
-                              $pp = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
-                              while($d = mysqli_fetch_array($pp)){
-                                      ?>
-                                      <img src="<?php echo "foto_kayu/foto3/".$d['foto_3']; ?>" class="img-responsive avatar-vew" alt="avatar" width="50px" height="50px">
-                           <?php } ?>
-                        </td>
-                        <td>
-                          <a href="edit_kebun.php?kode_kayu=<?php echo $row['kode_kayu']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a>
-                          <a href="php/delete_data_kayu.php?kode_kayu=<?php echo $row['kode_kayu']; ?>" method="post" class="btn btn-danger" onclick="return konfirmasi()" href="#"><li class="fa fa-trash-o"></li> Hapus</a>
-                        </td>
-                      </tr>
-                      <?php
-                        $no++;
+                    <?php
+
+                    $data = mysqli_query($koneksi, "SELECT kode_kayu FROM tbl_kayu WHERE kode_kayu='$coba'") ;
+                    while ($d = mysqli_fetch_array($data)) {
+                        $id = $d['kode_kayu'];
+                        $qm = mysqli_query($koneksi, "SELECT * FROM tbl_kayu where kode_kayu = '$id'");
+                        while ($dt = mysqli_fetch_array($qm)) {
+                            ?>
+
+                    <form class="form-horizontal form-label-left" action="php/update_kayu.php" method="post">
+                    <form class="form-horizontal form-label-left" novalidate>
+                      <span class="section">Masukkan Data yang Sesuai :</span>
+                      <form action="update_kayu.php" method="post" enctype="multipart/form-data" >
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kode_kayu">Kode Kayu <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="kode_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="kode_kayu" placeholder="Kode Kayu" type="text" value="<?php echo $dt['kode_kayu']; ?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_kayu">Nama Kayu <span class="required">*</span>
+                        </label>
+                        <div class="item form-group">
+                          <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select class="select1_single form-control" name="nama_kayu" id="nama_kayu" class="nama_kayu" value="<?php echo $dt['nama_kayu']; ?>">
+                            <option disabled="disabled">Nama Kayu :</option>
+                            <option value="Jati">Jati</option>
+                            <option value="Mahoni">Mahoni</option>
+                            <option value="Sandrila">Sandrila</option>
+                            <option value="Sengon">Sengon</option>
+                          </select>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kayu">Jenis Kayu <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="jenis_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="jenis_kayu" placeholder="Jenis Kayu" type="text" value="<?php echo $dt['jenis_kayu']; ?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="alamat_kebun">Alamat kebun <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="alamat_kebun" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="alamat_kebun" placeholder="Alamat Kebun" type="text" value="<?php echo $dt['alamat_kebun']; ?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="deskripsi">Deskripsi <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea id="deskripsi" required="required" name="deskripsi" class="form-control col-md-7 col-xs-12" value="<?php echo $dt['deskripsi']; ?>"></textarea>
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tanggal_upload">Tanggal Upload <span class="required">:</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="tanggal_upload" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tanggal_upload" placeholder="Tahun-Bulan-Tanggal"  type="date" value="<?php echo $dt['tanggal_upload']; ?>">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                         <label for="foto_1" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Kebun 1 </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="file" name="foto_1" value="<?php echo $row['foto_1']; ?>" class="form-control" placeholder="Enter..." required="">
+                          </div>
+                       </div>
+                       <div class="item form-group">
+                         <label for="foto_2" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Kebun 2 </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="file" name="foto_2" value="<?php echo $row['foto_2']; ?>" class="form-control" placeholder="Enter..." required="">
+                          </div>
+                       </div>
+                       <div class="item form-group">
+                         <label for="foto_3" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Kebun 3 </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="file" name="foto_3" value="<?php echo $row['foto_3
+                            ']; ?>" class="form-control" placeholder="Enter..." required="">
+                          </div>
+                       </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                          <button type="submit" class="btn btn-primary">Batal</button>
+                          <input type="submit" class="btn btn-primary" value="Simpan">
+                        </div>
+                      </div>
+                    </form>
+                    <?php
                         }
-                        }  else {
-                           echo '';
-                           }
-                        }?>
-                      </tbody>
-                    </table>
+                    }?>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
         <!-- /page content -->
 
-       <!-- footer content -->
+        <!-- footer content -->
         <footer>
           <div class="pull-right">
            Si-Juka | Sistem Informasi Penjualan Kayu Online Terlengkap </br><a href="https://colorlib.com"></br>Copyright@2018</a>
@@ -416,31 +436,8 @@ include 'php/cek_user.php';
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- iCheck -->
-    <script src="../vendors/iCheck/icheck.min.js"></script>
-    <!-- Datatables -->
-    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="../vendors/jszip/dist/jszip.min.js"></script>
-    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
-    <script type="text/javascript" language="JavaScript">
-    function konfirmasi()
-    {
-    tanya = confirm("Anda Yakin Akan Menghapus Data Tersebut ???");
-    if (tanya == true) return true;
-    else return false;
-    }</script>
+    <!-- validator -->
+    <script src="../vendors/validator/validator.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>

@@ -2,6 +2,7 @@
 session_start();
 
 include '../koneksi.php';
+include '../php/rupiah.php';
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,9 +12,9 @@ include '../koneksi.php';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <link rel="icon" href="../images/IMG-20181016-WA0004.jpg" type="image/ico" />
+  <link rel="icon" href="images/IMG-20181016-WA0004.jpg" type="image/ico" />
 
-    <title>SIJUKA</title>
+    <title>Si_Juka | Sistem Informasi Penjualan Kayu Online Terlengkap </title>
 
     <!-- Bootstrap -->
     <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -22,8 +23,8 @@ include '../koneksi.php';
     <!-- NProgress -->
     <link href="../../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
-    <link href="../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
 
+    <link href="../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- bootstrap-progressbar -->
     <link href="../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- JQVMap -->
@@ -37,11 +38,17 @@ include '../koneksi.php';
 
   <body class="nav-md">
     <?php
+        if(isset($_GET['ko'])){
+          if($_GET['ko'] == "sip"){
+            echo "<script>alert('Data Berhasil Dihapus.'); window.location.href = 'tabel_kayu.php';</script>";
+          }}
+          ?>
+    <?php
     $orang = $_SESSION['username'];
     $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
     while ($row = $al->fetch_assoc()) {
-    // echo $row['jabatan']."<br
     }
+
         ?>
     <div class="container body">
       <div class="main_container">
@@ -100,6 +107,8 @@ include '../koneksi.php';
               </div>
             </div>
             <!-- /sidebar menu -->
+
+
           </div>
         </div>
 
@@ -142,7 +151,7 @@ include '../koneksi.php';
                       </a>
                     </li>
                     <li><a href="javascript:;">Bantuan</a></li>
-                    <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Keluar</a></li>
+                    <li><a href="../logout.php"><i class="fa fa-sign-out pull-right"></i> Keluar</a></li>
                   </ul>
                 </li>
 
@@ -214,16 +223,22 @@ include '../koneksi.php';
             </nav>
           </div>
         </div>
+        </div>
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
+
+            <div class="page-title">
+
+            </div>
+
+            <div class="right_col" role="main">
+            <div class="">
 
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Daftar Kayu mu </h2>
+                    <h2>Tabel Kebun <small>Pembeli</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -239,11 +254,11 @@ include '../koneksi.php';
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
                     </ul>
-                  <div class="clearfix"></div>
-                </div>
+                    <div class="clearfix"></div>
+                  </div>
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30">
-                      Berikut Daftar Kayu mu :
+                      Berikut Tabel Daftar Kebun Dari Si-Juka
                     </p>
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
@@ -254,9 +269,8 @@ include '../koneksi.php';
                           <th>Alamat_Kebun</th>
                           <th>Deskripsi</th>
                           <th>Tanggal_Upload</th>
-                          <th>Foto_Kebun_1</th>
-                          <th>Foto_Kebun_2</th>
-                          <th>Foto_Kebun_3</th>
+                          <th>Status</th>
+                          <th>Harga</th>
                           <th>Pilihan</th>
                         </tr>
                       </thead>
@@ -282,12 +296,12 @@ include '../koneksi.php';
                         <td><?php echo $row['alamat_kebun'];?></td>
                         <td><?php echo $row['deskripsi'];?></td>
                         <td><?php echo $row['tanggal_upload'];?></td>
-                        <td><?php echo $row['foto_1'];?></td>
-                        <td><?php echo $row['foto_2'];?></td>
-                        <td><?php echo $row['foto_3'];?></td>
+                        <td><?php echo $row['status'];?></td>
+                          <td><?php echo rupiah($row['harga']);?></td>
                         <td>
                           <a href="edit_kayu.php?kayu=<?php echo $row['kode_kayu']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a>
-                          <a href="aksi_user.php?sender=hapus&nik=<?php echo $row['nik']; ?>" class="btn btn-danger"><li class="fa fa-trash-o"></li> Hapus</a>
+                          <a href="../php/delete_kayu.php?kode_kayu=<?php echo $row['kode_kayu']; ?>" method="post" class="btn btn-danger" onclick="return konfirmasi()" href="#"><li class="fa fa-trash-o"></li> Hapus</a>
+
                         </td>
                       </tr>
                       <?php
@@ -306,18 +320,13 @@ include '../koneksi.php';
             </div>
           </div>
         </div>
-
         <!-- /page content -->
-
-
-        <!-- footer content -->
         <footer>
           <div class="pull-right">
            Si-Juka | Sistem Informasi Penjualan Kayu Online Terlengkap </br><a href="https://colorlib.com"></br>Copyright@2018</a>
           </div>
           <div class="clearfix"></div>
         </footer>
-        <!-- /footer content -->
       </div>
     </div>
 
@@ -329,35 +338,32 @@ include '../koneksi.php';
     <script src="../../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
     <script src="../../vendors/nprogress/nprogress.js"></script>
-    <!-- Chart.js -->
-    <script src="../../vendors/Chart.js/dist/Chart.min.js"></script>
-    <!-- gauge.js -->
-    <script src="../../vendors/gauge.js/dist/gauge.min.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <!-- iCheck -->
     <script src="../../vendors/iCheck/icheck.min.js"></script>
-    <!-- Skycons -->
-    <script src="../../vendors/skycons/skycons.js"></script>
-    <!-- Flot -->
-    <script src="../../vendors/Flot/jquery.flot.js"></script>
-    <script src="../../vendors/Flot/jquery.flot.pie.js"></script>
-    <script src="../../vendors/Flot/jquery.flot.time.js"></script>
-    <script src="../../vendors/Flot/jquery.flot.stack.js"></script>
-    <script src="../../vendors/Flot/jquery.flot.resize.js"></script>
-    <!-- Flot plugins -->
-    <script src="../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    <script src="../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-    <script src="../../vendors/flot.curvedlines/curvedLines.js"></script>
-    <!-- DateJS -->
-    <script src="../../vendors/DateJS/build/date.js"></script>
-    <!-- JQVMap -->
-    <script src="../../vendors/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="../../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="../../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="../../vendors/moment/min/moment.min.js"></script>
-    <script src="../../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- Datatables -->
+    <script src="../../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="../../vendors/jszip/dist/jszip.min.js"></script>
+    <script src="../../vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../../vendors/pdfmake/build/vfs_fonts.js"></script>
+
+    <script type="text/javascript" language="JavaScript">
+    function konfirmasi()
+    {
+    tanya = confirm("Anda Yakin Akan Menghapus Data Tersebut ???");
+    if (tanya == true) return true;
+    else return false;
+    }</script>
 
     <!-- Custom Theme Scripts -->
     <script src="../../build/js/custom.min.js"></script>

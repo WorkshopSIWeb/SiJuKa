@@ -324,6 +324,8 @@ include 'php/cek_user.php';
                         while ($dt = mysqli_fetch_array($qm)){
                      ?>
 
+                    <form class="form-horizontal form-label-left" action="php/update_user.php" method="post" enctype="multipart/form-data" >
+                      <span class="section">Masukkan Data yang sesuai :</span>
                     <form class="form-horizontal form-label-left" action="php/update_user.php" method="post">
 
                     <form class="form-horizontal form-label-left" novalidate>
@@ -351,7 +353,7 @@ include 'php/cek_user.php';
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <!-- <i class="fa fa-calendar"></i> -->
-                          <input id="tgl_lahir" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tgl_lahir" placeholder="Tahun-Bulan-Tanggal" type="text" value="<?php echo $dt['tgl_lahir'];?>">
+                          <input id="tgl_lahir" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tgl_lahir" placeholder="Tahun-Bulan-Tanggal" type="date" value="<?php echo $dt['tgl_lahir'];?>">
                         </div>
                       </div>
                       <div class="item form-group">

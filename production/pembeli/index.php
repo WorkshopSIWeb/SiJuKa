@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shop Homepage - Start Bootstrap Template</title>
+    <title>SIJUKA | Home</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,14 +28,20 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        <a class="navbar-brand" href="#">SIJUKA</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <form action="../indexcari.php" method="post">
+                <input type="text" id="searchquery" width="40" height="5" name="keyword" placeholder="Search..." />
+                <input type="submit" id="searchbutton" value="Search" name="Search" class="formbutton" />
+              </form>
+            </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home
+              <a class="nav-link" href="index.php">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -60,12 +66,13 @@
 
         <div class="col-lg-3">
 
+
           <h1 class="my-4">Shop Name</h1>
-          <div class="list-group">
-            <a href="#" class="list-group-item">Category 1</a>
-            <a href="#" class="list-group-item">Category 2</a>
-            <a href="#" class="list-group-item">Category 3</a>
-          </div>
+         <div class="list-group">
+           <a href="#" class="list-group-item">Category 1</a>
+           <a href="#" class="list-group-item">Category 2</a>
+           <a href="#" class="list-group-item">Category 3</a>
+</div>
 
         </div>
         <!-- /.col-lg-3 -->
@@ -82,7 +89,7 @@
               <div class="carousel-item active">
 
                 <?php
-                    $pic1 = mysqli_query($koneksi, "SELECT * FROM tbl_kayu ORDER BY kode_kayu DESC LIMIT 1 OFFSET 2 ");
+                    $pic1 = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE status != 'laku' ORDER BY kode_kayu DESC LIMIT 1 OFFSET 2 ");
                     while($d = mysqli_fetch_array($pic1)){
                             ?>
                                <tr>
@@ -90,6 +97,34 @@
                                        <?php $ky = $d['kode_kayu']; ?>
                                         <a href="../detailkayu.php?kayu=<?php echo $ky;?>">
                                             <img src="<?php echo "../foto_kayu/foto1/".$d['foto_1']; ?>" class="img-responsive avatar-vew" alt="avatar" width="900" height="350">
+                                            <style>
+                                              #judul{
+
+                                                position: absolute;
+                                                top: 260px;
+                                                right: 10px;
+                                                z-index: 2;
+                                                color: rgb(0, 0, 0);
+                                                background-color: rgba(255, 255, 255, 0.63);
+
+                                              }
+                                              #judul2{
+
+                                                position: absolute;
+                                                top: 290px;
+                                                right: 10px;
+                                                z-index: 2;
+                                                color: rgb(0, 0, 0);
+                                                background-color: rgba(255, 255, 255, 0.63);
+
+                                              }
+                                            </style>
+                                            <?php
+                                            $kq = $d['nama_kayu'];
+                                            $ss=mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM tbl_jenis WHERE id_jenis = '$kq'")); ?>
+                                            <h4 id="judul"><?php echo $ss['nama_kayu']; echo " - "; echo $d['jenis_kayu'];?></h4>
+                                            <br>
+                                            <h5 id="judul2"><?php echo rupiah($d['harga']);?></h5>
                                         </a>
                                       </td>
                                 </tr>
@@ -98,7 +133,7 @@
               </div>
               <div class="carousel-item">
                 <?php
-                    $pic1 = mysqli_query($koneksi, "SELECT * FROM tbl_kayu ORDER BY kode_kayu DESC LIMIT 1 OFFSET 1 ");
+                    $pic1 = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE status != 'laku' ORDER BY kode_kayu DESC LIMIT 1 OFFSET 1 ");
                     while($d = mysqli_fetch_array($pic1)){
                             ?>
                                <tr>
@@ -106,6 +141,34 @@
                                        <?php $ky = $d['kode_kayu']; ?>
                                         <a href="../detailkayu.php?kayu=<?php echo $ky;?>">
                                             <img src="<?php echo "../foto_kayu/foto1/".$d['foto_1']; ?>" class="img-responsive avatar-vew" alt="avatar" width="900" height="350">
+                                            <style>
+                                              #judul{
+
+                                                position: absolute;
+                                                top: 260px;
+                                                right: 10px;
+                                                z-index: 2;
+                                                color: rgb(0, 0, 0);
+                                                background-color: rgba(255, 255, 255, 0.63);
+
+                                              }
+                                              #judul2{
+
+                                                position: absolute;
+                                                top: 290px;
+                                                right: 10px;
+                                                z-index: 2;
+                                                color: rgb(0, 0, 0);
+                                                background-color: rgba(255, 255, 255, 0.63);
+
+                                              }
+                                            </style>
+                                            <?php
+                                            $kq = $d['nama_kayu'];
+                                            $ss=mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM tbl_jenis WHERE id_jenis = '$kq'")); ?>
+                                            <h4 id="judul"><?php echo $ss['nama_kayu']; echo " - "; echo $d['jenis_kayu'];?></h4>
+                                            <br>
+                                            <h5 id="judul2"><?php echo rupiah($d['harga']);?></h5>
                                         </a>
                                       </td>
                                 </tr>
@@ -113,7 +176,7 @@
               </div>
               <div class="carousel-item">
                 <?php
-                    $pic1 = mysqli_query($koneksi, "SELECT * FROM tbl_kayu ORDER BY kode_kayu DESC LIMIT 1");
+                    $pic1 = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE status != 'laku' ORDER BY kode_kayu DESC LIMIT 1");
                     while($d = mysqli_fetch_array($pic1)){
                             ?>
                                <tr>
@@ -121,6 +184,34 @@
                                        <?php $ky = $d['kode_kayu']; ?>
                                         <a href="../detailkayu.php?kayu=<?php echo $ky;?>">
                                             <img src="<?php echo "../foto_kayu/foto1/".$d['foto_1']; ?>" class="img-responsive avatar-vew" alt="avatar" width="900" height="350">
+                                            <style>
+                                              #judul{
+
+                                                position: absolute;
+                                                top: 260px;
+                                                right: 10px;
+                                                z-index: 2;
+                                                color: rgb(0, 0, 0);
+                                                background-color: rgba(255, 255, 255, 0.63);
+
+                                              }
+                                              #judul2{
+
+                                                position: absolute;
+                                                top: 290px;
+                                                right: 10px;
+                                                z-index: 2;
+                                                color: rgb(0, 0, 0);
+                                                background-color: rgba(255, 255, 255, 0.63);
+
+                                              }
+                                            </style>
+                                            <?php
+                                            $kq = $d['nama_kayu'];
+                                            $ss=mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM tbl_jenis WHERE id_jenis = '$kq'")); ?>
+                                            <h4 id="judul"><?php echo $ss['nama_kayu']; echo " - "; echo $d['jenis_kayu'];?></h4>
+                                            <br>
+                                            <h5 id="judul2"><?php echo rupiah($d['harga']);?></h5>
                                         </a>
                                       </td>
                                 </tr>
@@ -142,7 +233,7 @@
 
                 //variable
 
-                $query = mysqli_query ($koneksi, "SELECT * FROM tbl_kayu ORDER BY kode_kayu DESC");
+                $query = mysqli_query ($koneksi, "SELECT * FROM tbl_kayu WHERE status != 'laku' ORDER BY kode_kayu DESC");
 
                 $row = mysqli_num_rows($query);
                 //cek apakah ada satu
@@ -171,8 +262,7 @@
                              ?>
                                 <tr>
                                       <td>
-
-                                             <img src="<?php echo "../foto_kayu/foto1/".$d['foto_1']; ?>" class="card-img-top" alt="avatar">
+                                             <img src="<?php echo "../foto_kayu/foto1/".$d['foto_1']; ?>" class="card-img-top" width="253" height="142" alt="avatar">
                                        </td>
                                  </tr>
                   <?php } ?>

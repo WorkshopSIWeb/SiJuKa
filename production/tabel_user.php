@@ -2,7 +2,8 @@
 session_start();
 
 include 'koneksi.php';
- ?>
+include 'php/cek_user.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,8 +41,6 @@ include 'koneksi.php';
     $orang = $_SESSION['username'];
     $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
     while ($row = $al->fetch_assoc()) {
-    // echo $row['jabatan']."<br>";
-    echo $_SESSION['jabatan'];
     }
       if($_SESSION['status']!="login"){
           header("location:loregpembeli.php?pesan=belum_login");
@@ -277,7 +276,7 @@ include 'koneksi.php';
               <div class="title_left">
                 <h3>Admin</h3>
               </div>
-
+<!-- 
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
@@ -287,7 +286,7 @@ include 'koneksi.php';
                     </span>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
                     
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -353,9 +352,9 @@ include 'koneksi.php';
                         <td><?php echo $row['jabatan'];?></td>
                         <td><?php echo $row['pekerjaan'];?></td>
                         <td><?php echo $row['jenis_kelamin'];?></td>
-                        <td>
-                          <a href="aksi_kebun.php?sender=edit&nik=<?php echo $row['nik']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a> 
-                          <a href="aksi_kebun.php?sender=hapus&nik=<?php echo $row['nik']; ?>" class="btn btn-danger"><li class="fa fa-trash-o"></li> Hapus</a> 
+                        <td>                        
+                          <a href="edit_user.php?nik=<?php echo $row['nik']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a> 
+                          <a href="php/delete_data_user.php?nik=<?php echo $row['nik']; ?>" method="post" class="btn btn-danger" onclick="return konfirmasi()" href="#"><li class="fa fa-trash-o"></li> Hapus</a> 
                         </td>
                       </tr>
                       <?php    
@@ -386,7 +385,7 @@ include 'koneksi.php';
         <!-- /footer content -->
       </div>
     </div>
-    
+
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -414,8 +413,38 @@ include 'koneksi.php';
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
+    <script type="text/javascript" language="JavaScript">
+    function konfirmasi()
+    {
+    tanya = confirm("Anda Yakin Akan Menghapus Data Tersebut ???");
+    if (tanya == true) return true;
+    else return false;
+    }</script>
+    
+    <!-- <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="js/dialog.jquery.js"></script>
+    <script>
+    $(function(){
+      var can=function(){
+        alert("You just clicked CANCEL")
+      }
+      $(".btn").click(function(){
+    $("body").dialog({
+      width: 400,
+      height: "",
+      title: "Confirm Action",
+      content: "<h3>Are You Sure?</h3><i class='fa  fa-question-circle-o fa-5x'></i>",
+      okBtn: "Okey",
+      cancleBtn: "Cancel",
+      okCallback: "",
+      cancleCallback:can,
+      closeCallback: ""
+    });
+      })
+    })
+    </script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-
+ -->
   </body>
 </html>

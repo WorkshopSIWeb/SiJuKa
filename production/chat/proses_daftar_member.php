@@ -4,8 +4,8 @@ include_once 'setting/database.php';
 
 $nama_lengkap_daftar    = $_POST['nama_lengkap_daftar'];
 $gender_daftar          = $_POST['gender_daftar'];
-$alamat_daftar          = $_POST['alamat_daftar']; 
-$username_daftar        = $_POST['username_daftar']; 
+$alamat_daftar          = $_POST['alamat_daftar'];
+$username_daftar        = $_POST['username_daftar'];
 $password_daftar        = md5($_POST['password_daftar']);
 
 if(empty($nama_lengkap_daftar) || empty($alamat_daftar) || empty($username_daftar) || empty($password_daftar)){
@@ -17,7 +17,7 @@ if(!(int)$gender_daftar){
 }
 
 if($gender_daftar=="1"){ $gender = "L"; }
-else{ $gender = "P"; } 
+else{ $gender = "P"; }
 
 $seleksi = mysqli_query($koneksi, "SELECT id_member FROM member WHERE username='$username_daftar'");
 $jumlah_baris = mysqli_num_rows($seleksi);

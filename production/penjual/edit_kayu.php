@@ -2,6 +2,7 @@
 session_start();
 
 include '../koneksi.php';
+include '../php/rupiah.php';
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -142,7 +143,7 @@ include '../koneksi.php';
                       </a>
                     </li>
                     <li><a href="javascript:;">Bantuan</a></li>
-                    <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Keluar</a></li>
+                    <li><a href="../logout.php"><i class="fa fa-sign-out pull-right"></i> Keluar</a></li>
                   </ul>
                 </li>
 
@@ -249,16 +250,24 @@ include '../koneksi.php';
                         while ($dt = mysqli_fetch_array($qm)){
                      ?>
 
-                    <form class="form-horizontal form-label-left" action="php/update_profil.php" method="post">
+                    <form class="form-horizontal form-label-left" action="../php/update_kayu2.php" method="post">
                       <div class="item form-group">
                         <input type="hidden" name="kode_kayu" value="<?php echo $dt['kode_kayu'];?>">
                       </div>
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nama Kayu <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Nama Kayu <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select class="select1_single form-control" name="nama_kayu" id="nama_kayu" class="nama_kayu" value=" ">
-                            <option disabled="disabled" selected>Pilih Kayu</option>
+                            <option disabled="disabled" hidden="yes">
+                              <?php
+                              $plh = $dt['nama_kayu'];
+                              $nm = mysqli_query($koneksi, "SELECT nama_kayu FROM tbl_jenis WHERE id_jenis = '$plh'");
+                              while ($nma = mysqli_fetch_array($nm)){
+                              echo $nma['nama_kayu'];
+                            }
+                             ?>
+                           </option>
                             <?php
                             $kyu = mysqli_query($koneksi, "SELECT * FROM tbl_jenis");
                             while($row = mysqli_fetch_array($kyu)){
@@ -280,6 +289,13 @@ include '../koneksi.php';
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="name" name="alamat_kebun" value="<?php echo $dt['alamat_kebun'] ?>" class="form-control col-md-7 col-xs-12" placeholder="Alamat Kebun" required="required" type="text">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Harga(Rp) <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="number" name="harga" value="<?php echo $dt['harga'] ?>" class="form-control col-md-7 col-xs-12" placeholder="Harga" required="required" type="text">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -337,7 +353,7 @@ include '../koneksi.php';
 
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                          <button type="submit" class="btn btn-primary">Batal</button>
+                          <button type="button" onclick="history.go(-1);"class="btn btn-primary">Batal</button>
                           <input type="submit" class="btn btn-primary" value="Simpan">
                         </div>
                       </div>
