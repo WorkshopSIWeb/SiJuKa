@@ -43,11 +43,29 @@ include 'php/cek_pembeli.php';
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <!-- <img src="images/img.jpg" alt="..." class="img-circle profile_img"> -->
+                <table>
+                     <?php
+                        $orang = $_SESSION['username'];
+                        $data = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE username = '$orang'");
+                        while ($d = mysqli_fetch_array($data)) {
+                            ?>
+                                   <tr>
+                                         <td>
+                                                <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50">
+                                          </td>
+                                    </tr>
+                     <?php
+                        } ?>
+                  </table>
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <span>Selamat Datang</span>
+                <h2>
+                  <?php
+                      echo  $_SESSION['username'];
+                  ?>
+                </h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -57,104 +75,17 @@ include 'php/cek_pembeli.php';
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
+                <h3>Menu</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.html">Dashboard</a></li>
-                      <li><a href="index2.html">Dashboard2</a></li>
-                      <li><a href="index3.html">Dashboard3</a></li>
-                    </ul>
+                  <li><a href="pembeli/index2.php"><i class="fa fa-home"></i> Home</a>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="form.html">General Form</a></li>
-                      <li><a href="form_advanced.html">Advanced Components</a></li>
-                      <li><a href="form_validation.html">Form Validation</a></li>
-                      <li><a href="form_wizards.html">Form Wizard</a></li>
-                      <li><a href="form_upload.html">Form Upload</a></li>
-                      <li><a href="form_buttons.html">Form Buttons</a></li>
-                    </ul>
+                  <li><a href="pembeli/penawaran.php"><i class="fa fa-edit"></i> Daftar Permintaan</a>
                   </li>
-                  <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="general_elements.html">General Elements</a></li>
-                      <li><a href="media_gallery.html">Media Gallery</a></li>
-                      <li><a href="typography.html">Typography</a></li>
-                      <li><a href="icons.html">Icons</a></li>
-                      <li><a href="glyphicons.html">Glyphicons</a></li>
-                      <li><a href="widgets.html">Widgets</a></li>
-                      <li><a href="invoice.html">Invoice</a></li>
-                      <li><a href="inbox.html">Inbox</a></li>
-                      <li><a href="calendar.html">Calendar</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="tables.html">Tables</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="chartjs.html">Chart JS</a></li>
-                      <li><a href="chartjs2.html">Chart JS2</a></li>
-                      <li><a href="morisjs.html">Moris JS</a></li>
-                      <li><a href="echarts.html">ECharts</a></li>
-                      <li><a href="other_charts.html">Other Charts</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                      <li><a href="fixed_footer.html">Fixed Footer</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              <div class="menu_section">
-                <h3>Live On</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="e_commerce.html">E-commerce</a></li>
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.html">Profile</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="page_403.html">403 Error</a></li>
-                      <li><a href="page_404.html">404 Error</a></li>
-                      <li><a href="page_500.html">500 Error</a></li>
-                      <li><a href="plain_page.html">Plain Page</a></li>
-                      <li><a href="login.html">Login Page</a></li>
-                      <li><a href="pricing_tables.html">Pricing Tables</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="#level1_1">Level One</a>
-                        <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="level2.html">Level Two</a>
-                            </li>
-                            <li><a href="#level2_1">Level Two</a>
-                            </li>
-                            <li><a href="#level2_2">Level Two</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li><a href="#level1_2">Level One</a>
-                        </li>
-                    </ul>
-                  </li>
-                  <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
-                </ul>
-              </div>
+                  <li><a href="pembeli/setting.php"><i class="fa fa-cogs"></i> Pengaturan </a>
 
+                  </li>
+                </ul>
+              </div>
             </div>
             <!-- /sidebar menu -->
 
@@ -188,7 +119,26 @@ include 'php/cek_pembeli.php';
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+
+
+                         <?php
+                            $orang = $_SESSION['username'];
+                            $data = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE username = '$orang'");
+                            while ($d = mysqli_fetch_array($data)) {
+                                ?>
+                                       <tr>
+                                             <td>
+                                                    <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>"  width="50" height="50">
+                                              </td>
+                                        </tr>
+                         <?php
+                            }
+
+                             echo  $_SESSION['username'];
+
+                         ?>
+
+
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -278,22 +228,7 @@ include 'php/cek_pembeli.php';
         <div class="right_col" role="main">
 
           <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>SIJUKA : Detail Kayu</h3>
-              </div>
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             <div class="clearfix"></div>
 
@@ -313,42 +248,45 @@ include 'php/cek_pembeli.php';
                   <!-- memanggil foto1 -->
                       <?php
                         $pp = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
-                        while($d = mysqli_fetch_array($pp)){
-                                ?>
+                        while ($d = mysqli_fetch_array($pp)) {
+                            ?>
                                    <tr>
                                          <td>
 
                                                 <img src="<?php echo "foto_kayu/foto1/".$d['foto_1']; ?>" class="img-responsive avatar-vew" alt="avatar" width="450px" height="250px">
                                           </td>
                                     </tr>
-                     <?php } ?>
+                     <?php
+                        } ?>
                       </div>
                       <div class="product_gallery">
                         <a>
                           <?php
                             $pp = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
-                            while($d = mysqli_fetch_array($pp)){
-                                    ?>
+                            while ($d = mysqli_fetch_array($pp)) {
+                                ?>
                                        <tr>
                                              <td>
 
                                                     <img src="<?php echo "foto_kayu/foto2/".$d['foto_2']; ?>"  alt="avatar">
                                               </td>
                                         </tr>
-                         <?php } ?>
+                         <?php
+                            } ?>
                         </a>
                           <a>
                             <?php
                               $pp = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
-                              while($d = mysqli_fetch_array($pp)){
-                                      ?>
+                              while ($d = mysqli_fetch_array($pp)) {
+                                  ?>
                                          <tr>
                                                <td>
 
                                                       <img src="<?php echo "foto_kayu/foto3/".$d['foto_3']; ?>"  alt="avatar">
                                                 </td>
                                           </tr>
-                           <?php } ?>
+                           <?php
+                              } ?>
                         </a>
                       </div>
                     </div>
@@ -359,29 +297,31 @@ include 'php/cek_pembeli.php';
                       <?php
                       $al = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
                       while ($row = $al->fetch_assoc()) {
-                      $nama_kayu = $row['nama_kayu'];}
+                          $nama_kayu = $row['nama_kayu'];
+                      }
 
                         $kayu =mysqli_query($koneksi, "SELECT nama_kayu FROM tbl_jenis WHERE id_jenis = '$nama_kayu'");
-                        while($c = mysqli_fetch_array($kayu)){
-                          echo $c['nama_kayu'];
+                        while ($c = mysqli_fetch_array($kayu)) {
+                            echo $c['nama_kayu'];
                         }
                         echo " - ";
                         $al = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
                         while ($row = $al->fetch_assoc()) {
-                        echo $row['jenis_kayu'];}
+                            echo $row['jenis_kayu'];
+                        }
                        ?>
                       </h3>
                       <h5>Keterangan : </h5>
                       <p><?php   $al = mysqli_query($koneksi, "SELECT deskripsi FROM tbl_kayu WHERE kode_kayu = '$id'");
                         while ($row = $al->fetch_assoc()) {
-                        echo $row['deskripsi'];
+                            echo $row['deskripsi'];
                         } ?></p>
                       <br />
 
                       <div class="">
                         <h2>Lokasi : <?php   $al = mysqli_query($koneksi, "SELECT alamat_kebun FROM tbl_kayu WHERE kode_kayu = '$id'");
                             while ($row = $al->fetch_assoc()) {
-                            echo $row['alamat_kebun'];
+                                echo $row['alamat_kebun'];
                             } ?></h2>
                       </div>
 
@@ -393,8 +333,8 @@ include 'php/cek_pembeli.php';
                           <h3>Harga</h3>
                           <h1 class="price"><?php $al = mysqli_query($koneksi, "SELECT harga FROM tbl_kayu WHERE kode_kayu = '$id'");
                             while ($row = $al->fetch_assoc()) {
-                            $hrg =  $row['harga'];
-                          }
+                                $hrg =  $row['harga'];
+                            }
                           echo rupiah($hrg);
                           ?></h1>
                         </div>
@@ -404,10 +344,18 @@ include 'php/cek_pembeli.php';
                         <!-- <input type="button" class="btn btn-default btn-lg" value="Booking kayu"> -->
                         <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#modalbooking">Booking Kayu</button>
                         <!-- <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#modalkontak">Kontak Penjual</button> -->
+                        <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modallapor">Laporkan Pemilik kayu</button>
                       </div>
-
+                      <h4>Hubungi Penjual :</h4>
                       <div class="product_social">
                         <ul class="list-inline">
+                          <?php $al = mysqli_query($koneksi, "SELECT nik FROM tbl_kayu WHERE kode_kayu = '$id'");
+                            while ($row = $al->fetch_assoc()) {
+                                $p =  $row['nik'];
+                            }
+                          ?>
+                          <li><button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalchat">Chat</button>
+                          </li>
                           <li><a href="#"><i class="fa fa-facebook-square"></i></a>
                           </li>
                           <li><a href="#"><i class="fa fa-twitter-square"></i></a>
@@ -451,6 +399,8 @@ include 'php/cek_pembeli.php';
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
 
+
+    <!-- modal booking -->
     <div id="modalbooking" class="modal fade" role="dialog">
       <div class="modal-dialog">
         <!-- isi modal -->
@@ -464,14 +414,16 @@ include 'php/cek_pembeli.php';
             <?php
               $al = mysqli_query($koneksi, "SELECT nik FROM tbl_kayu WHERE kode_kayu = '$id'");
               while ($row = $al->fetch_assoc()) {
-              $nikpemilik = $row['nik'];}
+                  $nikpemilik = $row['nik'];
+              }
              ?>
             <input type="hidden" name="pemilik" value='<?php echo $nikpemilik;?>'>
             <?php
               $orang = $_SESSION['username'];
               $as = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username = '$orang'");
               while ($row = $as->fetch_assoc()) {
-                $nikpemesan = $row['nik'];}
+                  $nikpemesan = $row['nik'];
+              }
              ?>
             <input type="hidden" name="pemesan" value='<?php echo $nikpemesan;?>'>
             <input type="hidden" name="kode_kayu" value='<?php echo $id;?>'>
@@ -479,6 +431,73 @@ include 'php/cek_pembeli.php';
           </div>
           <div class="modal-footer">
             <input type="submit" class="btn btn-default"  value="booking">
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- modallapor -->
+    <div id="modallapor" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- isi modal -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"> Laporkan Pemilik Kayu </h4>
+          </div>
+          <form action="pembeli/form_Laporkan.php" method="post" enctype="multipart/form-data">
+          <div class="modal-body">
+            <?php
+              $al = mysqli_query($koneksi, "SELECT nik FROM tbl_kayu WHERE kode_kayu = '$id'");
+              while ($row = $al->fetch_assoc()) {
+                  $nikdilapor = $row['nik'];
+              }
+             ?>
+            <input type="hidden" name="dilapor" value='<?php echo $nikdilapor;?>'>
+            <?php
+              $orang = $_SESSION['username'];
+              $as = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username = '$orang'");
+              while ($row = $as->fetch_assoc()) {
+                  $nikpelapor = $row['nik'];
+              }
+             ?>
+            <input type="hidden" name="pelapor" value='<?php echo $nikpelapor;?>'>
+
+            <p> Anda ingin melaporkan pemilik kayu ini?</p>
+          </div>
+          <div class="modal-footer" height="20px">
+            <input type="submit" class="btn btn-danger"  value="Laporkan">
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- modal chat -->
+    <div id="modalchat" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- isi modal -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"> Chat pemilik kayu</h4>
+          </div>
+          <form action="php/chat.php" method="post" enctype="multipart/form-data">
+          <div class="modal-body">
+            <input type="hidden" name="pengirim" value='<?php echo $nikpelapor;?>'>
+            <?php
+              $al = mysqli_query($koneksi, "SELECT nik FROM tbl_kayu WHERE kode_kayu = '$id'");
+              while ($row = $al->fetch_assoc()) {
+                  $nikpemilik = $row['nik'];
+              }
+             ?>
+            <input type="hidden" name="penerima" value='<?php echo $nikpemilik;?>'>
+            <h4>Pesan apa yg anda kirimkan kepada pemilik kayu??</h4>
+            <input type="text" name="chat" class="form-control" placeholder="Isi pesan di sini">
+
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-default"  value="Kirimkan">
           </div>
         </form>
         </div>

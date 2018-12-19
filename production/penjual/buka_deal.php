@@ -2,6 +2,7 @@
   session_start();
 
   include '../koneksi.php';
+  include '../php/cek_user2.php';
 
 ?>
 <!DOCTYPE HTML>
@@ -79,6 +80,11 @@
                 <h3>Menu</h3>
                 <ul class="nav side-menu">
                   <li><a href="index.php"><i class="fa fa-home"></i> Home</a>
+                  </li>
+                  <?php
+                  $nik = mysqli_fetch_array(mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'"));
+                  ?>
+                  <li><a href="../chat/index.php?id=<?php echo $nik['nik']; ?>"><i class="fa fa-comment-o"></i> Chat</a>
                   </li>
                   <li><a href="posting_kayu.php"><i class="fa fa-edit"></i> Posting Kayu</a>
                   </li>
@@ -255,7 +261,7 @@
                               <?php
                               $kdpsn = $_GET['id_pesan'];
 
-                                $psn = mysqli_query($koneksi, "SELECT isi_pesan FROM pesan WHERE id_pesan='$kdpsn'");
+                                $psn = mysqli_query($koneksi, "SELECT isi_pesan FROM tbl_pesan WHERE kode_pesan='$kdpsn'");
                                 while($ky = mysqli_fetch_array($psn)){
                                   $id = $ky['isi_pesan'];
                                 }
@@ -453,7 +459,12 @@
 
                               <input type="submit" class="btn btn-default btn-lg" value="Deal dengan Tawaran ini">
                             </form>
-                              <button type="button" class="btn btn-default btn-lg">Tolak Tawaran ini</button>
+                              <form action="../php/tolak.php" method="post">
+                                <input type="hidden" name="pesan" value="<?php echo $kdpsn ?>">
+                                  <input type="hidden" value="<?php echo $id; ?>" name="kayu">
+                              <button type="submit" class="btn btn-default btn-lg">Tolak Tawaran ini</button>
+                              <form>
+                            </form>
                           </div>
                         </div>
                       </div>

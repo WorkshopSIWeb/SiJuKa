@@ -2,6 +2,7 @@
   session_start();
 
   include '../koneksi.php';
+  include '../php/cek_user2.php';
 
 ?>
 <html>
@@ -74,6 +75,11 @@
               <h3>Menu</h3>
               <ul class="nav side-menu">
                 <li><a href="index.php"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <?php
+                $nik = mysqli_fetch_array(mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'"));
+                ?>
+                <li><a href="../chat/index.php?id=<?php echo $nik['nik']; ?>"><i class="fa fa-comment-o"></i> Chat</a>
                 </li>
                 <li><a href="posting_kayu.php"><i class="fa fa-edit"></i> Posting Kayu</a>
                 </li>
@@ -281,30 +287,16 @@
                     </thead>
                     <tbody>
                   <?php
-                  $query_daftar_pesan = mysqli_query($koneksi, "SELECT DISTINCT P.*, M.nik, M.nama_lengkap FROM pesan P, tbl_user M WHERE P.id_pengirim=M.nik AND P.id_penerima='$id_member' AND subyek_pesan = 'BOOKING KAYU' ORDER BY P.id_pesan DESC");
+                  $query_daftar_pesan = mysqli_query($koneksi, "SELECT DISTINCT P.*, M.nik, M.nama_lengkap FROM tbl_pesan P, tbl_user M WHERE P.id_pengirim=M.nik AND P.id_penerima='$id_member' AND subyek_pesan = 'BOOKING KAYU' AND status = 'belum' ORDER BY P.kode_pesan DESC");
                   while ($daftar_pesan=mysqli_fetch_array($query_daftar_pesan)) {
-                    if($daftar_pesan['sudah_dibaca']=="belum"){
+
                   ?>
                     <tr class="pesan pesan_belum">
                       <td>
                         <?php echo $daftar_pesan['nama_lengkap']; ?>
                       </td>
                       <td>
-                        <a href="buka_deal.php?id_pembeli=<?php echo $daftar_pesan['id_pengirim']; ?>&id_pesan=<?php echo $daftar_pesan['id_pesan']; ?>"><?php echo $daftar_pesan['subyek_pesan']; ?></a>
-                      </td>
-                      <td>
-                        <?php echo $daftar_pesan['tanggal']; ?>
-                      </td>
-                    </tr>
-                  <?php }
-                    else if($daftar_pesan['sudah_dibaca']=="sudah"){
-                  ?>
-                    <tr class="pesan">
-                      <td>
-                        <?php echo $daftar_pesan['nama_lengkap']; ?>
-                      </td>
-                      <td>
-                        <a href="buka_deal.php?id_pembeli=<?php echo $daftar_pesan['id_pengirim']; ?>&id_pesan=<?php echo $daftar_pesan['id_pesan']; ?>"><?php echo $daftar_pesan['subyek_pesan']; ?></a>
+                        <a href="buka_deal.php?id_pembeli=<?php echo $daftar_pesan['id_pengirim']; ?>&id_pesan=<?php echo $daftar_pesan['kode_pesan']; ?>"><?php echo $daftar_pesan['subyek_pesan']; ?></a>
                       </td>
                       <td>
                         <?php echo $daftar_pesan['tanggal']; ?>
@@ -315,9 +307,7 @@
                       </center>
                       </td>
                     </tr>
-
                   <?php
-                    }
                   }
                   ?>
 

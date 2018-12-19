@@ -93,6 +93,11 @@ include '../php/cek_user2.php';
                 <ul class="nav side-menu">
                   <li><a href="index.php"><i class="fa fa-home"></i> Home</a>
                   </li>
+                  <?php
+                  $nik = mysqli_fetch_array(mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'"));
+                  ?>
+                  <li><a href="../chat/index.php?id=<?php echo $nik['nik']; ?>"><i class="fa fa-comment-o"></i> Chat</a>
+                  </li>
                   <li><a href="posting_kayu.php"><i class="fa fa-edit"></i> Posting Kayu</a>
                   </li>
                   <li><a href="setting.php"><i class="fa fa-cogs"></i> Pengaturan </a>
@@ -263,31 +268,59 @@ include '../php/cek_user2.php';
             <a href="daftar_deal.php?<?php echo $id;?>">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
-                  <div class="count">2</div><br>
+                  <div class="icon"><i class="fa fa-newspaper-o"></i></div>
+                  <div class="count">
+                    <?php
+                    $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'") ;
+                    while ($d = mysqli_fetch_array($data)) {
+                        $id = $d['nik'];
+                        $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
+                        while ($dt = mysqli_fetch_array($qm)){
+                          $nik = $dt['nik'];}}
+                      $count = mysqli_query($koneksi, "SELECT COUNT(kode_pesan) FROM tbl_pesan WHERE id_penerima = '$nik' AND status = 'belum'");
+                        while ($row = $count->fetch_assoc()) {
+                          echo $row['COUNT(kode_pesan)'];
+                        }
+                    ?>
+                  </div><br>
                   <h3>Permintaan Deal</h3><br>
-                  <p>Kayumu terjual? Lihat disini</p>
+                  <p>Lihat penawaran dari calon pembeli</p>
                 </div>
               </div>
             </a>
-            <a href="setting.php">
+            <a href="laporan_deal.php">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-gears"></i></div>
-                  <div class="count">3</div><br>
-                  <h3>Pengaturan</h3><br>
-                  <p>Settings</p>
+                  <div class="count">
+                    <?php
+                    $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'") ;
+                    while ($d = mysqli_fetch_array($data)) {
+                        $id = $d['nik'];
+                        $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
+                        while ($dt = mysqli_fetch_array($qm)){
+                          $nik = $dt['nik'];}}
+                      $count = mysqli_query($koneksi, "SELECT COUNT(kode_deal) FROM tbl_deal WHERE nikjual = '$nik'");
+                        while ($row = $count->fetch_assoc()) {
+                          echo $row['COUNT(kode_deal)'];
+                        }
+                    ?>
+                  </div><br>
+                  <h3>Laporan</h3><br>
+                  <p>Laporan Kayu terjual</p>
                 </div>
               </div>
             </a>
+            <a href="../feedback.php">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="glyphicon glyphicon-user"></i></div>
-                  <div class="count">4</div><br>
-                  <h3>Hubungi admin</h3><br>
-                  <p>Butuh bantuan ? Hubungi admin !</p>
+                  <div class="count">-</div><br>
+                  <h3>Feedback</h3><br>
+                  <p>Kirimkan masukan anda untuk SIJUKA</p>
                 </div>
               </div>
+            </a>
             </div>
           </div>
         </div>

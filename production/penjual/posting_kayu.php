@@ -90,6 +90,11 @@ include '../koneksi.php';
                 <ul class="nav side-menu">
                   <li><a href="index.php"><i class="fa fa-home"></i> Home</a>
                   </li>
+                  <?php
+                  $nik = mysqli_fetch_array(mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'"));
+                  ?>
+                  <li><a href="../chat/index.php?id=<?php echo $nik['nik']; ?>"><i class="fa fa-comment-o"></i> Chat</a>
+                  </li>
                   <li><a href="posting_kayu.php"><i class="fa fa-edit"></i> Posting Kayu</a>
                   </li>
                   <li><a href="setting.php"><i class="fa fa-cogs"></i> Pengaturan </a>
@@ -317,7 +322,7 @@ include '../koneksi.php';
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Deskripsi </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea name="deskripsi" class="resizable_textarea form-control" placeholder="Deskripsikan ukuran batang kayu (diameter x jumlah) "></textarea>
+                          <textarea name="deskripsi" class="resizable_textarea form-control" placeholder="Isi Keterangan tambahan kayu disini. Deskripsikan ukuran batang kayu misalnya (diameter x jumlah) "></textarea>
                         </div>
                       </div>
 

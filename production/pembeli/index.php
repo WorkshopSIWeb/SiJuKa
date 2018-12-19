@@ -36,24 +36,16 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <form action="../indexcari.php" method="post">
-                <input type="text" id="searchquery" width="40" height="5" name="keyword" placeholder="Search..." />
+                <input type="text" id="searchquery" class="search" width="40" height="5" name="keyword" placeholder="Search..." />
                 <input type="submit" id="searchbutton" value="Search" name="Search" class="formbutton" />
               </form>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="index.php">Home
-                <span class="sr-only">(current)</span>
+              <a class="nav-link" href="index2.php">Dashboard
+                <span class="sr-only"></span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
-            </li>
+
           </ul>
         </div>
       </div>
@@ -64,15 +56,15 @@
 
       <div class="row">
 
-        <div class="col-lg-3">
+        <div class="col-lg-2">
 
 
-          <h1 class="my-4">Shop Name</h1>
-         <div class="list-group">
+          <!-- <h1 class="my-4">Shop Name</h1> -->
+         <!-- <div class="list-group">
            <a href="#" class="list-group-item">Category 1</a>
            <a href="#" class="list-group-item">Category 2</a>
            <a href="#" class="list-group-item">Category 3</a>
-</div>
+         </div> -->
 
         </div>
         <!-- /.col-lg-3 -->

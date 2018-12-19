@@ -13,7 +13,7 @@
   if ($update) {
     // code...
     echo "<script>alert('S U K S E S. . . Data Berhasil DiUbah ! ! !');
-            window.location='../penjual/tabel_kayu2.php'</script>";
+            window.location='../penjual/tabel_kayu.php'</script>";
     // header("location: ../tabel_user.php");
   }else {
     echo "<script>alert('G A G A L . . . Data Gagal Diubah ! ! !')";

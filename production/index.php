@@ -41,7 +41,7 @@ include 'koneksi.php';
     $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
     while ($row = $al->fetch_assoc()) {
     // echo $row['jabatan']."<br>";
-    echo $_SESSION['jabatan'];
+
     }
 	    if($_SESSION['status']!="login"){
 		      header("location:loregpembeli.php");
@@ -96,44 +96,23 @@ include 'koneksi.php';
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.php">Admin</a></li>
-                      <li><a href="index2.php">Penjual</a></li>
-                      <li><a href="index3.php">Pembeli</a></li>
-                    </ul>
+                  <li><a href="index.php"><i class="fa fa-home"></i> Home</a>
                   </li>
                   <li><a><i class="fa fa-edit"></i> Form Untuk Admin <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form_user.php">Kelola Data User</a></li>
-                      <li><a href="form_kebun.php">Kelola Data Kebun</a></li>
-                      <li><a href="form_transaksi.php">Kelola Data Transaksi</a></li>
-                      <li><a href="form_laporan.php">Kelola Laporan</a></li>
+                      <li><a href="form_user.php">Tambah User</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-table"></i> Kelola Data <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tabel_user.php">Kelola Tabel User</a></li>
-                      <li><a href="tabel_kebun.php">Kelola Tabel Kebun</a></li>
-                      <li><a href="tabel_transaksi.php">Kelola Tabel Transaksi</a></li>
-                      <li><a href="tabel_laporan.php">Kelola Laporan</a></li>
-
+                      <li><a href="tabel_user.php">Kelola  User</a></li>
+                      <li><a href="tabel_kebun.php">Kelola Kayu</a></li>
+                      <li><a href="tabel_transaksi.php">Kelola Transaksi</a></li>
                     </ul>
                   </li>
                 </ul>
               </div>
-              <div class="menu_section">
-                <h3>Live On</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.php">Profile</a></li>
-                    </ul>
-                  </li>
-              </div>
+
             </div>
             <!-- /sidebar menu -->
 
@@ -273,38 +252,67 @@ include 'koneksi.php';
         <div class="right_col" role="main">
           <div class="">
             <div class="row top_tiles">
+              <a href="tabel_user.php">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
-                  <div class="count">1</div><br>
+                  <div class="count">
+                    <?php
+                    $count = mysqli_query($koneksi, "SELECT COUNT(nik) FROM tbl_user");
+                      while ($row = $count->fetch_assoc()) {
+                        echo $row['COUNT(nik)'];
+                      }
+                     ?>
+                  </div><br>
                   <h3>Kelola Data User</h3><br>
-                  <p>Menu Untuk mengelola Data User</p>
+                  <p>Kelola Data User</p>
                 </div>
               </div>
+            </a>
+              <a href="tabel_kebun.php">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
-                  <div class="count">2</div><br>
-                  <h3>Kelola Data Kebun</h3><br>
-                  <p>Menu Untuk Mengelola Data Kebun Yang Masih Tersedia</p>
+                  <div class="count">
+                    <?php
+                    $count = mysqli_query($koneksi, "SELECT COUNT(kode_kayu) FROM tbl_kayu");
+                      while ($row = $count->fetch_assoc()) {
+                        echo $row['COUNT(kode_kayu)'];
+                      }
+                     ?>
+                  </div><br>
+                  <h3>Kelola Data Kayu</h3><br>
+                  <p>Kelola Kayu disini</p>
                 </div>
               </div>
+            </a>
+            <a href="tabel_transaksi.php">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
-                  <div class="count">3</div><br>
-                  <h3>Kelola Transaksi</h3><br>
-                  <p>Menu Untuk Mengelola Data Transaksi</p>
+                  <div class="count">
+                    <?php
+                    $count = mysqli_query($koneksi, "SELECT COUNT(kode_deal) FROM tbl_deal");
+                      while ($row = $count->fetch_assoc()) {
+                        echo $row['COUNT(kode_deal)'];
+                      }
+                     ?>
+                  </div><br>
+                  <h3>Kelola Deal</h3><br>
+                  <p>Menu Untuk Mengelola Data deal</p>
                 </div>
               </div>
+            </a>
+              <a href="setting.php">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
-                  <div class="count">4</div><br>
-                  <h3>Kelola Laporan</h3><br>
-                  <p>Menu Untuk Mengelola Laporan Baik harian, Mingguan, Maupun Tahunan</p>
+                  <div class="icon"><i class="fa fa-gears"></i></div>
+                  <div class="count">-</div><br>
+                  <h3>Pengaturan</h3><br>
+                  <p>Pengaturan</p>
                 </div>
               </div>
+            </a>
             </div>
           </div>
         </div>

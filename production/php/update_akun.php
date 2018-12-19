@@ -9,13 +9,14 @@ session_start();
 
   $upakun = mysqli_query($koneksi, "UPDATE tbl_user SET username = '$username', password = '$password' WHERE nik='$nik'");
   if ($upakun) {
-    if ($user == 'pembeli') {
-      header('location:../pembeli/setting.php');
-    } else if ($user == 'penjual') {
-        header('location:../penjual/setting.php');
-      }else if($user == 'admin') {
-    header('location:../setting.php');
-  }else {
-    echo "gagal";
-  }}
- ?>
+      if ($user == 'pembeli') {
+          header('location:../pembeli/setting.php');
+      } elseif ($user == 'penjual') {
+          header('location:../penjual/setting.php');
+      } elseif ($user == 'admin') {
+          header('location:../setting.php');
+      } else {
+          echo "gagal";
+      }
+  }
+?>

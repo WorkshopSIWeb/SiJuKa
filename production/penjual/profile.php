@@ -3,6 +3,7 @@ session_start();
 
 include '../php/rupiah.php';
 include '../koneksi.php';
+include '../php/cek_user2.php';
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,6 +93,11 @@ include '../koneksi.php';
                 <h3>Menu</h3>
                 <ul class="nav side-menu">
                   <li><a href="index.php"><i class="fa fa-home"></i> Home</a>
+                  </li>
+                  <?php
+                  $nik = mysqli_fetch_array(mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'"));
+                  ?>
+                  <li><a href="../chat/index.php?id=<?php echo $nik['nik']; ?>"><i class="fa fa-comment-o"></i> Chat</a>
                   </li>
                   <li><a href="posting_kayu.php"><i class="fa fa-edit"></i> Posting Kayu</a>
                   </li>
@@ -238,22 +244,7 @@ include '../koneksi.php';
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>User Profile</h3>
-              </div>
-
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          
 
             <div class="clearfix"></div>
 
@@ -319,7 +310,7 @@ include '../koneksi.php';
                       <br />
 
                       <!-- start skills -->
-                      <h4>Skills</h4>
+                      <!-- <h4>Skills</h4>
                       <ul class="list-unstyled user_data">
                         <li>
                           <p>Web Applications</p>
@@ -345,7 +336,7 @@ include '../koneksi.php';
                             <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
                           </div>
                         </li>
-                      </ul>
+                      </ul> -->
                       <!-- end of skills -->
 
                     </div>

@@ -2,6 +2,7 @@
 session_start();
 
 include '../koneksi.php';
+include '../php/cek_user2.php';
 
  ?>
 <!DOCTYPE html>
@@ -93,7 +94,12 @@ include '../koneksi.php';
                 <ul class="nav side-menu">
                   <li><a href="index.php"><i class="fa fa-home"></i> Home</a>
                   </li>
-                  <li><a href="posting_kayu.php"><i class="fa fa-edit"></i> Daftar Permintaan</a>
+                  <?php
+                  $nik = mysqli_fetch_array(mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'"));
+                  ?>
+                  <li><a href="../chat/index.php?id=<?php echo $nik['nik']; ?>"><i class="fa fa-comment-o"></i> Chat</a>
+                  </li>
+                  <li><a href="penawaran.php"><i class="fa fa-edit"></i> Daftar booking mu</a>
                   </li>
                   <li><a href="setting.php"><i class="fa fa-cogs"></i> Pengaturan </a>
 
@@ -250,44 +256,46 @@ include '../koneksi.php';
                       $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
                       while ($dt = mysqli_fetch_array($qm)){
                         $nik = $dt['nik'];}}
-                    $count = mysqli_query($koneksi, "SELECT COUNT(id_pesan) FROM pesan WHERE id_pengirim = '$nik' AND subyek_pesan = 'BOOKING KAYU'");
+                    $count = mysqli_query($koneksi, "SELECT COUNT(kode_pesan) FROM tbl_pesan WHERE id_pengirim = '$nik' AND subyek_pesan = 'BOOKING KAYU' AND status = 'belum'");
                       while ($row = $count->fetch_assoc()) {
-                        echo $row['COUNT(id_pesan)'];
+                        echo $row['COUNT(kode_pesan)'];
                       }
                   ?></div><br>
-                  <h3>Penawaranmu</h3><br>
-                  <p>Kelola penawaranmu di sini</p>
+                  <h3>Bookingan mu</h3><br>
+                  <p>Lihat kayu bookinganmu di sini</p>
                 </div>
               </div>
             </a>
-            <a href="daftar_deal.php?<?php echo $id;?>">
+            <a href="riwayat_deal.php">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
-                  <div class="count">2</div><br>
-                  <h3>Permintaan Deal</h3><br>
-                  <p>Kayumu terjual? Lihat disini</p>
+                  <div class="count">-</div><br>
+                  <h3>Riwayat booking</h3><br>
+                  <p>Lihat riwayatmu</p>
                 </div>
               </div>
             </a>
             <a href="setting.php">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
-                  <div class="count">3</div><br>
+                  <div class="icon"><i class="fa fa-gears"></i></div>
+                  <div class="count">-</div><br>
                   <h3>Pengaturan</h3><br>
                   <p>Settings</p>
                 </div>
               </div>
             </a>
+            <a href="../feedback.php">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
-                  <div class="count">4</div><br>
-                  <h3>Hubungi admin</h3><br>
-                  <p>Butuh bantuan ? Hubungi admin !</p>
+                  <div class="icon"><i class="glyphicon glyphicon-user"></i></div>
+                  <div class="count">-</div><br>
+                  <h3>Feedback</h3><br>
+                  <p>Kirimkan masukan anda untuk SIJUKA</p>
                 </div>
               </div>
+            </a>
             </div>
           </div>
         </div>
@@ -336,13 +344,7 @@ include '../koneksi.php';
     <script src="../../vendors/flot.curvedlines/curvedLines.js"></script>
     <!-- DateJS -->
     <script src="../../vendors/DateJS/build/date.js"></script>
-    <!-- JQVMap -->
-    <script src="../../vendors/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="../../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="../../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="../../vendors/moment/min/moment.min.js"></script>
-    <script src="../../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
 
     <!-- Custom Theme Scripts -->
     <script src="../../build/js/custom.min.js"></script>

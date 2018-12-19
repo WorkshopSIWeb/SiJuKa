@@ -80,6 +80,11 @@
                 <ul class="nav side-menu">
                   <li><a href="index.php"><i class="fa fa-home"></i> Home</a>
                   </li>
+                  <?php
+                  $nik = mysqli_fetch_array(mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'"));
+                  ?>
+                  <li><a href="../chat/index.php?id=<?php echo $nik['nik']; ?>"><i class="fa fa-comment-o"></i> Chat</a>
+                  </li>
                   <li><a href="posting_kayu.php"><i class="fa fa-edit"></i> Posting Kayu</a>
                   </li>
                   <li><a href="setting.php"><i class="fa fa-cogs"></i> Pengaturan </a>
@@ -230,7 +235,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Profil</h2>
+                    <h2>Pengaturan</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li>
                         <div class="col-lg-6">
@@ -247,154 +252,167 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <?php
-                    $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'") ;
-                    while ($d = mysqli_fetch_array($data)) {
-                        $id = $d['nik'];
-                        $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
-                        while ($dt = mysqli_fetch_array($qm)){
-                     ?>
+                    <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                      <div class="panel">
+                        <a class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          <h4 class="panel-title">Data Diri</h4>
+                        </a>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                          <div class="panel-body">
+                            <?php
+                            $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'") ;
+                            while ($d = mysqli_fetch_array($data)) {
+                                $id = $d['nik'];
+                                $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
+                                while ($dt = mysqli_fetch_array($qm)){
+                             ?>
 
-                    <form class="form-horizontal form-label-left" action="../php/update_profil.php" method="post">
-                      <div class="item form-group">
-                        <input type="hidden" name="nik" value="<?php echo $dt['nik'];?>">
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nama Lengkap <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="name" name="nama_lengkap" value="<?php echo $dt['nama_lengkap'] ?>" class="form-control col-md-7 col-xs-12" placeholder="Nama Lengkap" required="required" type="text">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Tanggal Lahir <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="date" id="date" name="tanggal_lahir" value="<?php echo $dt['tgl_lahir'] ?>" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Alamat <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="address" name="alamat" value="<?php echo $dt['alamat'] ?>" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Nomor Telepon <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="number" name="no_telepon" value="<?php echo $dt['no_telepon'] ?>" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="email" name="email" value="<?php echo $dt['email'] ?>" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pekerjaan">Pekerjaan
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" name="pekerjaan" value="<?php echo $dt['pekerjaan'] ?>" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                           <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kelamin">Jenis kelamin
-                          </label>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <select name="jenis_kelamin" class="select2_single form-control" tabindex="-1" >
-                              <option disabled="disabled" hidden="yes"><?php echo $dt['jenis_kelamin']; ?></option>
-                              <option value="Laki-laki">Laki-laki</option>
-                              <option value="Perempuan">Perempuan</option>
-                              <option value="Lain-lain">Lain-lain</option>
-                            </select>
+                            <form class="form-horizontal form-label-left" action="../php/update_profil.php" method="post">
+                              <div class="item form-group">
+                                <input type="hidden" name="nik" value="<?php echo $dt['nik'];?>">
+                              </div>
+                              <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Nama Lengkap <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input id="name" name="nama_lengkap" value="<?php echo $dt['nama_lengkap'] ?>" class="form-control col-md-7 col-xs-12" placeholder="Nama Lengkap" required="required" type="text">
+                                </div>
+                              </div>
+                              <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Tanggal Lahir <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input type="date" id="date" name="tanggal_lahir" value="<?php echo $dt['tgl_lahir'] ?>" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                              </div>
+                              <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Alamat <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input type="text" id="address" name="alamat" value="<?php echo $dt['alamat'] ?>" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                              </div>
+                              <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">Nomor Telepon <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input type="text" id="number" name="no_telepon" value="<?php echo $dt['no_telepon'] ?>" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
+                                </div>
+                              </div>
+                              <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input type="text" id="email" name="email" value="<?php echo $dt['email'] ?>" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
+                                </div>
+                              </div>
+                              <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pekerjaan">Pekerjaan
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input type="text" name="pekerjaan" value="<?php echo $dt['pekerjaan'] ?>" class="form-control col-md-7 col-xs-12">
+                                </div>
+                              </div>
+                              <div class="item form-group">
+                                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kelamin">Jenis kelamin
+                                  </label>
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select name="jenis_kelamin" class="select2_single form-control" tabindex="-1" >
+                                      <option disabled="disabled" hidden="yes"><?php echo $dt['jenis_kelamin']; ?></option>
+                                      <option value="Laki-laki">Laki-laki</option>
+                                      <option value="Perempuan">Perempuan</option>
+                                      <option value="Lain-lain">Lain-lain</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              <div class="ln_solid"></div>
+                              <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">
+                                  <button type="submit" class="btn btn-primary">Batal</button>
+                                  <input type="submit" class="btn btn-primary" value="Simpan">
+                                </div>
+                              </div>
+                            </form>
+                          <?php } }?>
                           </div>
                         </div>
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-md-offset-3">
-                          <button type="submit" class="btn btn-primary">Batal</button>
-                          <input type="submit" class="btn btn-primary" value="Simpan">
+                      </div>
+                      <div class="panel">
+                        <a class="panel-heading collapsed" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          <h4 class="panel-title">Informasi Akun</h4>
+                        </a>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                          <div class="panel-body">
+                            <p><strong>Informasi Akun</strong>
+                            </p>
+                            <?php
+                            $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'") ;
+                            while ($d = mysqli_fetch_array($data)) {
+                                $id = $d['nik'];
+                                $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
+                                while ($dt = mysqli_fetch_array($qm)){
+                             ?>
+
+                            <form class="form-horizontal form-label-left" action="../php/update_akun.php" method="post">
+                              <div class="item form-group">
+                                <input type="hidden" name="nik" value="<?php echo $dt['nik'];?>">
+                              </div>
+                              <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input id="username" name="username" value="<?php echo $dt['username'] ?>" class="form-control col-md-7 col-xs-12" placeholder="Username" required="required" type="text">
+                                </div>
+                              </div>
+                              <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Password <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input type="password" id="password" class="form-password form-control col-md-7 col-xs-12" name="password" value="<?php echo $dt['password'] ?>" required="required" >
+                                </div>
+                              </div>
+                              <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Validasi Password <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input type="password" id="password" class="form-password form-control col-md-7 col-xs-12" name="repassword" required="required">
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-lg-0"></div>
+                                <div class="col-lg-6">
+                                <input type="checkbox" class="form-checkbox">Tampilkan Password
+                              </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">
+                                  <input type="submit" class="btn btn-primary" value="Simpan">
+                                </div>
+                              </div>
+                            </form>
+                          <?php } }?>
+                          </div>
                         </div>
                       </div>
-                    </form>
-                  <?php } }?>
+                      <div class="panel">
+                        <a class="panel-heading collapsed" role="tab" id="headingThree" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          <h4 class="panel-title">Collapsible Group Items #3</h4>
+                        </a>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                          <div class="panel-body">
+                            <p><strong>Collapsible Item 3 data</strong>
+                            </p>
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
 
 
-                <!-- informasi akun --><div class="x_panel">
-                  <div class="x_title">
-                    <h2>Informasi Akun</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li>
-                        <div class="col-lg-6">
-                      </li>
-                      <li>
-                        <div class="col-lg-7">
-                      </li>
-                      <li>
-                        <div class="col-lg-7">
-                      </li>
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <?php
-                    $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'") ;
-                    while ($d = mysqli_fetch_array($data)) {
-                        $id = $d['nik'];
-                        $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
-                        while ($dt = mysqli_fetch_array($qm)){
-                     ?>
 
-                    <form class="form-horizontal form-label-left" action="../php/update_akun.php" method="post">
-                      <div class="item form-group">
-                        <input type="hidden" name="nik" value="<?php echo $dt['nik'];?>">
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="username" name="username" value="<?php echo $dt['username'] ?>" class="form-control col-md-7 col-xs-12" placeholder="Username" required="required" type="text">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Password <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="password" id="password" class="form-password form-control col-md-7 col-xs-12" name="password" value="<?php echo $dt['password'] ?>" required="required" >
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Validasi Password <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="password" id="password" class="form-password form-control col-md-7 col-xs-12" name="repassword" required="required">
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-lg-0"></div>
-                        <div class="col-lg-6">
-                        <input type="checkbox" class="form-checkbox">Tampilkan Password
-                      </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-md-offset-3">
-                          <input type="submit" class="btn btn-primary" value="Simpan">
-                        </div>
-                      </div>
-                    </form>
-                  <?php } }?>
-                  </div>
-                </div>
-
-                <!-- /informasi akun -->
               </div>
             </div>
           </div>
