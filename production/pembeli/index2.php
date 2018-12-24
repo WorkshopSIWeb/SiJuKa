@@ -270,7 +270,20 @@ include '../php/cek_user2.php';
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
                   <div class="icon"><i class="fa fa-caret-square-o-right"></i></div>
-                  <div class="count">-</div><br>
+                  <div class="count">
+                    <?php
+                    $data = mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'") ;
+                    while ($d = mysqli_fetch_array($data)) {
+                        $id = $d['nik'];
+                        $qm = mysqli_query($koneksi, "SELECT * FROM tbl_user where nik = '$id'");
+                        while ($dt = mysqli_fetch_array($qm)){
+                          $nik = $dt['nik'];}}
+                      $count = mysqli_query($koneksi, "SELECT COUNT(kode_pesan) FROM tbl_pesan WHERE id_pengirim = '$nik' AND subyek_pesan = 'BOOKING KAYU' AND status != 'belum'");
+                        while ($row = $count->fetch_assoc()) {
+                          echo $row['COUNT(kode_pesan)'];
+                        }
+                    ?>
+                  </div><br>
                   <h3>Riwayat booking</h3><br>
                   <p>Lihat riwayatmu</p>
                 </div>

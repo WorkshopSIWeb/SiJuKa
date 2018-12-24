@@ -303,13 +303,20 @@ include 'koneksi.php';
                 </div>
               </div>
             </a>
-              <a href="setting.php">
+              <a href="tabel_laporkan.php">
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="fa fa-gears"></i></div>
-                  <div class="count">-</div><br>
-                  <h3>Pengaturan</h3><br>
-                  <p>Pengaturan</p>
+                  <div class="icon"><i class="fa fa-mail"></i></div>
+                  <div class="count">
+                    <?php
+                    $count = mysqli_query($koneksi, "SELECT COUNT(kode_lapor) FROM tbl_laporkan");
+                      while ($row = $count->fetch_assoc()) {
+                        echo $row['COUNT(kode_lapor)'];
+                      }
+                     ?>
+                  </div><br>
+                  <h3>Tabel Laporkan</h3><br>
+                  <p>Lihat pelaporan disini</p>
                 </div>
               </div>
             </a>

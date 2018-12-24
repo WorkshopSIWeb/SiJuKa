@@ -281,7 +281,7 @@
                       </th>
                       <th>
                         <center>
-                        Status
+                        Detail
                       </center>
                       </th>
                     </tr>
@@ -321,7 +321,9 @@
                         <?php echo rupiah($harga); ?>
                       </td>
                       <td>
-                        <button >detail</button>
+                        <a href="buka_booking.php?id_penjual=<?php echo $daftar_pesan['id_penerima']; ?>&id_pesan=<?php echo $daftar_pesan['kode_pesan']; ?>">
+                        <button>detail</button>
+                      </a>
                       </td>
 
                     </tr>

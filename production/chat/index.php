@@ -11,7 +11,7 @@
 
 <html>
 <head>
-  
+
   <link href="bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="bootstrap.min.js"></script>
   <script src="jquery.min.js"></script>
@@ -104,7 +104,21 @@
           $usir = $_GET['trm'];
 
           $achat = mysqli_query($koneksi, "SELECT * FROM tbl_chat WHERE (nik_kirim = '$user' AND nik_terima = '$usir') OR (nik_kirim = '$usir' AND nik_terima = '$user')" );
-        ?>
+          $ama = mysqli_fetch_array(mysqli_query($koneksi, "SELECT nama_lengkap FROM tbl_user WHERE nik = '$usir'"));
+          ?>
+          <div class="headind_srch">
+            <div class="recent_heading">
+              <h4><?php echo $ama['nama_lengkap']; ?></h4>
+            </div>
+            <div class="srch_bar">
+              <div class="stylish-input-group">
+                <input type="text" class="search-bar">
+                <span class="input-group-addon" hidden>
+                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                </span> </div>
+            </div>
+          </div>
+
 
         <div class="mesgs">
           <div class="msg_history">
