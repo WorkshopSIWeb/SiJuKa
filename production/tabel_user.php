@@ -95,44 +95,23 @@ include 'php/cek_user.php';
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.php">Admin</a></li>
-                      <li><a href="index2.php">Penjual</a></li>
-                      <li><a href="index3.php">Pembeli</a></li>
-                    </ul>
+                  <li><a href="index.php"><i class="fa fa-home"></i> Home</a>
                   </li>
                   <li><a><i class="fa fa-edit"></i> Form Untuk Admin <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form_user.php">Kelola Data User</a></li>
-                      <li><a href="form_kebun.php">Kelola Data Kebun</a></li>
-                      <li><a href="form_transaksi.php">Kelola Data Transaksi</a></li>
-                      <li><a href="form_laporan.php">Kelola Laporan</a></li>
+                      <li><a href="form_user.php">Tambah User</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-table"></i> Kelola Data <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tabel_user.php">Kelola Tabel User</a></li>
-                      <li><a href="tabel_kebun.php">Kelola Tabel Kebun</a></li>
-                      <li><a href="tabel_transaksi.php">Kelola Tabel Transaksi</a></li>
-                      <li><a href="tabel_laporan.php">Kelola Laporan</a></li>
-
+                      <li><a href="tabel_user.php">Kelola  User</a></li>
+                      <li><a href="tabel_kebun.php">Kelola Kayu</a></li>
+                      <li><a href="tabel_transaksi.php">Kelola Transaksi</a></li>
                     </ul>
                   </li>
                 </ul>
               </div>
-              <div class="menu_section">
-                <h3>Live On</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.php">Profile</a></li>
-                    </ul>
-                  </li>
-              </div>
+
             </div>
             <!-- /sidebar menu -->
 
@@ -276,7 +255,7 @@ include 'php/cek_user.php';
               <div class="title_left">
                 <h3>Admin</h3>
               </div>
-<!-- 
+<!--
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
@@ -288,7 +267,7 @@ include 'php/cek_user.php';
                 </div>
               </div> -->
             </div>
-                    
+
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
@@ -325,9 +304,9 @@ include 'php/cek_user.php';
                           <th>Nomor_Telepon</th>
                           <th>Email</th>
                           <th>Username</th>
-                          <th>Jabatan</th>
-                          <th>Pekerjaan</th>
-                          <th>Jenis_Kelamin</th>
+
+
+
                           <th>Pilihan</th>
                         </tr>
                       </thead>
@@ -349,19 +328,18 @@ include 'php/cek_user.php';
                         <td><?php echo $row['no_telepon'];?></td>
                         <td><?php echo $row['email'];?></td>
                         <td><?php echo $row['username'];?></td>
-                        <td><?php echo $row['jabatan'];?></td>
-                        <td><?php echo $row['pekerjaan'];?></td>
-                        <td><?php echo $row['jenis_kelamin'];?></td>
-                        <td>                        
-                          <a href="edit_user.php?nik=<?php echo $row['nik']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a> 
-                          <a href="php/delete_data_user.php?nik=<?php echo $row['nik']; ?>" method="post" class="btn btn-danger" onclick="return konfirmasi()" href="#"><li class="fa fa-trash-o"></li> Hapus</a> 
+
+
+                        <td>
+                          <a href="edit_user.php?nik=<?php echo $row['nik']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a>
+                          <a href="php/delete_data_user.php?nik=<?php echo $row['nik']; ?>" method="post" class="btn btn-danger" onclick="return konfirmasi()" href="#"><li class="fa fa-trash-o"></li> Hapus</a>
                         </td>
                       </tr>
-                      <?php    
-                        $no++;                    
+                      <?php
+                        $no++;
                         }
                         }  else {
-                           echo '';    
+                           echo '';
                            }
                         }?>
                       </tbody>
@@ -374,7 +352,7 @@ include 'php/cek_user.php';
           </div>
         </div>
         <!-- /page content -->
-        
+
        <!-- footer content -->
         <footer>
           <div class="pull-right">
@@ -420,7 +398,6 @@ include 'php/cek_user.php';
     if (tanya == true) return true;
     else return false;
     }</script>
-    
     <!-- <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="js/dialog.jquery.js"></script>
     <script>

@@ -2,7 +2,7 @@
 session_start();
 
 include 'koneksi.php';
-include 'php/cek_user.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,31 +88,19 @@ include 'php/cek_user.php';
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
+                <h3>Menu</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.php">Admin</a></li>
-                      <li><a href="index2.php">Penjual</a></li>
-                      <li><a href="index3.php">Pembeli</a></li>
-                    </ul>
+                  <li><a href="pembeli/index.php"><i class="fa fa-home"></i> Home</a>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Form Untuk Admin <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="form_user.php">Kelola Data User</a></li>
-                      <li><a href="form_kebun.php">Kelola Data Kebun</a></li>
-                      <li><a href="form_transaksi.php">Kelola Data Transaksi</a></li>
-                      <li><a href="form_laporan.php">Kelola Laporan</a></li>
-                    </ul>
+                  <?php
+                  $nik = mysqli_fetch_array(mysqli_query($koneksi, "SELECT nik FROM tbl_user WHERE username='$orang'"));
+                  ?>
+                  <li><a href="../chat/index.php?id=<?php echo $nik['nik']; ?>"><i class="fa fa-comment-o"></i> Chat</a>
                   </li>
-                  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="tabel_user.php">Kelola Tabel User</a></li>
-                      <li><a href="tabel_kebun.php">Kelola Tabel Kebun</a></li>
-                      <li><a href="tabel_transaksi.php">Kelola Tabel Transaksi</a></li>
-                      <li><a href="tabel_laporan.php">Kelola Laporan</a></li>
+                  <li><a href="penawaran.php"><i class="fa fa-edit"></i> Daftar booking mu</a>
+                  </li>
+                  <li><a href="setting.php"><i class="fa fa-cogs"></i> Pengaturan </a>
 
-                    </ul>
                   </li>
                 </ul>
               </div>
@@ -264,13 +252,17 @@ include 'php/cek_user.php';
         <!-- /top navigation -->
 
         <!-- page content -->
-        <?php
+<?php
 //koneksi
 $koneksi = new mysqli('localhost','root','','sijuka');
 if (isset($_POST['Search'])){
     //variable
     $keyword = $_POST['keyword'];
-    $query = $koneksi->query("SELECT * FROM tbl_kayu WHERE nama_kayu LIKE '%$keyword%' OR jenis_kayu LIKE '%$keyword%' OR alamat_kebun LIKE '$keyword' OR deskripsi LIKE '$keyword' ");
+    $query = $koneksi->query("SELECT j.*, k.* FROM tbl_kayu k, tbl_jenis j
+      WHERE (k.status = 'belum laku' AND j.id_jenis=k.nama_kayu AND j.nama_kayu LIKE '%$keyword%') OR
+            (k.status = 'belum laku' AND j.id_jenis=k.nama_kayu AND k.jenis_kayu LIKE '%$keyword%') OR
+            (k.status = 'belum laku' AND j.id_jenis=k.nama_kayu AND k.alamat_kebun LIKE '$keyword') OR
+            (k.status = 'belum laku' AND j.id_jenis=k.nama_kayu AND k.deskripsi LIKE '$keyword')");
     $row = mysqli_num_rows($query);
     //cek apakah ada satu
     if ($row==0){
@@ -322,14 +314,19 @@ foreach ($query as $rows){
 
       </a>
         </div>
-        <div class="col-md-4">
-          <h3> <?php echo  $nama_kayu; ?>  </h3>
-          <p> <?php echo  $jenis_kayu; ?> </p>
-      <p class="main"> <?php echo  $deskripsi; ?> </p>
-          <a class="btn btn-primary" href="#">View Project</a>
+        <!-- <div class="col-md-4"> -->
+          <h3> <?php
+            $kayu =mysqli_query($koneksi, "SELECT nama_kayu FROM tbl_jenis WHERE id_jenis = '$nama_kayu'");
+            while($c = mysqli_fetch_array($kayu)){
+              echo $c['nama_kayu'];
+            }
+            echo " - ";
+            echo  $jenis_kayu;
+           ?> </h3>
+
           <p class="main"> <?php echo  $deskripsi; ?> </p>
           <a class="btn btn-primary" href="detailkayu.php?kayu=<?php echo $kode_kayu?>">Lihat Detail</a>
-        </div>
+        <!-- </div> -->
       </div>
     </div>
     </div>

@@ -1,8 +1,5 @@
 <?php
-$orang = $_SESSION['username'];
-
-            if($_SESSION['status']!="login"){
-                header("location:loregpembeli.php?pesan=belum_login");
-          }
-  
+if($_SESSION['status']!="login"){
+    echo "<script>alert('Anda Harus Login Dulu'); window.location.href = '../loregpembeli.php';</script>";
+  };
 ?>

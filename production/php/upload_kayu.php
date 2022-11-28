@@ -6,7 +6,8 @@
   $jenis_kayu = $_POST['jenis_kayu'];
   $alamat_kebun = $_POST['alamat'];
   $deskripsi = $_POST['deskripsi'];
-  $tgl = date('Y-m-y');
+
+  $harga = $_POST['harga'];
 
     $ext_boleh = array('png','jpg','jpeg');
     $foto1 = $_FILES['foto1']['name'];
@@ -30,10 +31,10 @@
           move_uploaded_file($file_tmp2, '../foto_kayu/foto2/'.$foto2);
           move_uploaded_file($file_tmp3, '../foto_kayu/foto3/'.$foto3);
 
-          $query = mysqli_query($koneksi, "INSERT INTO tbl_kayu (nik, nama_kayu, jenis_kayu, alamat_kebun, deskripsi, tanggal_upload, foto_1, foto_2, foto_3) VALUES ('$nik','$nama_kayu', '$jenis_kayu', '$alamat_kebun', '$deskripsi', '$tgl', '$foto1', '$foto2', '$foto3')");
+          $query = mysqli_query($koneksi, "INSERT INTO tbl_kayu (nik, nama_kayu, jenis_kayu, alamat_kebun, deskripsi, foto_1, foto_2, foto_3, harga, status) VALUES ('$nik','$nama_kayu', '$jenis_kayu', '$alamat_kebun', '$deskripsi', '$foto1', '$foto2', '$foto3','$harga','belum laku')");
 
           if($query){
-            header("location:../index.php");
+            header("location:../penjual/index.php");
           }else {
             echo "Gagal om";
       }

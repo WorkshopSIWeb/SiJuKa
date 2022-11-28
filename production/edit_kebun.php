@@ -43,12 +43,12 @@ include 'php/cek_user.php';
     $al = mysqli_query($koneksi, "SELECT jabatan FROM tbl_user WHERE username='$orang'");
     while ($row = $al->fetch_assoc()) {
     }
-      if($_SESSION['status']!="login"){
+      if ($_SESSION['status']!="login") {
           header("location:loregpembeli.php?pesan=belum_login");
-        }
+      }
     if ($_SESSION['jabatan'] != 'admin') {
-          header("location:loregpembeli.php?pesan=bukan_admin");
-        }
+        header("location:loregpembeli.php?pesan=bukan_admin");
+    }
         ?>
     <div class="container body">
       <div class="main_container">
@@ -70,12 +70,15 @@ include 'php/cek_user.php';
                         $data = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE username = '$orang'");
                         while($d = mysqli_fetch_array($data)){
                                 ?>
+                        while ($d = mysqli_fetch_array($data)) {
+                            ?>
                                    <tr>
                                          <td>
                                                 <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" class="img-circle profile_img" width="50" height="50">
                                           </td>
                                     </tr>
-                     <?php } ?>
+                     <?php
+                        } ?>
                   </table>
               </div>
               <div class="profile_info">
@@ -171,8 +174,8 @@ include 'php/cek_user.php';
                      <?php
                         $orang = $_SESSION['username'];
                         $data = mysqli_query($koneksi, "SELECT * FROM tbl_user WHERE username = '$orang'");
-                        while($d = mysqli_fetch_array($data)){
-                                ?>
+                        while ($d = mysqli_fetch_array($data)) {
+                            ?>
                                    <tr>
                                          <td>
                                                 <img src="<?php echo "foto_profil/".$d['foto_profil']; ?>" width="50" height="50">
@@ -183,7 +186,8 @@ include 'php/cek_user.php';
                   </a>
                                           </td>
                                     </tr>
-                     <?php } ?>
+                     <?php
+                        } ?>
                   </table>
                   <!-- </a> -->
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -320,8 +324,8 @@ include 'php/cek_user.php';
                     while ($d = mysqli_fetch_array($data)) {
                         $id = $d['kode_kayu'];
                         $qm = mysqli_query($koneksi, "SELECT * FROM tbl_kayu where kode_kayu = '$id'");
-                        while ($dt = mysqli_fetch_array($qm)){
-                     ?>
+                        while ($dt = mysqli_fetch_array($qm)) {
+                            ?>
 
                     <form class="form-horizontal form-label-left" action="php/update_kayu.php" method="post">
                     <form class="form-horizontal form-label-left" novalidate>
@@ -331,7 +335,7 @@ include 'php/cek_user.php';
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kode_kayu">Kode Kayu <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="kode_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="kode_kayu" placeholder="Kode Kayu" type="text" value="<?php echo $dt['kode_kayu'];?>">
+                          <input id="kode_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="kode_kayu" placeholder="Kode Kayu" type="text" value="<?php echo $dt['kode_kayu']; ?>">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -339,7 +343,7 @@ include 'php/cek_user.php';
                         </label>
                         <div class="item form-group">
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="select1_single form-control" name="nama_kayu" id="nama_kayu" class="nama_kayu" value="<?php echo $dt['nama_kayu'];?>">
+                          <select class="select1_single form-control" name="nama_kayu" id="nama_kayu" class="nama_kayu" value="<?php echo $dt['nama_kayu']; ?>">
                             <option disabled="disabled">Nama Kayu :</option>
                             <option value="Jati">Jati</option>
                             <option value="Mahoni">Mahoni</option>
@@ -353,47 +357,47 @@ include 'php/cek_user.php';
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kayu">Jenis Kayu <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="jenis_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="jenis_kayu" placeholder="Jenis Kayu" type="text" value="<?php echo $dt['jenis_kayu'];?>">
+                          <input id="jenis_kayu" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="jenis_kayu" placeholder="Jenis Kayu" type="text" value="<?php echo $dt['jenis_kayu']; ?>">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="alamat_kebun">Alamat kebun <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="alamat_kebun" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="alamat_kebun" placeholder="Alamat Kebun" type="text" value="<?php echo $dt['alamat_kebun'];?>">
+                          <input id="alamat_kebun" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="alamat_kebun" placeholder="Alamat Kebun" type="text" value="<?php echo $dt['alamat_kebun']; ?>">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="deskripsi">Deskripsi <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="deskripsi" required="required" name="deskripsi" class="form-control col-md-7 col-xs-12" value="<?php echo $dt['deskripsi'];?>"></textarea>
+                          <textarea id="deskripsi" required="required" name="deskripsi" class="form-control col-md-7 col-xs-12" value="<?php echo $dt['deskripsi']; ?>"></textarea>
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tanggal_upload">Tanggal Upload <span class="required">:</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="tanggal_upload" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tanggal_upload" placeholder="Tahun-Bulan-Tanggal"  type="date" value="<?php echo $dt['tanggal_upload'];?>">
+                          <input id="tanggal_upload" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tanggal_upload" placeholder="Tahun-Bulan-Tanggal"  type="date" value="<?php echo $dt['tanggal_upload']; ?>">
                         </div>
                       </div>
                       <div class="item form-group">
                          <label for="foto_1" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Kebun 1 </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="file" name="foto_1" value="<?php echo $row['foto_1'];?>" class="form-control" placeholder="Enter..." required="">
+                            <input type="file" name="foto_1" value="<?php echo $row['foto_1']; ?>" class="form-control" placeholder="Enter..." required="">
                           </div>
                        </div>
                        <div class="item form-group">
                          <label for="foto_2" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Kebun 2 </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="file" name="foto_2" value="<?php echo $row['foto_2'];?>" class="form-control" placeholder="Enter..." required="">
+                            <input type="file" name="foto_2" value="<?php echo $row['foto_2']; ?>" class="form-control" placeholder="Enter..." required="">
                           </div>
                        </div>
                        <div class="item form-group">
                          <label for="foto_3" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Kebun 3 </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
                             <input type="file" name="foto_3" value="<?php echo $row['foto_3
-                            '];?>" class="form-control" placeholder="Enter..." required="">
+                            ']; ?>" class="form-control" placeholder="Enter..." required="">
                           </div>
                        </div>
                       <div class="ln_solid"></div>
@@ -404,7 +408,9 @@ include 'php/cek_user.php';
                         </div>
                       </div>
                     </form>
-                    <?php } }?>
+                    <?php
+                        }
+                    }?>
                   </div>
                 </div>
               </div>
@@ -437,6 +443,6 @@ include 'php/cek_user.php';
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-	
+
   </body>
 </html>

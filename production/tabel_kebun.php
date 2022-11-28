@@ -3,6 +3,7 @@ session_start();
 
 include 'koneksi.php';
 include 'php/cek_user.php';
+include 'php/rupiah.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,44 +96,23 @@ include 'php/cek_user.php';
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.php">Admin</a></li>
-                      <li><a href="index2.php">Penjual</a></li>
-                      <li><a href="index3.php">Pembeli</a></li>
-                    </ul>
+                  <li><a href="index.php"><i class="fa fa-home"></i> Home</a>
                   </li>
                   <li><a><i class="fa fa-edit"></i> Form Untuk Admin <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form_user.php">Kelola Data User</a></li>
-                      <li><a href="form_kebun.php">Kelola Data Kebun</a></li>
-                      <li><a href="form_transaksi.php">Kelola Data Transaksi</a></li>
-                      <li><a href="form_laporan.php">Kelola Laporan</a></li>
+                      <li><a href="form_user.php">Tambah User</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-table"></i> Kelola Data <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tabel_user.php">Kelola Tabel User</a></li>
-                      <li><a href="tabel_kebun.php">Kelola Tabel Kebun</a></li>
-                      <li><a href="tabel_transaksi.php">Kelola Tabel Transaksi</a></li>
-                      <li><a href="tabel_laporan.php">Kelola Laporan</a></li>
-
+                      <li><a href="tabel_user.php">Kelola  User</a></li>
+                      <li><a href="tabel_kebun.php">Kelola Kayu</a></li>
+                      <li><a href="tabel_transaksi.php">Kelola Transaksi</a></li>
                     </ul>
                   </li>
                 </ul>
               </div>
-              <div class="menu_section">
-                <h3>Live On</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.php">Profile</a></li>
-                    </ul>
-                  </li>
-              </div>
+
             </div>
             <!-- /sidebar menu -->
 
@@ -272,42 +252,12 @@ include 'php/cek_user.php';
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Pembeli</h3>
-              </div>
-
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Cari!</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
 
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Tabel Kebun <small>Pembeli</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
+
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -318,15 +268,13 @@ include 'php/cek_user.php';
                       <thead>
                         <tr>
                           <th>No</th>
-                          <th>Kode_Kayu</th>
-                          <th>Nama_Kayu</th>
-                          <th>Jenis_Kayu</th>
-                          <th>Alamat_Kebun</th>
+
+                          <th>Nama Kayu</th>
+
+                          <th>Alamat Kebun</th>
                           <th>Deskripsi</th>
-                          <th>Tanggal_Upload</th>
-                          <th>Foto_Kebun_1</th>
-                          <th>Foto_Kebun_2</th>
-                          <th>Foto_Kebun_3</th>
+                          <th>Tanggal Upload</th>
+                          <th>Harga</th>
                           <th>Pilihan</th>
                         </tr>
                       </thead>
@@ -341,49 +289,34 @@ include 'php/cek_user.php';
                         while ($row=  mysqli_fetch_assoc($result)){
                         ?>
                         <td><?php echo $no ;?></td>
-                        <td><?php echo $row['kode_kayu'];?></td>
-                        <td><?php echo $row['nama_kayu'];?></td>
-                        <td><?php echo $row['jenis_kayu'];?></td>
+
+                        <td><?php
+                          $kode = $row['kode_kayu'];
+                          $ky = mysqli_fetch_array(mysqli_query($koneksi, "SELECT  tbl_kayu.*, tbl_jenis.* FROM tbl_kayu, tbl_jenis WHERE kode_kayu ='$kode'"));
+                          echo $ky['nama_kayu'];
+                          echo " - ";
+                          echo $ky['jenis_kayu'];
+                        ?></td>
+
                         <td><?php echo $row['alamat_kebun'];?></td>
                         <td><?php echo $row['deskripsi'];?></td>
                         <td><?php echo $row['tanggal_upload'];?></td>
                         <td>
                           <?php
-                            $id = $row['kode_kayu'];
-                            $pp = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
-                            while($d = mysqli_fetch_array($pp)){
-                                    ?>
-                                    <img src="<?php echo "foto_kayu/foto1/".$d['foto_1']; ?>" class="img-responsive avatar-vew" alt="avatar" width="50px" height="50px">
-                          <?php } ?>
+                            $hrg = $row['harga'];
+                            echo rupiah($hrg);
+                          ?>
                         </td>
                         <td>
-                           <?php
-                              $id = $row['kode_kayu'];
-                              $pp = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
-                              while($d = mysqli_fetch_array($pp)){
-                                      ?>
-                                      <img src="<?php echo "foto_kayu/foto2/".$d['foto_2']; ?>" class="img-responsive avatar-vew" alt="avatar" width="50px" height="50px">
-                           <?php } ?>
-                        </td>
-                        <td>
-                           <?php
-                              $id = $row['kode_kayu'];
-                              $pp = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
-                              while($d = mysqli_fetch_array($pp)){
-                                      ?>
-                                      <img src="<?php echo "foto_kayu/foto3/".$d['foto_3']; ?>" class="img-responsive avatar-vew" alt="avatar" width="50px" height="50px">
-                           <?php } ?>
-                        </td>
-                        <td>
-                          <a href="edit_kebun.php?kode_kayu=<?php echo $row['kode_kayu']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a> 
-                          <a href="php/delete_data_KAYU.php?kode_kayu=<?php echo $row['kode_kayu']; ?>" method="post" class="btn btn-danger" onclick="return konfirmasi()" href="#"><li class="fa fa-trash-o"></li> Hapus</a> 
+                          <a href="edit_kebun.php?kode_kayu=<?php echo $row['kode_kayu']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a>
+                          <a href="php/delete_data_kayu.php?kode_kayu=<?php echo $row['kode_kayu']; ?>" method="post" class="btn btn-danger" onclick="return konfirmasi()" href="#"><li class="fa fa-trash-o"></li> Hapus</a>
                         </td>
                       </tr>
-                      <?php    
-                        $no++;                    
+                      <?php
+                        $no++;
                         }
                         }  else {
-                           echo '';    
+                           echo '';
                            }
                         }?>
                       </tbody>
@@ -405,8 +338,8 @@ include 'php/cek_user.php';
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
-      </div>
-    </div>
+      <!-- </div>
+    </div> -->
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>

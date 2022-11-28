@@ -27,6 +27,7 @@
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
     <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Custom Css -->
     <link href="css/stylelogin.css" rel="stylesheet">
   </head>
@@ -45,7 +46,7 @@
                 <input type="text" name="username"class="form-control" placeholder="Username" required="required" />
               </div>
               <div class="form-password">
-                <input type="password" name="password" class="form-password form-control" placeholder="Password" required="required" />
+                <input type="password" id="password" class="form-password form-control col-md-7 col-xs-12" name="password" placeholder="Password" required="required">
               </div>
 
 
@@ -125,10 +126,12 @@
               <input type="text" name="nama_lengkap" class="form-control" placeholder="Nama Lengkap" required="required"/>
             </div>
             <div>
-              <input type="text" name="tanggal_lahir" class="form-control" placeholder="tahun-bulan-tanggal" required="required"/>
+              <input type="date" name="tanggal_lahir" class="form-control col-md-3 col-sm-3 col-xs-12" required="required"/>
             </div>
+
+            &nbsp;
             <div>
-              <input type="text" name="alamat" class="form-control" placeholder="Alamat" required="required"/>
+              <input type="text" id="address" name="alamat" class="form-control col-md-3 col-sm-3 col-xs-1" placeholder="Alamat" required="required"/>
             </div>
             <div>
               <input type="text" name="no_telepon" class="form-control" placeholder="No Telepon" required="required"/>
@@ -140,10 +143,10 @@
               <input type="text" name="username" class="form-control" placeholder="Username" required="required"/>
             </div>
             <div>
-              <input type="password" id="password" name="password" class="form-password form-control" placeholder="Password" required="required"/>
+              <input type="password" id="password" name="password" class="form-password form-control col-md-7 col-xs-12" placeholder="  Password" required="required"/>
             </div>
             <div>
-              <input type="password" id="password" name="repassword" class="form-password form-control" placeholder="Masukkan Kembali Password" required="required"/>
+              <input type="password" id="password" name="repassword" class="form-password form-control col-md-7 col-xs-12" placeholder="  Masukkan Kembali Password" required="required"/>
             </div>
             <div class="row">
               <div class="col-lg-0"></div>

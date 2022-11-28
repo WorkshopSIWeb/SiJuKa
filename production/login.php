@@ -23,11 +23,11 @@
     }else if ($data['jabatan']=="pembeli") {
       $_SESSION['username'] = $username;
       $_SESSION['jabatan'] = "pembeli";
-      header("location:page_403.html");
+      header("location:pembeli/index.php");
     }else if ($data['jabatan']=="penjual") {
       $_SESSION['username'] = $username;
       $_SESSION['jabatan'] = "penjual";
-      header("location:page_500.html");
+      header("location:penjual/index.php");
     }else{
       header("location:loregpembeli.php");
     }

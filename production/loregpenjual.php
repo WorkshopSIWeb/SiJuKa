@@ -6,11 +6,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <script type="text/javascript" src="jquery.js"></script>
     <link rel="icon" href="images/IMG-20181016-WA0004.jpg" type="image/ico" />
-    
-    <script type="text/javascript" src="js/jquery.js"></script>
-
 
     <title>SIJUKA | LOGIN</title>
 
@@ -26,6 +23,9 @@
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
     <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+
     <!-- Custom Css -->
     <link href="css/stylelogin.css" rel="stylesheet">
   </head>
@@ -70,8 +70,8 @@
                 }elseif ($_GET['pesan'] == "approve") {
                   echo "<script>alert('Pendaftaran Anda Berhasil, Silahkan Login untuk Masuk ke sistem'); window.location.href = 'loregpembeli.php';</script>";
                 }elseif ($_GET['pesan'] == "bukan_admin") {
-                  echo "<script>alert('Anda bukan admin. Anda tidak seharusnya mengakses halaman ini!'); window.location.href = 'page_404.html';</script>";
-
+                  echo "<script>alert('Anda bukan admin. Anda tidak seharusnya mengakses halaman ini'); window.location.href = 'page_404.html';</script>";
+                  // code...
                 }
               }
               ?>
@@ -125,8 +125,10 @@
               <input type="text" name="nama_lengkap" class="form-control" placeholder="Nama Lengkap" required="required"/>
             </div>
             <div>
-              <input type="text" name="tanggal_lahir" class="form-control" placeholder="tahun-bulan-tanggal" required="required"/>
+              <input type="date" name="tanggal_lahir" class="form-control col-md-3 col-sm-3 col-xs-12" required="required"/>
             </div>
+
+            &nbsp;
             <div>
               <input type="text" name="alamat" class="form-control" placeholder="Alamat" required="required"/>
             </div>
@@ -140,10 +142,10 @@
               <input type="text" name="username" class="form-control" placeholder="Username" required="required"/>
             </div>
             <div>
-              <input type="password" id="password" name="password" class="form-password" placeholder="  Password" required="required"/>
+              <input type="password" id="password" class="form-password form-control col-md-7 col-xs-12" name="password" placeholder="Password" required="required" >
             </div>
             <div>
-              <input type="password" id="password" name="repassword" class="form-password" placeholder="  Masukkan Kembali Password" required="required"/>
+              <input type="password" id="password" class="form-password form-control col-md-7 col-xs-12" name="repassword" placeholder="Masukkan password kembali" required="required" >
             </div>
             <div class="row">
               <div class="col-lg-0"></div>

@@ -387,7 +387,7 @@ include 'php/cek_user.php';
                       <div class="item form-group">
                         <label for="password" class="control-label col-md-3">Password</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="password" type="password" name="password" data-validate-length="6,8" class="form-control col-md-7 col-xs-12" required="required" value="<?php echo $dt['password'];?>">
+                          <input id="password" type="password" name="password" class="form-control col-md-7 col-xs-12" required="required" value="<?php echo $dt['password'];?>">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -472,6 +472,6 @@ include 'php/cek_user.php';
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-	
+
   </body>
 </html>

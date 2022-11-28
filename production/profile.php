@@ -89,28 +89,18 @@ include 'php/cek_user.php';
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.php">Admin</a></li>
-                      <li><a href="index2.php">Penjual</a></li>
-                      <li><a href="index3.php">Pembeli</a></li>
-                    </ul>
+                  <li><a href="index.php"><i class="fa fa-home"></i> Home</a>
                   </li>
                   <li><a><i class="fa fa-edit"></i> Form Untuk Admin <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form_user.php">Kelola Data User</a></li>
-                      <li><a href="form_kebun.php">Kelola Data Kebun</a></li>
-                      <li><a href="form_transaksi.php">Kelola Data Transaksi</a></li>
-                      <li><a href="form_laporan.php">Kelola Laporan</a></li>
+                      <li><a href="form_user.php">Tambah User</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-table"></i> Kelola Data <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tabel_user.php">Kelola Tabel User</a></li>
-                      <li><a href="tabel_kebun.php">Kelola Tabel Kebun</a></li>
-                      <li><a href="tabel_transaksi.php">Kelola Tabel Transaksi</a></li>
-                      <li><a href="tabel_laporan.php">Kelola Laporan</a></li>
-
+                      <li><a href="tabel_user.php">Kelola  User</a></li>
+                      <li><a href="tabel_kebun.php">Kelola Kayu</a></li>
+                      <li><a href="tabel_transaksi.php">Kelola Transaksi</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -340,21 +330,6 @@ include 'php/cek_user.php';
 
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
-
-                      <!-- <div class="profile_title">
-                        <div class="col-md-6">
-                          <h2>User Activity Report</h2>
-                        </div>
-                        <div class="col-md-6">
-                          <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
-                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                            <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                          </div>
-                        </div>
-                      </div> -->
-                      <!-- start of user-activity-graph -->
-                      <!-- <div id="graph_bar" style="width:100%; height:280px;"></div> -->
-                      <!-- end of user-activity-graph -->
 
                       <div class="" role="tabpanel" data-example-id="togglable-tabs">
                         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
