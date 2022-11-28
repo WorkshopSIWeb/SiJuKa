@@ -347,9 +347,33 @@ include 'php/cek_user.php';
                         <td><?php echo $row['alamat_kebun'];?></td>
                         <td><?php echo $row['deskripsi'];?></td>
                         <td><?php echo $row['tanggal_upload'];?></td>
-                        <td><?php echo $row['foto_1'];?></td>
-                        <td><?php echo $row['foto_2'];?></td>
-                        <td><?php echo $row['foto_3'];?></td>
+                        <td>
+                          <?php
+                            $id = $row['kode_kayu'];
+                            $pp = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
+                            while($d = mysqli_fetch_array($pp)){
+                                    ?>
+                                    <img src="<?php echo "foto_kayu/foto1/".$d['foto_1']; ?>" class="img-responsive avatar-vew" alt="avatar" width="50px" height="50px">
+                          <?php } ?>
+                        </td>
+                        <td>
+                           <?php
+                              $id = $row['kode_kayu'];
+                              $pp = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
+                              while($d = mysqli_fetch_array($pp)){
+                                      ?>
+                                      <img src="<?php echo "foto_kayu/foto2/".$d['foto_2']; ?>" class="img-responsive avatar-vew" alt="avatar" width="50px" height="50px">
+                           <?php } ?>
+                        </td>
+                        <td>
+                           <?php
+                              $id = $row['kode_kayu'];
+                              $pp = mysqli_query($koneksi, "SELECT * FROM tbl_kayu WHERE kode_kayu = '$id'");
+                              while($d = mysqli_fetch_array($pp)){
+                                      ?>
+                                      <img src="<?php echo "foto_kayu/foto3/".$d['foto_3']; ?>" class="img-responsive avatar-vew" alt="avatar" width="50px" height="50px">
+                           <?php } ?>
+                        </td>
                         <td>
                           <a href="edit_kebun.php?kode_kayu=<?php echo $row['kode_kayu']; ?>" class="btn btn-info"><li class="fa fa-pencil"></li> Edit</a> 
                           <a href="php/delete_data_KAYU.php?kode_kayu=<?php echo $row['kode_kayu']; ?>" method="post" class="btn btn-danger" onclick="return konfirmasi()" href="#"><li class="fa fa-trash-o"></li> Hapus</a> 

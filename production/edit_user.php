@@ -354,7 +354,6 @@ include 'php/cek_user.php';
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <!-- <i class="fa fa-calendar"></i> -->
                           <input id="tgl_lahir" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tgl_lahir" placeholder="Tahun-Bulan-Tanggal" type="date" value="<?php echo $dt['tgl_lahir'];?>">
-                          <input id="tgl_lahir" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="tgl_lahir" placeholder="Tahun-Bulan-Tanggal" type="text" value="<?php echo $dt['tgl_lahir'];?>">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -394,7 +393,6 @@ include 'php/cek_user.php';
                       <div class="item form-group">
                          <label for="foto_profil" class="control-label col-md-3 col-sm-3 col-xs-12">Foto Profil </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="file" name="foto_profil" class="form-control" >
                             <input type="file" name="foto_profil" value="<?php echo $dt['foto_profil'];?>" class="form-control" placeholder="Enter..." required="">
                           </div>
                        </div>
